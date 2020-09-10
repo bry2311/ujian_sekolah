@@ -2655,22 +2655,22 @@ class Guru extends CI_Controller
 							$sheet1->setCellValue('B' . $tempI, ') ' . strip_tags($allSoal[$i - $j]->soal) . '');
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($js->ja));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->ja))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->ja)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($js->jb));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jb))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jb)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($js->jc));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jc))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jc)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($js->jd));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jd))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jd)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
@@ -2679,7 +2679,7 @@ class Guru extends CI_Controller
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) != trim(strtolower($js->jawaban))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) != trim(strtolower(strip_tags($js->jawaban)))) {
 								$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 							}
 						}
@@ -2689,30 +2689,30 @@ class Guru extends CI_Controller
 						$sheet1->setCellValue('A' . $tempI, $allSoal[$i - $j]->no_soal . '.');
 						//$sheet1->setCellValue('B'.$tempI, $allSoal[$i-$j]->soal);
 						$tempI += 1;
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->e))) {
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
 							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->e);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->e))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						} else {
 							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->a);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->a))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->a)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						}
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, 'B. ' . $allSoal[$i - $j]->b);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->b))) {
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->b)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, 'C. ' . $allSoal[$i - $j]->c);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->c))) {
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->c)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, 'D. ' . $allSoal[$i - $j]->d);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->d))) {
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->d)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;

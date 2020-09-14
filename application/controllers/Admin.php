@@ -249,6 +249,7 @@ class Admin extends CI_Controller
 				'kelas' => $kelas,
 				'role' => ucwords($this->input->post('role', TRUE)),
 				'jenis_kelamin' => $this->input->post('jenis_kelamin', TRUE),
+				'aktif' => $this->input->post('aktif', TRUE),
 			);
 		}
 

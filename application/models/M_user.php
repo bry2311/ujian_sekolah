@@ -14,7 +14,7 @@ class M_user extends CI_Model
 	}
 	public function getAllUserByKelas($kelas)
 	{
-		$query = $this->db->query("SELECT no_absen,nama,jenis_kelamin,kelas,nik FROM user WHERE kelas LIKE '$kelas%' ORDER BY kelas");
+		$query = $this->db->query("SELECT no_absen,nama,jenis_kelamin,kelas,nik FROM user WHERE kelas LIKE '$kelas%' AND aktif = 1 ORDER BY kelas, no_absen");
 		return $query->result();
 	}
 	public function login($data)

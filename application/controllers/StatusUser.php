@@ -57,4 +57,16 @@ class StatusUser extends CI_Controller
 		$this->M_user->updateStatusLogout($nikUser);
 		redirect('StatusUser/index');
 	}
+
+	public function resetAll()
+	{
+		$this->isAnyLogin();
+		$user = $this->M_user->getAllUserOnline();
+		foreach ($user as $u) {
+			if ($u->role == "Siswa") {
+				$this->M_user->updateStatusLogout($u->nik);
+			}
+		}
+		redirect('StatusUser/index');
+	}
 }

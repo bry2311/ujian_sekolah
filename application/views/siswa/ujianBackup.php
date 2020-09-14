@@ -233,9 +233,7 @@
 														<div class="card-body">
 															<h2 align="center" style="font-size:12pt;"><?php echo $s->materi; ?></h2>
 															<br>
-															<div style="white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Firefox */ white-space: -pre-wrap; /* Opera <7 */ white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* IE */">
-																<h2 style="font-size:12pt;"><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
-															</div>
+															<h2 style="font-size:12pt;"><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
 															<?php if (isset($s->gambarSoal)) { ?>
 																<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
 															<?php } ?>
@@ -332,7 +330,7 @@
 																					<td>
 																						<div id="visible">
 																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
+																							<div>
 																					</td>
 																				</tr>
 																			</table>
@@ -411,7 +409,7 @@
 																					<td>
 																						<div id="visible">
 																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
+																							<div>
 																					</td>
 																				</tr>
 																			</table>
@@ -481,7 +479,7 @@
 																					<td>
 																						<div id="visible">
 																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
+																							<div>
 																					</td>
 																				</tr>
 																			</table>
@@ -550,7 +548,7 @@
 																					<td>
 																						<div id="visible">
 																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
+																							<div>
 																					</td>
 																				</tr>
 																			</table>
@@ -621,7 +619,7 @@
 								</div>
 							</div>
 						</div>
-						<div id="visible">
+						<div id="visible3">
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/back2/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Back</i></a> &nbsp;
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/next2/' . $tmpId . "/" . $tempIndex); ?>">

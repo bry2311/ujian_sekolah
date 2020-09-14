@@ -41,7 +41,7 @@ class M_nilai extends CI_Model {
         return $query->result();
     }
     public function getNilaiByIdUjian($id){ 
-        $query = $this->db->query("SELECT n.*,u.nama,u.kelas FROM nilai n JOIN user u ON n.nik = u.nik WHERE n.id_ujian = $id ORDER BY u.kelas ASC");
+        $query = $this->db->query("SELECT n.*,u.nama,u.kelas FROM nilai n JOIN user u ON n.nik = u.nik WHERE n.id_ujian = $id AND u.aktif = 1 ORDER BY u.kelas ASC");
         return $query->result();
     }
     public function getNilaiByIdUjian2($id){ 
@@ -70,4 +70,3 @@ class M_nilai extends CI_Model {
         $this->db->delete("nilai");
     }
 }
-?> 

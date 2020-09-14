@@ -4221,6 +4221,12 @@ class Guru extends CI_Controller
 		$j = $i;
 		$ct = 1;
 		$lastClass = $allUser[0]->kelas;
+		$minimum = 100;
+		$maximum = 0;
+		$totalScore = 0;
+		$countAllUser = 0;
+		$passStudent = 0;
+		$notPass = 0;
 		for ($i; $i < count($allUser) + $j; $i++) {
 			if ($lastClass != $allUser[$i - $j]->kelas) {
 				$ct = 1;
@@ -4233,16 +4239,51 @@ class Guru extends CI_Controller
 					$tmpNilai = $nilai[$nj]->hasil;
 					if ($tmpNilai >= $ujian->kkm) {
 						$tmpRemed = " ";
+						$passStudent += 1;
+					} else {
+						if ($tmpNilai != "-") {
+							$notPass += 1;
+						}
 					}
 					break;
 				}
+			}
+			if ($tmpNilai <= $minimum && $tmpNilai != "-") {
+				$minimum = $tmpNilai;
+			}
+			if ($tmpNilai >= $maximum && $tmpNilai != "-") {
+				$maximum = $tmpNilai;
+			}
+			if ($tmpNilai != "-") {
+				$totalScore += $tmpNilai;
 			}
 			$sheet1->setCellValue('A' . $i, $allUser[$i - $j]->kelas . $ct . " ");
 			$sheet1->setCellValue('B' . $i, $allUser[$i - $j]->nama);
 			$sheet1->setCellValue('C' . $i, $tmpNilai);
 			$sheet1->setCellValue('D' . $i, $tmpRemed);
 			$ct += 1;
+			$countAllUser += 1;
 		}
+		$sheet1->setCellValue('A' . $i, "Minimum");
+		$sheet1->setCellValue('B' . $i, "");
+		$sheet1->setCellValue('C' . $i, $minimum);
+		$i += 1;
+		$sheet1->setCellValue('A' . $i, "Maximum");
+		$sheet1->setCellValue('B' . $i, "");
+		$sheet1->setCellValue('C' . $i, $maximum);
+		$i += 1;
+		$sheet1->setCellValue('A' . $i, "Average");
+		$sheet1->setCellValue('B' . $i, "");
+		$sheet1->setCellValue('C' . $i, round($totalScore / $countAllUser, 2));
+		$i += 1;
+		$sheet1->setCellValue('A' . $i, "Daya serap");
+		$sheet1->setCellValue('B' . $i, "");
+		$sheet1->setCellValue('C' . $i, strval(round($passStudent / $countAllUser, 2) * 100) . "%");
+		$i += 1;
+		$sheet1->setCellValue('A' . $i, "< KKM");
+		$sheet1->setCellValue('B' . $i, "");
+		$sheet1->setCellValue('C' . $i, $notPass);
+		$i += 1;
 		$sheet1->getStyle('A' . $beginI . ':D' . ($i - 1))->applyFromArray($styleArray);
 		// end sheet 1//
 		// start sheet 2//

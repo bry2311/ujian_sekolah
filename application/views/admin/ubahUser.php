@@ -133,17 +133,17 @@
 											<td>
 												<select name="unit">
 													<option <?php if ($user->unit == 'TK') {
-																		echo 'selected';
-																	} ?>>TK</option>
+																echo 'selected';
+															} ?>>TK</option>
 													<option <?php if ($user->unit == 'SD') {
-																		echo 'selected';
-																	} ?>>SD</option>
+																echo 'selected';
+															} ?>>SD</option>
 													<option <?php if ($user->unit == 'SMP') {
-																		echo 'selected';
-																	} ?>>SMP</option>
+																echo 'selected';
+															} ?>>SMP</option>
 													<option <?php if ($user->unit == 'SMA') {
-																		echo 'selected';
-																	} ?>>SMA</option>
+																echo 'selected';
+															} ?>>SMA</option>
 												</select>
 											</td>
 										</tr>
@@ -156,8 +156,8 @@
 													foreach ($kelas as $k) {
 													?>
 														<option value="<?php echo $k->nama; ?>" <?php if ($k->nama == $user->kelas) {
-																																			echo 'selected';
-																																		} ?>><?php echo $k->nama; ?></option>
+																									echo 'selected';
+																								} ?>><?php echo $k->nama; ?></option>
 													<?php
 													}
 													?>
@@ -169,11 +169,11 @@
 											<td>
 												<select name="role">
 													<option <?php if ($user->role == 'Guru') {
-																		echo 'selected';
-																	} ?>>Guru</option>
+																echo 'selected';
+															} ?>>Guru</option>
 													<option <?php if ($user->role == 'Siswa') {
-																		echo 'selected';
-																	} ?>>Siswa</option>
+																echo 'selected';
+															} ?>>Siswa</option>
 												</select>
 											</td>
 										</tr>
@@ -181,11 +181,24 @@
 											<td>Jenis Kelamin</td>
 											<td><select name="jenis_kelamin">
 													<option <?php if ($user->jenis_kelamin == 'L') {
-																		echo 'selected';
-																	} ?>>L</option>
+																echo 'selected';
+															} ?>>L</option>
 													<option <?php if ($user->jenis_kelamin == 'P') {
-																		echo 'selected';
-																	} ?>>P</option>
+																echo 'selected';
+															} ?>>P</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>Aktif </td>
+											<td>
+												<select name="aktif">
+													<option <?php if ($user->aktif == '1') {
+																echo 'selected';
+															} ?> value="1">Aktif</option>
+													<option <?php if ($user->aktif == '0') {
+																echo 'selected';
+															} ?> value="0">Tidak aktif</option>
 												</select>
 											</td>
 										</tr>

@@ -102,8 +102,6 @@ class Siswa extends CI_Controller
 		$this->isAnyLogin();
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
 		$this->M_user->updateStatusUjian($this->session->nik, $id);
-		echo "a";
-		exit;
 		$this->load->view('siswa/informasiUjian', $data);
 	}
 	public function startUjian()

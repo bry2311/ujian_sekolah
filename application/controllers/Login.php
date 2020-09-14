@@ -56,9 +56,9 @@ class Login extends CI_Controller
 				$data['ujian'] = $this->M_ujian->getUjianAktif();
 				$this->load->view('guru/home.php', $data);
 			} else if ($result->role == "Siswa") {
-				$data['nilai'] = $this->M_nilai->getNilaiByNik($this->session->nik);
-				$data['ujian'] = $this->M_ujian->getUjianAktif();
-				$this->load->view('siswa/home.php', $data);
+				$data['nilai'] = $this->M_nilai->getNilaiByNik($result->nik);
+				$data['ujian'] = $this->M_ujian->getUjian();
+				$this->load->view('siswa/dataReport.php', $data);
 			} else if ($result->role == "Admin") {
 				$data['user'] = $this->M_user->getUser();
 				$data['menu'] = $this->M_menu->makeMenu('user');
@@ -88,10 +88,10 @@ class Login extends CI_Controller
 			'password' => MD5($this->input->post('password', TRUE)),
 		);
 		$result = $this->M_user->login($data);
-		if ($result->last_status != 0) {
-			$this->session->set_flashdata('msg', 'User sedang aktif! Silahkan logout terlebih dahulu atau hubungi guru.');
-			redirect('login');
-		}
+		// if ($result->last_status != 0) {
+		// 	$this->session->set_flashdata('msg', 'User sedang aktif! Silahkan logout terlebih dahulu atau hubungi guru.');
+		// 	redirect('login');
+		// }
 		if (isset($result)) {
 			$this->M_user->updateStatusLogin($result->nik);
 			$this->session->nama = $result->nama;

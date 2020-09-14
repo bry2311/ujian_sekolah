@@ -105,6 +105,7 @@
 							<div class="card-header py-3">
 								<h6 class="m-0 font-weight-bold text-primary">Data User</h6>
 							</div>
+							<a class="btn btn-danger pull-right" style="margin:20px 20px 0px 20px" href="<?= base_url('StatusUser/resetAll/'); ?>">Reset All</a>
 							<div class="card-body">
 								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 									<thead>

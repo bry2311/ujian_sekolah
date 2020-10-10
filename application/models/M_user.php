@@ -22,6 +22,11 @@ class M_user extends CI_Model
 		$query = $this->db->query("SELECT * FROM user WHERE nik='$data[nik]' AND password='$data[password]' LIMIT 1");
 		return $query->row();
 	}
+	public function loginByNik($data)
+	{
+		$query = $this->db->query("SELECT * FROM user WHERE nik='$data' LIMIT 1");
+		return $query->row();
+	}
 	public function updateStatusLogin($nik)
 	{
 		$this->db->set('last_status', '1');

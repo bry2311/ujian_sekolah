@@ -371,6 +371,19 @@ class Guru extends CI_Controller
 			$ge = null;
 		}
 		$a = $this->input->post('a', TRUE);
+		$kunci_pg = $this->input->post('kunci_pg', TRUE);
+		$kunci_jawaban = null;
+		if ($kunci_pg == "A") {
+			$kunci_jawaban = $this->input->post('a', TRUE);
+		} else if ($kunci_pg == "B") {
+			$kunci_jawaban = $this->input->post('b', TRUE);
+		} else if ($kunci_pg == "C") {
+			$kunci_jawaban = $this->input->post('c', TRUE);
+		} else if ($kunci_pg == "D") {
+			$kunci_jawaban = $this->input->post('d', TRUE);
+		} else if ($kunci_pg == "E") {
+			$kunci_jawaban = $this->input->post('e', TRUE);
+		}
 		//var_dump($a);exit;
 		$data = array(
 			'materi' => $this->input->post('materi', TRUE),
@@ -388,8 +401,8 @@ class Guru extends CI_Controller
 			'gambarC' => $gc,
 			'gambarD' => $gd,
 			'gambarE' => $ge,
-			'kunci_jawaban' => $this->input->post('kunci_jawaban', TRUE),
-
+			'kunci_pg' => $this->input->post('kunci_pg', TRUE),
+			'kunci_jawaban' => $kunci_jawaban,
 			'nik' => $this->session->nik,
 		);
 		$this->M_soalpg->add($data);
@@ -451,6 +464,19 @@ class Guru extends CI_Controller
 			$ge = null;
 		}
 		$id = $this->input->post('id');
+		$kunci_pg = $this->input->post('kunci_pg', TRUE);
+		$kunci_jawaban = null;
+		if ($kunci_pg == "A") {
+			$kunci_jawaban = $this->input->post('a', TRUE);
+		} else if ($kunci_pg == "B") {
+			$kunci_jawaban = $this->input->post('b', TRUE);
+		} else if ($kunci_pg == "C") {
+			$kunci_jawaban = $this->input->post('c', TRUE);
+		} else if ($kunci_pg == "D") {
+			$kunci_jawaban = $this->input->post('d', TRUE);
+		} else if ($kunci_pg == "E") {
+			$kunci_jawaban = $this->input->post('e', TRUE);
+		}
 		$data = array(
 			'materi' => $this->input->post('materi', TRUE),
 			'kd' => $this->input->post('kd', TRUE),
@@ -467,7 +493,8 @@ class Guru extends CI_Controller
 			'gambarC' => $gc,
 			'gambarD' => $gd,
 			'gambarE' => $ge,
-			'kunci_jawaban' => $this->input->post('kunci_jawaban', TRUE),
+			'kunci_pg' => $this->input->post('kunci_pg', TRUE),
+			'kunci_jawaban' => $kunci_jawaban,
 		);
 		if ($this->M_soalpg->editSoalPg($id, $data)) {
 			$this->session->set_flashdata('msg', "<div class='alert alert-success'> Berhasil Mengubah Data.</div>");
@@ -505,6 +532,19 @@ class Guru extends CI_Controller
 			$arrayRow = $row->toArray();
 			foreach ($arrayRow as $cell) {
 				if ($numrow > 1) {
+					$kunci_pg = trim(strtoupper($cell[8]));
+					$kunci_jawaban = null;
+					if ($kunci_pg == "A") {
+						$kunci_jawaban = $cell[3];
+					} else if ($kunci_pg == "B") {
+						$kunci_jawaban = $cell[4];
+					} else if ($kunci_pg == "C") {
+						$kunci_jawaban = $cell[5];
+					} else if ($kunci_pg == "D") {
+						$kunci_jawaban = $cell[6];
+					} else if ($kunci_pg == "E") {
+						$kunci_jawaban = $cell[7];
+					}
 					array_push($data, array(
 						'materi' => $cell[0],
 						'kd' => $cell[1],
@@ -514,7 +554,8 @@ class Guru extends CI_Controller
 						'c' => $cell[5],
 						'd' => $cell[6],
 						'e' => $cell[7],
-						'kunci_jawaban' => $cell[8],
+						'kunci_pg' => trim(strtoupper($cell[8])),
+						'kunci_jawaban' => $kunci_jawaban,
 						'nik' => $this->session->nik,
 						'kelas' => $cell[9],
 					));
@@ -2155,7 +2196,7 @@ class Guru extends CI_Controller
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-							if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) != trim(strtolower($js->jawaban))) {
+							if ($soalPg[$i - $j]->kunci_pg != $js->jawaban_asli) {
 								$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 							}
 						}
@@ -2255,7 +2296,7 @@ class Guru extends CI_Controller
 								$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 								$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 								$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-								if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) != trim(strtolower(strip_tags($js->jawaban)))) {
+								if ($allSoal[$i - $j]->kunci_pg != $js->jawaban_asli) {
 									$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 								}
 							}
@@ -2579,7 +2620,7 @@ class Guru extends CI_Controller
 						$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 						$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 						$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) != trim(strtolower(strip_tags($js->jawaban)))) {
+						if ($soalPg[$i - $j]->kunci_pg != $js->jawaban_asli) {
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 						}
 					}
@@ -2679,7 +2720,7 @@ class Guru extends CI_Controller
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) != trim(strtolower(strip_tags($js->jawaban)))) {
+							if ($allSoal[$i - $j]->kunci_pg != $js->jawaban_asli) {
 								$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 							}
 						}
@@ -3219,7 +3260,7 @@ class Guru extends CI_Controller
 				for ($z = 0; $z < count($allSoal); $z++) {
 					for ($js = 0; $js < count($jawabanSiswa); $js++) {
 						if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
-							if (trim($jawabanSiswa[$js]->jawaban) == trim($allSoal[$z]->kunci_jawaban)) {
+							if ($jawabanSiswa[$js]->jawaban_asli == $allSoal[$z]->kunci_pg) {
 								$resultD = $resultD . "1";
 								$jmlBenar += 1;
 							} else {
@@ -3249,16 +3290,22 @@ class Guru extends CI_Controller
 					$allSoal = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian($id);
 					$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaByNik($nilai[$i - $j]->nik, $id);
 					for ($z = 0; $z < count($allSoal); $z++) {
+						$answered = false;
 						for ($js = 0; $js < count($jawabanSiswa); $js++) {
 							if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
-								if (trim(strip_tags($jawabanSiswa[$js]->jawaban)) == trim(strip_tags($allSoal[$z]->kunci_jawaban))) {
+								if ($jawabanSiswa[$js]->jawaban_asli == $allSoal[$z]->kunci_pg) {
 									$resultD = $resultD . "1";
 									$jmlBenar += 1;
 								} else {
 									$resultD = $resultD . "0";
 									$jmlSalah += 1;
 								}
+								$answered = true;
 							}
+						}
+						if (!$answered) {
+							$resultD = $resultD . "0";
+							$jmlSalah += 1;
 						}
 					}
 				} else {
@@ -3640,7 +3687,7 @@ class Guru extends CI_Controller
 						for ($js = 0; $js < count($jawabanSiswa); $js++) {
 							if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 								$isAnswered = true;
-								if (trim($jawabanSiswa[$js]->jawaban) ==  trim($allSoal[$z]->kunci_jawaban)) {
+								if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_PG)) {
 									$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
 									$arrJmlBenar[$cellVal - 3] += 1;
 									$bUser += 1;
@@ -3707,7 +3754,7 @@ class Guru extends CI_Controller
 							for ($js = 0; $js < count($jawabanSiswa); $js++) {
 								if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 									$isAnswered = true;
-									if (trim(strip_tags($jawabanSiswa[$js]->jawaban)) ==  trim(strip_tags($allSoal[$z]->kunci_jawaban))) {
+									if ($jawabanSiswa[$js]->jawaban_asli ==  $allSoal[$z]->kunci_pg) {
 										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
 										$arrJmlBenar[$cellVal - 3] += 1;
 										$bUser += 1;
@@ -3943,7 +3990,7 @@ class Guru extends CI_Controller
 						for ($js = 0; $js < count($jawabanSiswa); $js++) {
 							if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 								$isAnswered = true;
-								if (trim($jawabanSiswa[$js]->jawaban) ==  trim($allSoal[$z]->kunci_jawaban)) {
+								if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_pg)) {
 									$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
 									$arrJmlBenar[$cellVal - 3] += 1;
 									$bUser += 1;
@@ -4010,7 +4057,7 @@ class Guru extends CI_Controller
 							for ($js = 0; $js < count($jawabanSiswa); $js++) {
 								if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 									$isAnswered = true;
-									if (trim($jawabanSiswa[$js]->jawaban) ==  trim($allSoal[$z]->kunci_jawaban)) {
+									if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_pg)) {
 										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
 										$arrJmlBenar[$cellVal - 3] += 1;
 										$bUser += 1;

@@ -38,7 +38,7 @@ class M_ujian_gabungan_has_soal extends CI_Model {
         $this->db->delete("ujian_gabungan_has_soal");
     }
     public function getSoalPgByIdUjian($id){  
-        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban FROM ujian_gabungan_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id AND us.tipe = 'Pilihan Ganda' ORDER BY us.no_soal");
+        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban, s.kunci_pg FROM ujian_gabungan_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id AND us.tipe = 'Pilihan Ganda' ORDER BY us.no_soal");
         return $query->result();
     }
     public function getSoalIsianByIdUjian($id){ 

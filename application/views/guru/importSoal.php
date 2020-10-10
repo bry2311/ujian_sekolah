@@ -12,11 +12,11 @@
   <title>CBT Talenta School</title>
 
   <!-- Custom fonts for this template-->
-  <link href="<?= base_url()?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="<?= base_url() ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="<?= base_url()?>/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?= base_url() ?>/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -37,42 +37,42 @@
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>login/guru">
+        <a class="nav-link" href="<?= base_url(); ?>login/guru">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Home</span></a>
       </li>
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>guru/dataUser">
+        <a class="nav-link" href="<?= base_url(); ?>guru/dataUser">
           <i class="fas fa-fw fa-address-book"></i>
           <span>Daftar User</span>
         </a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>guru/dataGambar">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>guru/dataGambar">
           <i class="fas fa-fw fa-cog"></i>
           <span>Daftar Gambar</span>
         </a>
-        </li>
-        <li class="nav-item active">
-        <a class="nav-link" href="<?= base_url();?>guru/dataSoal">
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="<?= base_url(); ?>guru/dataSoal">
           <i class="fas fa-fw fa-cog"></i>
           <span>Daftar Soal</span>
         </a>
-        </li>
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>guru/dataUjian">
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>guru/dataUjian">
           <i class="fas fa-fw fa-database"></i>
           <span>Daftar Ujian</span>
         </a>
-        </li>
+      </li>
 
-        <li class="nav-item">
-        <a class="nav-link" href="<?= base_url();?>guru/dataReport">
+      <li class="nav-item">
+        <a class="nav-link" href="<?= base_url(); ?>guru/dataReport">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>Report</span>
         </a>
-        </li>
+      </li>
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
       <!-- Sidebar Toggler (Sidebar) -->
@@ -98,7 +98,7 @@
           <ul class="navbar-nav ml-auto">
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
-              <a class="nav-link dropdown-toggle" href="<?= base_url();?>login/logout" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="<?= base_url(); ?>login/logout" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-search fa-fw"></i>
               </a>
               <!-- Dropdown - Messages -->
@@ -117,8 +117,8 @@
             </li>
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="<?= base_url();?>login/logout">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->nama;?></span>
+              <a class="nav-link dropdown-toggle" href="<?= base_url(); ?>login/logout">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->session->nama; ?></span>
                 <i class="fas fa-sign-out-alt fa-sm"></i>
               </a>
             </li>
@@ -133,30 +133,30 @@
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Import Soal</h1>
           </div>
-          <!-- Content Row --> 
+          <!-- Content Row -->
           <div class="row">
-              <!-- Approach -->
-              <div class="card shadow mb-4" style="width:100%">
-                <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">Import Soal</h6>
-                </div> 
-                <div class="card-body">
-                  <h4 class="mb"> Import Excel Data Soal</h4>
-                  	  <a href="<?php echo base_url("excel/formatSoal2.xls"); ?>">Download Format</a>
-                      <form class="form-horizontal style-form" action="<?= base_url();?>guru/importSoalDb" method="post" enctype="multipart/form-data">                       
-                          <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">File Excel (.xls)</label>
-                            <input class="" name="file" type="file"  required>    
-                            <div class="row mt">
-                              <div class="col-lg-6 col-md-6 col-sm-12">
-                              </div>
-                              <a href="<?= base_url('guru/dataSoal');?>" class="btn btn-default">Kembali</a>
-                              <input type="submit" class="btn btn-primary" value="Simpan" name="submit">  
-                            </div>
-                          </div>                          
-                    </form>
-                </div>
+            <!-- Approach -->
+            <div class="card shadow mb-4" style="width:100%">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Import Soal</h6>
               </div>
+              <div class="card-body">
+                <h4 class="mb"> Import Excel Data Soal</h4>
+                <a href="<?php echo base_url("excel/formatSoal.xls"); ?>">Download Format</a>
+                <form class="form-horizontal style-form" action="<?= base_url(); ?>guru/importSoalDb" method="post" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label class="col-sm-2 col-sm-2 control-label">File Excel (.xls)</label>
+                    <input class="" name="file" type="file" required>
+                    <div class="row mt">
+                      <div class="col-lg-6 col-md-6 col-sm-12">
+                      </div>
+                      <a href="<?= base_url('guru/dataSoal'); ?>" class="btn btn-default">Kembali</a>
+                      <input type="submit" class="btn btn-primary" value="Simpan" name="submit">
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
         <!-- /.container-fluid -->
@@ -210,18 +210,18 @@
 
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= base_url()?>/vendor/jquery/jquery.min.js"></script>
-<script src="<?= base_url()?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url() ?>/vendor/jquery/jquery.min.js"></script>
+<script src="<?= base_url() ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="<?= base_url()?>/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<?= base_url() ?>/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="<?= base_url()?>/js/sb-admin-2.min.js"></script>
+<script src="<?= base_url() ?>/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<script src="<?= base_url()?>/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url()?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url() ?>/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url() ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="<?= base_url()?>/js/demo/datatables-demo.js"></script>
+<script src="<?= base_url() ?>/js/demo/datatables-demo.js"></script>

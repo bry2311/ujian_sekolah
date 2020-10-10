@@ -18,7 +18,7 @@ class M_ujian_has_soal extends CI_Model {
         return $query->result();
     }
     public function getUjianHasSoalByIdUjian($id){  
-        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban FROM ujian_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id ORDER BY us.no_soal");
+        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban, s.kunci_pg FROM ujian_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id ORDER BY us.no_soal");
         return $query->result();
     }
     public function getUjianHasSoalByIdUjian3($id){  

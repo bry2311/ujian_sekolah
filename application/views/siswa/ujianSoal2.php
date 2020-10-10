@@ -222,51 +222,52 @@
 							</div>
 							<h2 id="demo" align="center" style="font-size:12pt;"></h2>
 							<div class="card-body">
-								<div class="scrollmenu">
-									<p>
-										<?php
-										if ($ujian->jenis == "Pilihan Ganda") {
-											for ($i = 0; $i < count($this->session->soal_ujian_random); $i++) {
-												foreach ($soal as $s) {
-													if ($s->id == $this->session->soal_ujian_random[$i] && $tempIndex == $i) {
-										?>
-														<div class="card-body">
-															<h2 align="center" style="font-size:12pt;"><?php echo $s->materi; ?></h2>
-															<br>
-															<div style="white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Firefox */ white-space: -pre-wrap; /* Opera <7 */ white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* IE */">
-																<h2 style="font-size:12pt;"><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
-															</div>
-															<?php if (isset($s->gambarSoal)) { ?>
-																<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
-															<?php } ?>
-															<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa2" method="post">
-																<div class="input-group">
-																	<?php
-																	$tempJawaban = -1;
-																	if ($jawaban != null) {
-																		for ($j = 0; $j < count($jawaban); $j++) {
-																			if ($jawaban[$j]->id_soal == $s->id) {
-																				$tempJawaban = $j;
-																			}
+								<!-- <div class="scrollmenu"> -->
+								<p>
+									<?php
+									if ($ujian->jenis == "Pilihan Ganda") {
+										for ($i = 0; $i < count($this->session->soal_ujian_random); $i++) {
+											foreach ($soal as $s) {
+												if ($s->id == $this->session->soal_ujian_random[$i] && $tempIndex == $i) {
+									?>
+													<div class="card-body">
+														<h2 align="center" style="font-size:12pt;"><?php echo $s->materi; ?></h2>
+														<br>
+														<div style="white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Firefox */ white-space: -pre-wrap; /* Opera <7 */ white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* IE */">
+															<h2 style="font-size:12pt;"><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
+														</div>
+														<?php if (isset($s->gambarSoal)) { ?>
+															<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
+														<?php } ?>
+														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa2" method="post">
+															<div class="input-group">
+																<?php
+																$tempJawaban = -1;
+																if ($jawaban != null) {
+																	for ($j = 0; $j < count($jawaban); $j++) {
+																		if ($jawaban[$j]->id_soal == $s->id) {
+																			$tempJawaban = $j;
 																		}
 																	}
-																	$ja = "";
-																	$jb = "";
-																	$jc = "";
-																	$jd = "";
-																	?>
-																	<?php
-																	if ($jawaban != null and $tempJawaban != -1) {
-																		if ($this->session->nik % 2 == 0) {
-																	?>
-																			<table>
-																				<?php if (trim(strtolower(strip_tags($s->e))) == trim(strtolower(strip_tags($s->kunci_jawaban)))) {
+																}
+																$ja = "";
+																$jb = "";
+																$jc = "";
+																$jd = "";
+																?>
+																<?php
+																if ($jawaban != null and $tempJawaban != -1) {
+																	if ($this->session->nik % 2 == 0) {
+																?>
+																		<div style="white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Firefox */ white-space: -pre-wrap; /* Opera <7 */ white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* IE */">
+																			<table style="table-layout:fixed; width:100%">
+																				<?php if ($s->kunci_pg == "E") {
 																				?>
 																					<tr>
 																						<?php $ja = $s->e; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
-																																																																				echo "checked";
-																																																																			} ?>></td>
+																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
+																																																																								echo "checked";
+																																																																							} ?>></td>
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																						<td>
 																							<?php if (isset($s->gambarE)) { ?>
@@ -279,9 +280,9 @@
 																				?>
 																					<tr>
 																						<?php $ja = $s->a; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
-																																																																				echo "checked";
-																																																																			} ?>></td>
+																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
+																																																																								echo "checked";
+																																																																							} ?>></td>
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																						<td>
 																							<?php if (isset($s->gambarA)) { ?>
@@ -293,9 +294,9 @@
 																				} ?>
 																				<tr>
 																					<?php $jb = $s->b; ?>
-																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B. <?php echo strval($s->b); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->b)))) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
+																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->b)))) {
+																																																																							echo "checked";
+																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarB)) { ?>
@@ -306,9 +307,9 @@
 																				</tr>
 																				<tr>
 																					<?php $jc = $s->c; ?>
-																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C. <?php echo strval($s->c); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->c)))) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
+																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->c)))) {
+																																																																							echo "checked";
+																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarC)) { ?>
@@ -318,9 +319,9 @@
 																				</tr>
 																				<tr>
 																					<?php $jd = $s->d; ?>
-																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D. <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
+																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
+																																																																							echo "checked";
+																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
@@ -336,289 +337,290 @@
 																					</td>
 																				</tr>
 																			</table>
-																		<?php
-																		} else {
-																		?>
-																			<table>
-																				<?php if (trim(strtolower(strip_tags($s->e))) == trim(strtolower(strip_tags($s->kunci_jawaban)))) {
-																				?>
-																					<tr>
-																						<?php $ja = $s->e; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
-																																																																				echo "checked";
-																																																																			} ?>></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarE)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php
-																				} else {
-																				?>
-																					<tr>
-																						<?php $ja = $s->d; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
-																																																																				echo "checked";
-																																																																			} ?>></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarD)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php
-																				} ?>
-																				<tr>
-																					<?php $jb = $s->a; ?>
-																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B. <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarA)) { ?>
-																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<?php $jc = $s->b; ?>
-																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C. <?php echo strval($s->b); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->b)) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarB)) { ?>
-																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<?php $jd = $s->c; ?>
-																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D. <?php echo strval($s->c); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->c)) {
-																																																																			echo "checked";
-																																																																		} ?>></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarC)) { ?>
-																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td>
-																						<div id="visible">
-																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
-																					</td>
-																				</tr>
-																			</table>
-																		<?php
-																		}
+																		</div>
+																	<?php
 																	} else {
-																		if ($this->session->nik % 2 == 0) {
-																		?>
-																			<table>
-																				<?php if (trim(strtolower(strip_tags($s->e))) == trim(strtolower(strip_tags($s->kunci_jawaban)))) {
-																				?>
-																					<tr>
-																						<?php $ja = $s->e; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->e); ?>'></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarE)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php
-																				} else {
-																				?>
-																					<tr>
-																						<?php $ja = $s->a; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->a); ?>'></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarA)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php } ?>
+																	?>
+																		<table>
+																			<?php if ($s->kunci_pg == "E") {
+																			?>
 																				<tr>
-																					<?php $jb = $s->b; ?>
-																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B. <?php echo strval($s->b); ?>'></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
+																					<?php $ja = $s->e; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
+																																																																							echo "checked";
+																																																																						} ?>></td>
+																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																					<td>
-																						<?php if (isset($s->gambarB)) { ?>
-																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																						<?php if (isset($s->gambarE)) { ?>
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
+																			<?php
+																			} else {
+																			?>
 																				<tr>
-																					<?php $jc = $s->c; ?>
-																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C. <?php echo strval($s->c); ?>'></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarC)) { ?>
-																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<?php $jd = $s->d; ?>
-																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D. <?php echo strval($s->d); ?>'></td>
+																					<?php $ja = $s->d; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
+																																																																							echo "checked";
+																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
-																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
+																			<?php
+																			} ?>
+																			<tr>
+																				<?php $jb = $s->a; ?>
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
+																																																																						echo "checked";
+																																																																					} ?>></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarA)) { ?>
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jc = $s->b; ?>
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->b)) {
+																																																																						echo "checked";
+																																																																					} ?>></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarB)) { ?>
+																						<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jd = $s->c; ?>
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->c)) {
+																																																																						echo "checked";
+																																																																					} ?>></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarC)) { ?>
+																						<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td>
+																					<div id="visible">
+																						<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+																					</div>
+																				</td>
+																			</tr>
+																		</table>
+																	<?php
+																	}
+																} else {
+																	if ($this->session->nik % 2 == 0) {
+																	?>
+																		<table>
+																			<?php if ($s->kunci_pg == "E") {
+																			?>
 																				<tr>
+																					<?php $ja = $s->e; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
+																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																					<td>
-																						<div id="visible">
-																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
+																						<?php if (isset($s->gambarE)) { ?>
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																						<?php } ?>
 																					</td>
 																				</tr>
-																			</table>
-																		<?php
-																		} else {
-																		?>
-																			<table>
-																				<?php if (trim(strtolower(strip_tags($s->e))) == trim(strtolower(strip_tags($s->kunci_jawaban)))) {
-																				?>
-																					<tr>
-																						<?php $ja = $s->e; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->e); ?>'></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarE)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php
-																				} else {
-																				?>
-																					<tr>
-																						<?php $ja = $s->d; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A. <?php echo strval($s->d); ?>'></td>
-																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
-																						<td>
-																							<?php if (isset($s->gambarD)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
-																							<?php } ?>
-																						</td>
-																					</tr>
-																				<?php
-																				} ?>
+																			<?php
+																			} else {
+																			?>
 																				<tr>
-																					<?php $jb = $s->a; ?>
-																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B. <?php echo strval($s->a); ?>'></td>
+																					<?php $ja = $s->a; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarA)) { ?>
-																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
-																				<tr>
-																					<?php $jc = $s->b; ?>
-																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C. <?php echo strval($s->b); ?>'></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarB)) { ?>
-																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<?php $jd = $s->c; ?>
-																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D. <?php echo strval($s->c); ?>'></td>
-																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
-																					<td>
-																						<?php if (isset($s->gambarC)) { ?>
-																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
-																						<?php } ?>
-																					</td>
-																				</tr>
-																				<tr>
-																					<td>
-																						<div id="visible">
-																							<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																						</div>
-																					</td>
-																				</tr>
-																			</table>
+																			<?php } ?>
+																			<tr>
+																				<?php $jb = $s->b; ?>
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarB)) { ?>
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jc = $s->c; ?>
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarC)) { ?>
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jd = $s->d; ?>
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarD)) { ?>
+																						<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td>
+																					<div id="visible">
+																						<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+																					</div>
+																				</td>
+																			</tr>
+																		</table>
 																	<?php
-																		}
-																	}
+																	} else {
 																	?>
-																</div>
-																<input type="hidden" name="ja" value='<?php echo $ja; ?>'>
-																<input type="hidden" name="jb" value='<?php echo $jb; ?>'>
-																<input type="hidden" name="jc" value='<?php echo $jc; ?>'>
-																<input type="hidden" name="jd" value='<?php echo $jd; ?>'>
-																<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
-																<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
-																<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
-															</form>
-														</div>
-													<?php
-													}
-												}
-											}
-										} else {
-											for ($i = 0; $i < count($this->session->soal_ujian_random); $i++) {
-												foreach ($soal as $s) {
-													if ($s->id == $this->session->soal_ujian_random[$i] && $tempIndex == $i) {
-														$tempJawaban = -1;
-														if ($jawaban_isian != null) {
-															for ($j = 0; $j < count($jawaban_isian); $j++) {
-																if ($jawaban_isian[$j]->id_soal == $s->id) {
-																	$tempJawaban = $j;
+																		<table>
+																			<?php if ($s->kunci_pg == "E") {
+																			?>
+																				<tr>
+																					<?php $ja = $s->e; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
+																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
+																					<td>
+																						<?php if (isset($s->gambarE)) { ?>
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																						<?php } ?>
+																					</td>
+																				</tr>
+																			<?php
+																			} else {
+																			?>
+																				<tr>
+																					<?php $ja = $s->d; ?>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
+																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
+																					<td>
+																						<?php if (isset($s->gambarD)) { ?>
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																						<?php } ?>
+																					</td>
+																				</tr>
+																			<?php
+																			} ?>
+																			<tr>
+																				<?php $jb = $s->a; ?>
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarA)) { ?>
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jc = $s->b; ?>
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarB)) { ?>
+																						<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<?php $jd = $s->c; ?>
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
+																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
+																				<td>
+																					<?php if (isset($s->gambarC)) { ?>
+																						<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																					<?php } ?>
+																				</td>
+																			</tr>
+																			<tr>
+																				<td>
+																					<div id="visible">
+																						<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+																					</div>
+																				</td>
+																			</tr>
+																		</table>
+																<?php
+																	}
 																}
-															}
-														}
-													?>
-														<div class="card-body">
-															<h2 align="center"><?php echo $s->materi; ?></h2>
-															<br>
-															<h2><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
-															<?php if (isset($s->gambarSoal)) {
-															?>
-																<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
-															<?php
-															}
-															?>
-															<br>
-															<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post">
-																<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini ..">
-                                <?php
-														if ($jawaban_isian != null and $tempJawaban != -1) {
-															echo $jawaban_isian[$tempJawaban]->jawaban;
-														}
-								?>
-                              </textarea>
-																<div id="aaaa" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-																</div>
-																<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
-																<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
-																<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
-															</form>
-														</div>
-										<?php
-													}
+																?>
+															</div>
+															<input type="hidden" name="ja" value='<?php echo $ja; ?>'>
+															<input type="hidden" name="jb" value='<?php echo $jb; ?>'>
+															<input type="hidden" name="jc" value='<?php echo $jc; ?>'>
+															<input type="hidden" name="jd" value='<?php echo $jd; ?>'>
+															<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
+															<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
+															<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
+														</form>
+													</div>
+												<?php
 												}
 											}
 										}
-										?>
-									</p>
-								</div>
+									} else {
+										for ($i = 0; $i < count($this->session->soal_ujian_random); $i++) {
+											foreach ($soal as $s) {
+												if ($s->id == $this->session->soal_ujian_random[$i] && $tempIndex == $i) {
+													$tempJawaban = -1;
+													if ($jawaban_isian != null) {
+														for ($j = 0; $j < count($jawaban_isian); $j++) {
+															if ($jawaban_isian[$j]->id_soal == $s->id) {
+																$tempJawaban = $j;
+															}
+														}
+													}
+												?>
+													<div class="card-body">
+														<h2 align="center"><?php echo $s->materi; ?></h2>
+														<br>
+														<h2><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
+														<?php if (isset($s->gambarSoal)) {
+														?>
+															<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
+														<?php
+														}
+														?>
+														<br>
+														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post">
+															<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini ..">
+                                <?php
+													if ($jawaban_isian != null and $tempJawaban != -1) {
+														echo $jawaban_isian[$tempJawaban]->jawaban;
+													}
+								?>
+                              </textarea>
+															<div id="aaaa" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+															</div>
+															<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
+															<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
+															<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
+														</form>
+													</div>
+									<?php
+												}
+											}
+										}
+									}
+									?>
+								</p>
+								<!-- </div> -->
 							</div>
 						</div>
 						<div id="visible">

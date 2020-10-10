@@ -472,7 +472,8 @@ class Siswa extends CI_Controller
 		$jc = $this->input->post('jc', TRUE);
 		$jd = $this->input->post('jd', TRUE);
 		$pilihanJawaban = substr($jawaban, 0, 1);
-		$hasilJawaban = substr($jawaban, 2);
+		$jawabanAsli = substr($jawaban, 2, 1);
+		$hasilJawaban = substr($jawaban, 4);
 		if ($jawaban != NULL) {
 			$nik = $this->session->nik;
 			$check = $this->M_jawaban_siswa->checkJawabanSiswa($id_soal, $id_ujian, $nik);
@@ -484,6 +485,7 @@ class Siswa extends CI_Controller
 					'jawaban' => $hasilJawaban,
 					'nomor_soal' => $tempIndex + 1,
 					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
 					'ja' => $ja,
 					'jb' => $jb,
 					'jc' => $jc,
@@ -498,6 +500,7 @@ class Siswa extends CI_Controller
 					'jawaban' => $hasilJawaban,
 					'nomor_soal' => $tempIndex + 1,
 					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
 					'ja' => $ja,
 					'jb' => $jb,
 					'jc' => $jc,
@@ -581,10 +584,6 @@ class Siswa extends CI_Controller
 					'nik' => $nik,
 					'jawaban' => $jawaban,
 					'nomor_soal' => $tempIndex + 1,
-					'ja' => $ja,
-					'jb' => $jb,
-					'jc' => $jc,
-					'jd' => $jd,
 				);
 				$this->M_jawaban_siswa_isian->add($data);
 			} else {
@@ -593,10 +592,6 @@ class Siswa extends CI_Controller
 					'id_ujian' => $id_ujian,
 					'nik' => $nik,
 					'jawaban' => $this->input->post('jawabanSiswa', TRUE),
-					'ja' => $ja,
-					'jb' => $jb,
-					'jc' => $jc,
-					'jd' => $jd,
 				);
 				$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($check->id, $data);
 			}
@@ -831,7 +826,7 @@ class Siswa extends CI_Controller
 			for ($i = 0; $i < $jmlSoal; $i++) {
 				foreach ($jawabanSiswa as $js) {
 					if ($js->id_soal == $allSoal[$i]->id_soal) {
-						if (trim(strtolower(strip_tags($js->jawaban))) == trim(strtolower(strip_tags($allSoal[$i]->kunci_jawaban)))) {
+						if ($js->jawaban_asli == $allSoal[$i]->kunci_pg) {
 							$count += 1;
 							break;
 						}

@@ -159,34 +159,42 @@
                   <tr> 
                     <td>Materi </td>
                     <td><textarea name="materi" style="width:500px"></textarea></td>
+                    <td></td>
                   </tr>
                   <tr> 
                     <td>Kd </td>
                     <td><input type="text" name="kd"></td>
+                    <td></td>
                   </tr>                  
                   <tr> 
                     <td>Soal </td>
                     <td><textarea id="soal" name="soal" style="width:500px"></textarea></td>
+                    <td></td>
                   </tr>
                   <tr> 
                     <td>A </td>
                     <td><textarea name="a" style="width:500px"></textarea></td>
+                    <td><input type="radio" id="kunci" name="kunci_pg" value="A" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
                   </tr> 
                   <tr> 
                     <td>B </td>
                     <td><textarea name="b" style="width:500px"></textarea></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="B" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
                   </tr>
                   <tr> 
                     <td>C </td>
                     <td><textarea name="c" style="width:500px"></textarea></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="C" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
                   </tr>
                   <tr> 
                     <td>D </td>
                     <td><textarea name="d" style="width:500px"></textarea></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="D" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
                   </tr>
                   <tr> 
                     <td>E </td>
                     <td><textarea name="e" style="width:500px"></textarea></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="E" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
                   </tr>
                   <tr>
                     <td>Kelas </td>
@@ -221,6 +229,7 @@
                           ?>
                         </select>
                       </td>
+											<td></td>
                   </tr>
                   <tr>
                     <td>Gambar Soal</td>
@@ -236,7 +245,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator1" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>
                   <script type="text/javascript">
                     $(function () {
@@ -273,7 +283,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator2" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>     
                   <script type="text/javascript">
                     $(function () {
@@ -310,7 +321,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator3" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>                
                   <script type="text/javascript">
                     $(function () {
@@ -345,7 +357,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator4" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>
                   <script type="text/javascript">
                     $(function () {
@@ -382,7 +395,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator5" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>
                   <script type="text/javascript">
                     $(function () {
@@ -419,7 +433,8 @@
                     ?>                    
                     </select>
                     <input value="activate" id="activate_selectator6" type="button">
-                    <td>
+                    </td>
+                    <td></td>
                   </tr>
                   <script type="text/javascript">
                     $(function () {
@@ -442,12 +457,8 @@
                       $activate_selectator.trigger('click');
                     });
                   </script>   
-                  <tr> 
-                    <td>Kunci </td>
-                    <td><textarea name="kunci_jawaban" style="width:500px"></textarea></td>
-                  </tr>
                   <tr>
-                    <td colspan="2"><input class="btn btn-primary pull-right" type="submit" value="submit" name="btnSubmit"></td>
+                    <td colspan="3"><input class="btn btn-primary pull-right" type="submit" value="submit" name="btnSubmit"></td>
                   </tr>
                 </table>
                 </form>

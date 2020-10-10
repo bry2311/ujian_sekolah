@@ -204,7 +204,7 @@
                       if($s->gambarE != null){
                         echo ' ('.$s->gambarE.')';
                       }?></td>
-                      <td><?php echo $s->kunci_jawaban;?></td>
+                      <td><?php echo $s->kunci_pg;?></td>
                     </tr>
                     <?php
                         $no++;

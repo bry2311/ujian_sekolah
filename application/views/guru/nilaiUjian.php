@@ -17,7 +17,33 @@
 
 	<!-- Custom styles for this template-->
 	<link href="<?= base_url() ?>/css/sb-admin-2.min.css" rel="stylesheet">
+	<style>
+		div.scrollmenu {
+			overflow: auto;
+			white-space: nowrap;
+		}
+	</style>
+	<script type="text/javascript">
+		function calculate(id, idSoal, idUjian) {
+			var number = document.getElementById(id).value;
+			var url = "<?= base_url('guru/submitScore/:slug/:slug2/:slug3'); ?>";
+			url = url.replace(':slug', number);
+			url = url.replace(':slug2', idSoal);
+			url = url.replace(':slug3', idUjian);
+			window.location.href = url;
+		}
 
+		function calculateFinal() {
+			var number = document.getElementById('nilaiAkhir').value;
+			var nik = <?= $nik; ?>;
+			var idUjian = <?= $idUjian; ?>;
+			var url = "<?= base_url('guru/submitLastScore/:slug/:slug2/:slug3'); ?>";
+			url = url.replace(':slug', number);
+			url = url.replace(':slug2', idUjian);
+			url = url.replace(':slug3', nik);
+			window.location.href = url;
+		}
+	</script>
 </head>
 
 <body id="page-top">
@@ -60,14 +86,14 @@
 					<span>Daftar Soal</span>
 				</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="<?= base_url(); ?>guru/dataUjian">
 					<i class="fas fa-fw fa-database"></i>
 					<span>Daftar Ujian</span>
 				</a>
 			</li>
 
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="<?= base_url(); ?>guru/dataReport">
 					<i class="fas fa-fw fa-chart-area"></i>
 					<span>Report</span>
@@ -131,84 +157,123 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Tambah Soal</h1>
+						<h1 class="h3 mb-0 text-gray-800">Detail Report</h1>
 					</div>
 					<!-- Content Row -->
 					<div class="row">
 						<!-- Approach -->
 						<div class="card shadow mb-4" style="width:100%">
 							<div class="card-header py-3">
-								<ul class="nav nav-second-level">
-									<li>
-										<a href="<?= base_url('guru/addSoalUjianGabungan/' . $ujian->id); ?>">
-											<div class="card-header py-3">
-												<h6 class="m-0 font-weight-bold text-primary">Tambah Soal Pg</h6>
-											</div>
-										</a>
-									</li>
-									<li>
-										<a href="<?= base_url('guru/addSoalIsianGabungan/' . $ujian->id); ?>">
-											<div class="card-header py-3">
-												<h6 class="m-0 font-weight-bold text-primary">Tambah Soal Isian</h6>
-											</div>
-										</a>
-									</li>
-								</ul>
+								<h6 class="m-0 font-weight-bold text-primary">Nilai <?php echo $ujian->nama; ?> </h6>
 							</div>
 							<div class="card-body">
-								<form class="user" action="<?php echo base_url(); ?>guru/addSoalIsianUjianGabungan" method="post">
+								<p>Jumlah soal pg = <?= $jmlSoalPg; ?></p>
+								<p>Jumlah pg benar = <?= $jmlBetul; ?></p>
+							</div>
+							<input type="number" id="nilaiAkhir" min="0" max="100" name="nilaiSoal" value="<?= $nilai[0]->hasil; ?>" style="margin:10px 20px 0px 20px">
+							<button class="btn btn-primary pull-right" style="margin:10px 20px 0px 20px" onclick="calculateFinal()">
+								<i class="fa fa-plus"></i> Nilai Akhir</a>
+							</button>
+
+							<div class="card-body">
+								<div class="scrollmenu">
+									<!-- <form action="<?= base_url('guru/cobaDownload'); ?>" method="POST"> -->
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>Add</th>
-												<th>Materi</th>
-												<th>Kd</th>
+												<th>Action</th>
 												<th>Soal</th>
+												<th>Jawaban</th>
+												<th>Status</th>
+												<th>Nilai Per soal</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 											$no = 1;
 											foreach ($soal as $s) {
+												$ada = false;
+												foreach ($jawaban as $j) {
+													if ($j->id_soal == $s->id_soal) {
+														$ada = true;
+														$idNumber = "number" . $no;
 											?>
-												<tr>
-													<td><?php echo $no; ?></td>
-													<td><input type="checkbox" name="id_soal[]" class="" id="id_soal<?php echo $s->id ?>" value="<?php echo $s->id ?>"></td>
-													<td><?php echo $s->materi; ?></td>
-													<td><?php echo $s->kd; ?></td>
-													<td><?php echo $s->soal;
-															if ($s->gambarSoal != null) {
-																echo ' (' . $s->gambarSoal . ')';
-															}; ?></td>
+														<tr>
+															<td><?php echo $no; ?></td>
+															<td>
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="100" name="nilaiSoal" value="0">
+																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
+															</td>
+															<td><?php echo $s->soal; ?></td>
+															<td><?php echo $j->jawaban; ?></td>
+															<td><?php echo $j->status; ?></td>
+															<td><?php echo $j->nilai_point; ?></td>
+														</tr>
 													<?php
-													$a = "-999";
-													$b = "-999";
-													$c = "-999";
-													$d = "-999";
-													if ($s->kunci_jawaban2 != null) {
-														$a = $s->kunci_jawaban2;
 													}
-													if ($s->kunci_jawaban3 != null) {
-														$b = $s->kunci_jawaban3;
-													}
-													if ($s->kunci_jawaban4 != null) {
-														$c = $s->kunci_jawaban4;
-													}
-													if ($s->kunci_jawaban5 != null) {
-														$d = $s->kunci_jawaban5;
-													}
+												}
+												if (!$ada) {
 													?>
-												</tr>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td>-</td>
+														<td><?php echo $s->soal; ?></td>
+														<td>-</td>
+														<td>Tidak di jawab</td>
+														<td>0</td>
+													</tr>
+												<?php
+												}
+												?>
+											<?php
+												$no++;
+											}
+											?>
+											<?php
+											$no = 1;
+											foreach ($soalGabungan as $s) {
+												$ada = false;
+												foreach ($jawaban as $j) {
+													if ($j->id_soal == $s->id_soal) {
+														$ada = true;
+														$idNumber = "number" . $no;
+											?>
+														<tr>
+															<td><?php echo $no; ?></td>
+															<td>
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="100" name="nilaiSoal" value="0">
+																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
+															</td>
+															<td><?php echo $s->soal; ?></td>
+															<td><?php echo $j->jawaban; ?></td>
+															<td><?php echo $j->status; ?></td>
+															<td><?php echo $j->nilai_point; ?></td>
+														</tr>
+													<?php
+													}
+												}
+												if (!$ada) {
+													?>
+													<tr>
+														<td><?php echo $no; ?></td>
+														<td>-</td>
+														<td><?php echo $s->soal; ?></td>
+														<td>-</td>
+														<td>Tidak di jawab</td>
+														<td>0</td>
+													</tr>
+												<?php
+												}
+												?>
 											<?php
 												$no++;
 											}
 											?>
 										</tbody>
 									</table>
-									<input type="hidden" name="idUjian" value="<?php echo $ujian->id; ?>">
-									<input type="submit" name="btnAddSoal" value="Add" class="btn btn-primary btn-xs">
-								</form>
+									<!-- </form> -->
+								</div>
 							</div>
 						</div>
 					</div>
@@ -261,7 +326,6 @@
 </body>
 
 </html>
-
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url() ?>/vendor/jquery/jquery.min.js"></script>

@@ -207,31 +207,31 @@
 													<td><?php echo $s->kd; ?></td>
 													<td><?php echo $s->kelas; ?></td>
 													<td><?php echo $s->soal;
-															if ($s->gambarSoal != null) {
-																echo ' (' . $s->gambarSoal . ')';
-															}; ?></td>
+														if ($s->gambarSoal != null) {
+															echo ' (' . $s->gambarSoal . ')';
+														}; ?></td>
 													<td><?php echo $s->a;
-															if ($s->gambarA != null) {
-																echo ' (' . $s->gambarA . ')';
-															} ?></td>
+														if ($s->gambarA != null) {
+															echo ' (' . $s->gambarA . ')';
+														} ?></td>
 													<td><?php echo $s->b;
-															if ($s->gambarB != null) {
-																echo ' (' . $s->gambarB . ')';
-															} ?></td>
+														if ($s->gambarB != null) {
+															echo ' (' . $s->gambarB . ')';
+														} ?></td>
 													<td><?php echo $s->c;
-															if ($s->gambarC != null) {
-																echo ' (' . $s->gambarC . ')';
-															} ?></td>
+														if ($s->gambarC != null) {
+															echo ' (' . $s->gambarC . ')';
+														} ?></td>
 													<td><?php echo $s->d;
-															if ($s->gambarD != null) {
-																echo ' (' . $s->gambarD . ')';
-															} ?></td>
+														if ($s->gambarD != null) {
+															echo ' (' . $s->gambarD . ')';
+														} ?></td>
 													<td><?php echo $s->e;
-															if ($s->gambarE != null) {
-																echo ' (' . $s->gambarE . ')';
-															} ?></td>
+														if ($s->gambarE != null) {
+															echo ' (' . $s->gambarE . ')';
+														} ?></td>
+													<td><?php echo $s->kunci_pg; ?></td>
 												</tr>
-												<td><?php echo $s->kunci_pg; ?></td>
 											<?php
 												$no++;
 											}

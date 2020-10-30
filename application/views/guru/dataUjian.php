@@ -175,7 +175,7 @@
 								<div class="scrollmenu">
 									<div style="display:none">
 										<p id="testSkill">http://talentaschool.sch.id:8060/ujian_sekolah/guru/shareUjian/</p>
-									</div>	
+									</div>
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
 											<tr>

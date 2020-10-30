@@ -595,11 +595,6 @@ class Guru extends CI_Controller
 			'soal' => $this->input->post('soal', TRUE),
 			'kelas' => $this->input->post('kelas', TRUE),
 			'gambarSoal' => $gs,
-			'kunci_jawaban1' => $this->input->post('kunci_jawaban1', TRUE),
-			'kunci_jawaban2' => $this->input->post('kunci_jawaban2', TRUE),
-			'kunci_jawaban3' => $this->input->post('kunci_jawaban3', TRUE),
-			'kunci_jawaban4' => $this->input->post('kunci_jawaban4', TRUE),
-			'kunci_jawaban5' => $this->input->post('kunci_jawaban5', TRUE),
 			'nik' => $this->session->nik,
 		);
 		$this->M_soalisian->add($data);
@@ -1801,12 +1796,13 @@ class Guru extends CI_Controller
 		$this->load->view('guru/dataReport', $data);
 	}
 
-	public function detailReport($id)
+	public function detailReport($id, $jenis)
 	{
 		$this->isAnyLogin();
 		$nik = $this->session->nik;
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$data['jenis'] = $jenis;
 		$this->load->view('guru/detailReport', $data);
 	}
 
@@ -1821,6 +1817,7 @@ class Guru extends CI_Controller
 		$this->M_nilai->editnilai($nilaiId, $data);
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$data['jenis'] = "";
 		$dataNilai = $this->M_nilai->getNilaiByID($nilaiId);
 		$this->load->view('guru/detailReport', $data);
 	}
@@ -1835,6 +1832,7 @@ class Guru extends CI_Controller
 		$this->M_nilai->editnilai($nilaiId, $data);
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$data['jenis'] = "";
 		$dataNilai = $this->M_nilai->getNilaiByID($nilaiId);
 		$this->load->view('guru/detailReport', $data);
 	}
@@ -2578,8 +2576,10 @@ class Guru extends CI_Controller
 		$sheet1->setCellValue('A' . $i, 'SOAL');
 		$sheet1->getStyle('A' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('A' . $i)->applyFromArray($styleArrayOut);
-		$sheet1->getStyle('A' . $i . ':H' . $i)->getAlignment()->setHorizontal('center');
-		$sheet1->getStyle('A' . $i . ':H' . $i)->applyFromArray($styleArray);
+		$sheet1->getStyle('A' . $i . ':I' . $i)->getAlignment()->setHorizontal('center');
+		$sheet1->getStyle('A' . $i . ':I' . $i)->applyFromArray($styleArray);
+		$sheet1->setCellValue('I' . $i, 'Nilai Per Soal');
+
 		$i += 1;
 		$j = $i;
 		$tempI = $i;
@@ -2679,7 +2679,8 @@ class Guru extends CI_Controller
 						$sheet1->setCellValue('B' . $tempI, strip_tags($soalIsian[$i - $j]->soal));
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, strip_tags($js->jawaban));
-						$sheet1->getStyle('A' . $beginI . ':H' . $tempI)->applyFromArray($styleArrayOut);
+						$sheet1->getStyle('A' . $beginI . ':I' . $tempI)->applyFromArray($styleArrayOut);
+						$sheet1->setCellValue('I' . $tempI, $js->nilai_point);
 						$tempI += 1;
 					}
 				}
@@ -2778,7 +2779,8 @@ class Guru extends CI_Controller
 							$sheet1->setCellValue('B' . $tempI, strip_tags($allSoal[$i - $j]->soal));
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, strip_tags($js->jawaban));
-							$sheet1->getStyle('A' . $beginI . ':H' . $tempI)->applyFromArray($styleArrayOut);
+							$sheet1->getStyle('A' . $beginI . ':I' . $tempI)->applyFromArray($styleArrayOut);
+							$sheet1->setCellValue('I' . $tempI, $js->nilai_point);
 							$tempI += 1;
 						}
 					}
@@ -4937,4 +4939,56 @@ class Guru extends CI_Controller
 		}
 	}
 	//End Gambar
+	public function nilaiUjian($id, $nik)
+	{
+		$this->isAnyLogin();
+		// $nik = $this->session->nik;
+		$data['idUjian'] = $id;
+		$data['nik'] = $nik;
+		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
+		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
+		$data['jawaban'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['soalGabungan'] = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+		$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
+		$jawabanPg = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);
+		$jmlSoalPg = count($soalPg);
+		$jmlJawabPg = count($jawabanPg);
+		$betul = 0;
+		for ($i = 0; $i < $jmlSoalPg; $i++) {
+			for ($j = 0; $j < $jmlJawabPg; $j++) {
+				if ($soalPg[$i]->id_soal == $jawabanPg[$j]->id_soal) {
+					if ($soalPg[$i]->kunci_pg == $jawabanPg[$j]->jawaban_asli) {
+						$betul += 1;
+					}
+				}
+			}
+		}
+		$data['jmlSoalPg'] = $jmlSoalPg;
+		$data['jmlJawabPg'] = $jmlJawabPg;
+		$data['jmlBetul'] = $betul;
+		$this->load->view('guru/nilaiUjian', $data);
+	}
+
+	public function submitScore($score, $idSoal, $idUjian)
+	{
+		$this->isAnyLogin();
+		$data = [
+			'nilai_point' => $score,
+			'status' => 'Sudah dinilai',
+		];
+		$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($idSoal, $data);
+		$nik = $this->session->nik;
+		redirect('guru/nilaiUjian/' . $idUjian . '/' . $nik, 'refresh');
+	}
+
+	public function submitLastScore($score, $idUjian, $nik)
+	{
+		$this->isAnyLogin();
+		$data = [
+			'hasil' => $score,
+		];
+		$this->M_nilai->editNilaiByNikAndIdUjian($nik, $idUjian, $data);
+		redirect('guru/detailReport/' . $idUjian . '/Isian', 'refresh');
+	}
 }

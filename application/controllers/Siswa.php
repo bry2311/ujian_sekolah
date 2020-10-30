@@ -526,7 +526,8 @@ class Siswa extends CI_Controller
 		$jc = $this->input->post('jc', TRUE);
 		$jd = $this->input->post('jd', TRUE);
 		$pilihanJawaban = substr($jawaban, 0, 1);
-		$hasilJawaban = substr($jawaban, 2);
+		$jawabanAsli = substr($jawaban, 2, 1);
+		$hasilJawaban = substr($jawaban, 4);
 		if ($jawaban != NULL) {
 			$nik = $this->session->nik;
 			$check = $this->M_jawaban_siswa->checkJawabanSiswa($id_soal, $id_ujian, $nik);
@@ -538,6 +539,7 @@ class Siswa extends CI_Controller
 					'jawaban' => $hasilJawaban,
 					'nomor_soal' => $tempIndex + 1,
 					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
 					'ja' => $ja,
 					'jb' => $jb,
 					'jc' => $jc,
@@ -552,6 +554,7 @@ class Siswa extends CI_Controller
 					'jawaban' => $hasilJawaban,
 					'nomor_soal' => $tempIndex + 1,
 					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
 					'ja' => $ja,
 					'jb' => $jb,
 					'jc' => $jc,

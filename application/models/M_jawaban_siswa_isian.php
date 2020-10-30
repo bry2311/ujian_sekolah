@@ -17,7 +17,7 @@ class M_jawaban_siswa_isian extends CI_Model {
         $query = $this->db->query("SELECT * FROM jawaban_siswa_isian WHERE id_ujian = $id");
         return $query->result();
     }
-    public function getJawabanSiswaIsianByNik($nik,$id){ 
+    public function getJawabanSiswaIsianByNik($id,$nik){ 
         $query = $this->db->query("SELECT * FROM jawaban_siswa_isian WHERE id_ujian = $id AND nik= $nik");
         return $query->result();
     }
@@ -49,4 +49,3 @@ class M_jawaban_siswa_isian extends CI_Model {
         $this->db->delete("jawaban_siswa_isian");
     }
 }
-?>

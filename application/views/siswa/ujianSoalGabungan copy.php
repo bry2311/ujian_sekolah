@@ -171,6 +171,7 @@
 	</style>
 	<?php
 	$tempIndex = $index;
+	$tempIndex2 = $index2;
 	?>
 </head>
 
@@ -210,9 +211,16 @@
 							<div class="card-header py-3">
 								<ul class="nav nav-second-level">
 									<li>
-										<a href="#">
+										<a href="<?= base_url('siswa/ujianSoalGabungan/' . $tmpId . "/" . $tempIndex); ?>">
 											<div class="card-header py-3">
-												<h6 class="m-0 font-weight-bold text-primary">Pilihan Ganda (<?php echo $max; ?>) + Isian (<?php echo $max2; ?>)</h6>
+												<h6 class="m-0 font-weight-bold text-primary">Pilihan Ganda (<?php echo $tempIndex + 1 . ' / ' . $max; ?>)</h6>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="<?= base_url('siswa/ujianSoalIsianGabungan/' . $tmpId . "/" . $tempIndex2); ?>">
+											<div class="card-header py-3">
+												<h6 class="m-0 font-weight-bold text-primary">Isian (<?php echo $tempIndex2 + 1 . ' / ' . $max2; ?>)</h6>
 											</div>
 										</a>
 									</li>
@@ -222,11 +230,11 @@
 							<div class="card-body">
 								<p>
 									<?php
-									if ($tempIndex < $max) {
-										for ($i = 0; $i < $max; $i++) {
-											foreach ($soal as $s) {
-												if ($s->id == $this->session->soal_gabungan[$i] && $tempIndex == $i) {
+									for ($i = 0; $i < count($this->session->soal_ujian_random); $i++) {
+										foreach ($soal as $s) {
+											if ($s->id == $this->session->soal_ujian_random[$i] && $tempIndex == $i) {
 									?>
+												<div class="card-body">
 													<h2 align="center" style="font-size:12pt;"><?php echo $s->materi; ?></h2>
 													<br>
 													<div style="white-space: pre-wrap; /* CSS3 */ white-space: -moz-pre-wrap; /* Firefox */ white-space: -pre-wrap; /* Opera <7 */ white-space: -o-pre-wrap;/* Opera 7 */word-wrap: break-word;/* IE */">
@@ -235,7 +243,7 @@
 													<?php if (isset($s->gambarSoal)) { ?>
 														<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
 													<?php } ?>
-													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa2" method="post">
+													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa3" method="post">
 														<div class="input-group">
 															<?php
 															$tempJawaban = -1;
@@ -262,8 +270,8 @@
 																				<tr>
 																					<?php $ja = $s->e; ?>
 																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
-																																																																							echo "checked";
-																																																																						} ?>></td>
+																																																																																																																								echo "checked";
+																																																																																																																							} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
@@ -277,8 +285,8 @@
 																				<tr>
 																					<?php $ja = $s->a; ?>
 																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
-																																																																							echo "checked";
-																																																																						} ?>></td>
+																																																																																																																								echo "checked";
+																																																																																																																							} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarA)) { ?>
@@ -291,8 +299,8 @@
 																			<tr>
 																				<?php $jb = $s->b; ?>
 																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->b)))) {
-																																																																						echo "checked";
-																																																																					} ?>></td>
+																																																																																																																							echo "checked";
+																																																																																																																						} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
@@ -304,8 +312,8 @@
 																			<tr>
 																				<?php $jc = $s->c; ?>
 																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->c)))) {
-																																																																						echo "checked";
-																																																																					} ?>></td>
+																																																																																																																							echo "checked";
+																																																																																																																						} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarC)) { ?>
@@ -316,8 +324,8 @@
 																			<tr>
 																				<?php $jd = $s->d; ?>
 																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
-																																																																						echo "checked";
-																																																																					} ?>></td>
+																																																																																																																							echo "checked";
+																																																																																																																						} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarD)) { ?>
@@ -343,8 +351,8 @@
 																			<tr>
 																				<?php $ja = $s->e; ?>
 																				<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
-																																																																						echo "checked";
-																																																																					} ?>></td>
+																																																																																																																							echo "checked";
+																																																																																																																						} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarE)) { ?>
@@ -358,8 +366,8 @@
 																			<tr>
 																				<?php $ja = $s->d; ?>
 																				<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
-																																																																						echo "checked";
-																																																																					} ?>></td>
+																																																																																																																							echo "checked";
+																																																																																																																						} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarD)) { ?>
@@ -372,8 +380,8 @@
 																		<tr>
 																			<?php $jb = $s->a; ?>
 																			<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
-																																																																					echo "checked";
-																																																																				} ?>></td>
+																																																																																																																						echo "checked";
+																																																																																																																					} ?>></td>
 																			<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																			<td>
 																				<?php if (isset($s->gambarA)) { ?>
@@ -384,8 +392,8 @@
 																		<tr>
 																			<?php $jc = $s->b; ?>
 																			<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->b)) {
-																																																																					echo "checked";
-																																																																				} ?>></td>
+																																																																																																																						echo "checked";
+																																																																																																																					} ?>></td>
 																			<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
 																			<td>
 																				<?php if (isset($s->gambarB)) { ?>
@@ -396,8 +404,8 @@
 																		<tr>
 																			<?php $jd = $s->c; ?>
 																			<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->c)) {
-																																																																					echo "checked";
-																																																																				} ?>></td>
+																																																																																																																						echo "checked";
+																																																																																																																					} ?>></td>
 																			<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
 																			<td>
 																				<?php if (isset($s->gambarC)) { ?>
@@ -565,37 +573,8 @@
 														<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
 														<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
 													</form>
-												<?php
-												}
-											}
-										}
-									} else {
-										for ($j = 0; $j < $max2; $j++) {
-											foreach ($soal2 as $s) {
-												if ($s->id == $this->session->soal_gabungan[3] && $tempIndex == $j + $max) {
-												?>
-													<h2 align="center"><?php echo $s->materi; ?></h2>
-													<br>
-													<h2><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
-													<?php if (isset($s->gambarSoal)) {
-													?>
-														<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
-													<?php
-													}
-													?>
-													<br>
-													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian3" method="post">
-														<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini .."><?php if ($jawaban_isian != null and $tempJawaban != -1) {
-																																					echo "value=" . $jawaban_isian[$tempJawaban]->jawaban . "";
-																																				} ?></textarea>
-														<div id="visible" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
-														</div>
-														<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
-														<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
-														<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
-													</form>
+												</div>
 									<?php
-												}
 											}
 										}
 									}
@@ -604,9 +583,9 @@
 							</div>
 						</div>
 						<div id="visible3">
-							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/newBack/' . $tmpId . "/" . $tempIndex); ?>">
+							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/back3/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Back</i></a> &nbsp;
-							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/newNext/' . $tmpId . "/" . $tempIndex); ?>">
+							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/next3/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Next</i></a> &nbsp;
 						</div>
 						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/terminate3/' . $tmpId); ?>" onclick="return confirm('Yakin akan mengumpulkan ujian ini?');">

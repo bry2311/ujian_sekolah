@@ -272,27 +272,42 @@ class Siswa extends CI_Controller
 				}
 			}
 			$tpz2 = [];
-			$jml = count($isi2);
-			for ($i = 0; $i < $jml; $i++) {
+			$jml2 = count($isi2);
+			for ($i = 0; $i < $jml2; $i++) {
 				$tpz2[$i] = 0;
 			}
 			$indexRandom = 0;
-			$random = rand(0, $jml - 1);
-			while ($indexRandom < $jml) {
+			$random = rand(0, $jml2 - 1);
+			while ($indexRandom < $jml2) {
 				if ($tpz2[$random] == 0) {
 					$tpz2[$random] = $isi2[$indexRandom]->id_soal;
 					$indexRandom += 1;
-					$random = rand(0, $jml - 1);
+					$random = rand(0, $jml2 - 1);
 				} else {
-					if ($random == ($jml - 1)) {
+					if ($random == ($jml2 - 1)) {
 						$random = 0;
 					} else {
 						$random += 1;
 					}
 				}
 			}
-			$this->session->soal_ujian_random = $tpz;
-			$this->session->soal_ujian_random2 = $tpz2;
+			$jmlTotal = $jml + $jml2;
+			$tpz3 = [];
+			$currentI = 0;
+			for ($i = 0; $i < $jml; $i++) {
+				$tpz3[$i] = $tpz[$i];
+			}
+			$currentI = $jml;
+			for ($i = 0; $i < $jml2; $i++) {
+				$tpz3[$currentI] = $tpz2[$i];
+				$currentI += 1;
+			}
+			// var_dump($max);
+			// var_dump($max2);
+			// exit;
+			// $this->session->soal_ujian_random = $tpz;
+			// $this->session->soal_ujian_random2 = $tpz2;
+			$this->session->soal_gabungan = $tpz3;
 			$this->load->view('siswa/ujianSoalGabungan', $data);
 		}
 	}
@@ -1077,6 +1092,61 @@ class Siswa extends CI_Controller
 		} else {
 			$this->load->view('siswa/ujianSoalIsianGabungan', $data);
 		}
+	}
+	public function newNext($id, $tempIndex)
+	{
+		$this->isAnyLogin();
+		date_default_timezone_set('Asia/Jakarta');
+		$temp = $this->M_ujian_gabungan_has_soal->getSoalPgByIdUjian($id);
+		$max = count($temp);
+		$temp2 = $this->M_ujian_gabungan_has_soal->getSoalIsianByIdUjian($id);
+		$max2 = count($temp2);
+		if ($tempIndex >= $max + $max2 - 1) {
+			$data['index'] = $max + $max2 - 1;
+		} else {
+			$data['index'] = $tempIndex + 1;
+		}
+		$data['soal'] = $this->M_soalpg->getSoalpg();
+		$data['soal2'] = $this->M_soalisian->getsoalisian();
+		$data['max'] = $max;
+		$data['max2'] = $max2;
+		$data['soal_ujian'] = $temp;
+		$data['soal_ujian2'] = $temp2;
+		$data['ujian'] = $this->M_ujian->getUjianByID($id);
+		$nik = $this->session->nik;
+		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		if ($tempIndex >= $max + $max2 - 1) {
+			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
+			$this->load->view('siswa/ujianSoalGabungan', $data);
+		} else {
+			$this->load->view('siswa/ujianSoalGabungan', $data);
+		}
+	}
+	public function newBack($id, $tempIndex)
+	{
+		$this->isAnyLogin();
+		date_default_timezone_set('Asia/Jakarta');
+		$temp = $this->M_ujian_gabungan_has_soal->getSoalPgByIdUjian($id);
+		$max = count($temp);
+		$temp2 = $this->M_ujian_gabungan_has_soal->getSoalIsianByIdUjian($id);
+		$max2 = count($temp2);
+		if ($tempIndex <= 0) {
+			$data['index'] = 0;
+		} else {
+			$data['index'] = $tempIndex - 1;
+		}
+		$data['soal'] = $this->M_soalpg->getSoalpg();
+		$data['soal2'] = $this->M_soalisian->getsoalisian();
+		$data['max'] = $max;
+		$data['max2'] = $max2;
+		$data['soal_ujian'] = $temp;
+		$data['soal_ujian2'] = $temp2;
+		$data['ujian'] = $this->M_ujian->getUjianByID($id);
+		$nik = $this->session->nik;
+		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function back3($id, $tempIndex)
 	{

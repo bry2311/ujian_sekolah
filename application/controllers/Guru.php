@@ -1845,16 +1845,25 @@ class Guru extends CI_Controller
 			'hasil' => 0,
 		);
 		$ujian =  $this->M_ujian->getUjianById($id);
+		$jenis = "PilihanGanda";
 		if ($ujian->jenis == "Pilihan Ganda") {
 			$this->M_jawaban_siswa->deleteJawabanSiswaByNik($nik, $id);
-		} else if ($ujian->jenis == "Isian") {
+		}
+		else if ($ujian->jenis == "Isian") {
 			$this->M_jawaban_siswa_isian->deleteJawabanSiswaByNik($nik, $id);
+			$jenis = "Isian";
+		} 
+		else if($ujian->tipe == "Gabungan"){
+			$this->M_jawaban_siswa->deleteJawabanSiswaByNik($nik, $id);
+			$this->M_jawaban_siswa_isian->deleteJawabanSiswaByNik($nik, $id);
+			$jenis = "Gabungan";
+			exit;
 		}
 		$this->M_nilai->editnilai($nilaiId, $data);
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
 		$dataNilai = $this->M_nilai->getNilaiByID($nilaiId);
-		redirect('guru/detailReport/' . $id, 'refresh');
+		redirect('guru/detailReport/' . $id . '/' . $jenis, 'refresh');
 	}
 
 	public function createPdf2($id, $nis, $kelas)
@@ -4947,13 +4956,16 @@ class Guru extends CI_Controller
 		$data['nik'] = $nik;
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
-		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
+		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);;
 		$data['jawaban'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
-		$data['soalGabungan'] = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+
+		$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+		$data['soalGabungan'] = $soalIsian;
 		$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
 		$jawabanPg = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);
 		$jmlSoalPg = count($soalPg);
 		$jmlJawabPg = count($jawabanPg);
+		$jmlSoalIsian = count($soalIsian);
 		$betul = 0;
 		for ($i = 0; $i < $jmlSoalPg; $i++) {
 			for ($j = 0; $j < $jmlJawabPg; $j++) {
@@ -4965,6 +4977,7 @@ class Guru extends CI_Controller
 			}
 		}
 		$data['jmlSoalPg'] = $jmlSoalPg;
+		$data['jmlSoalIsian'] = $jmlSoalIsian;
 		$data['jmlJawabPg'] = $jmlJawabPg;
 		$data['jmlBetul'] = $betul;
 		$this->load->view('guru/nilaiUjian', $data);

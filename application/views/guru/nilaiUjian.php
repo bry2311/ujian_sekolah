@@ -168,6 +168,7 @@
 							</div>
 							<div class="card-body">
 								<p>Jumlah soal pg = <?= $jmlSoalPg; ?></p>
+								<p>Jumlah soal isian = <?= $jmlSoalIsian; ?></p>
 								<p>Jumlah pg benar = <?= $jmlBetul; ?></p>
 							</div>
 							<input type="number" id="nilaiAkhir" min="0" max="100" name="nilaiSoal" value="<?= $nilai[0]->hasil; ?>" style="margin:10px 20px 0px 20px">

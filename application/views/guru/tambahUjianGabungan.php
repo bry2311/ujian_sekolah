@@ -17,7 +17,12 @@
 
   <!-- Custom styles for this template-->
   <link href="<?= base_url()?>/css/sb-admin-2.min.css" rel="stylesheet">
-
+	<script>
+	function myFunction(val) {
+		var nilaiBaru = 100 - val;
+		document.getElementById("persentase_isian").value = nilaiBaru;
+	}
+	</script>
 </head>
 
 <body id="page-top">
@@ -174,6 +179,14 @@
                   <tr> 
                     <td>KKM</td>
                     <td><input type="text" name="kkm"></td>
+                  </tr>
+									<tr> 
+                    <td>Persentase pg </td>
+                    <td><input type="text" id="persentase_pg" name="persentase_pg" value="50"  onchange="myFunction(this.value)"></td>
+                  </tr>
+									<tr> 
+                    <td>Persentase isian </td>
+                    <td><input type="text" id="persentase_isian" name="persentase_isian" value="50" readonly="readonly"> *tidak perlu diisi</td>
                   </tr>
                   <tr> 
                     <td>Status </td>

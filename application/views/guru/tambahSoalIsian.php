@@ -202,6 +202,10 @@
 											</td>
 										</tr>
 										<tr>
+											<td>Bobot</td>
+											<td><input type="number" name="bobot" min="0" max="100"></td>
+										</tr>
+										<tr>
 											<td>Gambar Soal</td>
 											<td>
 												<select name="gambarSoal" id="select1">

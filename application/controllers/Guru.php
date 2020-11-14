@@ -596,6 +596,7 @@ class Guru extends CI_Controller
 			'kelas' => $this->input->post('kelas', TRUE),
 			'gambarSoal' => $gs,
 			'nik' => $this->session->nik,
+			'bobot' => $this->input->post('bobot', TRUE),
 		);
 		$this->M_soalisian->add($data);
 		redirect('guru/dataSoalIsian', 'refresh');
@@ -640,13 +641,10 @@ class Guru extends CI_Controller
 			'materi' => $this->input->post('materi', TRUE),
 			'kd' => $this->input->post('kd', TRUE),
 			'soal' => $this->input->post('soal', TRUE),
-			'gambarSoal' => $gs,
 			'kelas' => $this->input->post('kelas', TRUE),
-			'kunci_jawaban1' => $this->input->post('kunci_jawaban1', TRUE),
-			'kunci_jawaban2' => $this->input->post('kunci_jawaban2', TRUE),
-			'kunci_jawaban3' => $this->input->post('kunci_jawaban3', TRUE),
-			'kunci_jawaban4' => $this->input->post('kunci_jawaban4', TRUE),
-			'kunci_jawaban5' => $this->input->post('kunci_jawaban5', TRUE),
+			'gambarSoal' => $gs,
+			'nik' => $this->session->nik,
+			'bobot' => $this->input->post('bobot', TRUE),
 		);
 		if ($this->M_soalisian->editSoalisian($id, $data)) {
 			$this->session->set_flashdata('msg', "<div class='alert alert-success'> Berhasil Mengubah Data.</div>");
@@ -732,6 +730,8 @@ class Guru extends CI_Controller
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
 			'kelas' =>  $this->input->post('kelas', TRUE),
 			'bab' =>  $this->input->post('bab', TRUE),
+			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
+			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
 		);
 		$this->M_ujian->add($data);
 		redirect('guru/dataUjian', 'refresh');
@@ -819,6 +819,8 @@ class Guru extends CI_Controller
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
 			'kelas' =>  $this->input->post('kelas', TRUE),
 			'bab' =>  $this->input->post('bab', TRUE),
+			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
+			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
 		);
 		if ($this->M_ujian->editUjian($id, $data)) {
 			$this->session->set_flashdata('msg', "<div class='alert alert-success'> Berhasil Mengubah Data.</div>");
@@ -1001,6 +1003,8 @@ class Guru extends CI_Controller
 			'kkm' => $this->input->post('kkm', TRUE),
 			'tahun_ajaran' =>  $this->input->post('tahun_ajaran', TRUE),
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
+			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
+			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
 		);
 		$this->M_ujian->add($data);
 		redirect('guru/dataUjianGabungan', 'refresh');
@@ -1035,6 +1039,7 @@ class Guru extends CI_Controller
 	{
 		$this->isAnyLogin();
 		$id = $this->input->post('id');
+		echo ($this->input->post('persentase_pg', TRUE));exit;
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
 			'waktu' => $this->input->post('waktu', TRUE),
@@ -1046,6 +1051,8 @@ class Guru extends CI_Controller
 			'kkm' => $this->input->post('kkm', TRUE),
 			'tahun_ajaran' =>  $this->input->post('tahun_ajaran', TRUE),
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
+			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
+			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
 		);
 		if ($this->M_ujian->editUjian($id, $data)) {
 			$this->session->set_flashdata('msg', "<div class='alert alert-success'> Berhasil Mengubah Data.</div>");
@@ -1857,7 +1864,6 @@ class Guru extends CI_Controller
 			$this->M_jawaban_siswa->deleteJawabanSiswaByNik($nik, $id);
 			$this->M_jawaban_siswa_isian->deleteJawabanSiswaByNik($nik, $id);
 			$jenis = "Gabungan";
-			exit;
 		}
 		$this->M_nilai->editnilai($nilaiId, $data);
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
@@ -4956,9 +4962,8 @@ class Guru extends CI_Controller
 		$data['nik'] = $nik;
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
-		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);;
+		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
 		$data['jawaban'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
-
 		$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
 		$data['soalGabungan'] = $soalIsian;
 		$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
@@ -4976,10 +4981,17 @@ class Guru extends CI_Controller
 				}
 			}
 		}
+		$maximumIsian = 0;
+		for($i = 0;$i< $jmlSoalIsian; $i++){
+			$maximumIsian += $soalIsian[$i]->bobot;
+		}
+		$nilaiMax = round((1 / ($jmlSoalPg + $jmlSoalIsian))*100,2);
 		$data['jmlSoalPg'] = $jmlSoalPg;
 		$data['jmlSoalIsian'] = $jmlSoalIsian;
 		$data['jmlJawabPg'] = $jmlJawabPg;
 		$data['jmlBetul'] = $betul;
+		$data['nilaiMax'] = $nilaiMax;
+		$data['nilaiMaxIsian'] = $maximumIsian;
 		$this->load->view('guru/nilaiUjian', $data);
 	}
 
@@ -5003,5 +5015,65 @@ class Guru extends CI_Controller
 		];
 		$this->M_nilai->editNilaiByNikAndIdUjian($nik, $idUjian, $data);
 		redirect('guru/detailReport/' . $idUjian . '/Isian', 'refresh');
+	}
+	public function calculateLastScore($id, $nik)
+	{
+		$this->isAnyLogin();
+		$ujian = $this->M_ujian->getUjianById($id);
+		if($ujian->tipe == "Gabungan"){
+			$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
+			$jawabanPg = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);
+			$jmlSoalPg = count($soalPg);
+			$jmlJawabPg = count($jawabanPg);
+			$betul = 0;
+			$persentasePg= $ujian->persentase_pg;
+			$persentaseIsian= $ujian->persentase_isian;
+			for ($i = 0; $i < $jmlSoalPg; $i++) {
+				for ($j = 0; $j < $jmlJawabPg; $j++) {
+					if ($soalPg[$i]->id_soal == $jawabanPg[$j]->id_soal) {
+						if ($soalPg[$i]->kunci_pg == $jawabanPg[$j]->jawaban_asli) {
+							$betul += 1;
+						}
+					}
+				}
+			}
+			$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+			$jawabanIsian = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+			$jmlSoalIsian = count($soalIsian);
+			$maximumIsian = 0;
+			for($i = 0;$i< $jmlSoalIsian; $i++){
+				$maximumIsian += $soalIsian[$i]->bobot;
+			}
+			$nilaiIsian = 0;
+			for($i = 0; $i< count($jawabanIsian); $i++){
+				$nilaiIsian += $jawabanIsian[$i]->nilai_point;
+			}
+			$nilaiAkhirPg = ($betul / $jmlSoalPg * 100) * ($persentasePg / 100);
+			$nilaiAkhirIsian = ($nilaiIsian / $maximumIsian * 100) * ($persentaseIsian / 100);
+			$nilaiAkhir = round($nilaiAkhirPg + $nilaiAkhirIsian, 2);
+			$data = [
+				'hasil' => $nilaiAkhir,
+			];
+			$this->M_nilai->editNilaiByNikAndIdUjian($nik, $id, $data);
+			redirect('guru/detailReport/' . $id . '/Gabungan', 'refresh');
+		}else{
+			$soalIsian = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
+			$jawabanIsian = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+			$jmlSoalIsian = count($soalIsian);
+			$maximumIsian = 0;
+			for($i = 0;$i< $jmlSoalIsian; $i++){
+				$maximumIsian += $soalIsian[$i]->bobot;
+			}
+			$nilaiIsian = 0;
+			for($i = 0; $i< count($jawabanIsian); $i++){
+				$nilaiIsian += $jawabanIsian[$i]->nilai_point;
+			}
+			$nilaiAkhir = ($nilaiIsian / $maximumIsian * 100);
+			$data = [
+				'hasil' => $nilaiAkhir,
+			];
+			$this->M_nilai->editNilaiByNikAndIdUjian($nik, $id, $data);
+			redirect('guru/detailReport/' . $id . '/Isian', 'refresh');
+		}
 	}
 }

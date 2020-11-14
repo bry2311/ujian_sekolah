@@ -176,6 +176,7 @@
 												<th>Kd</th>
 												<th>Kelas</th>
 												<th>Soal</th>
+												<th>Bobot</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -197,6 +198,8 @@
 															if ($s->gambarSoal != null) {
 																echo ' (' . $s->gambarSoal . ')';
 															}; ?></td>
+													<td><?php echo $s->bobot; ?></td>
+														
 												</tr>
 											<?php
 												$no++;

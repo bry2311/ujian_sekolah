@@ -17,7 +17,12 @@
 
   <!-- Custom styles for this template-->
   <link href="<?= base_url()?>/css/sb-admin-2.min.css" rel="stylesheet">
-
+	<script>
+	function myFunction(val) {
+		var nilaiBaru = 100 - val;
+		document.getElementById("persentase_isian").value = nilaiBaru;
+	}
+	</script>
 </head>
 
 <body id="page-top">
@@ -175,6 +180,14 @@
                     <td>KKM </td>
                     <td><input type="text" name="kkm" value="<?php echo $ujian->kkm;?>"></td>
                   </tr>
+									<tr> 
+                    <td>Persentase pg </td>
+                    <td><input type="text" id="persentase_pg" name="persentase_pg" value="<?php echo $ujian->persentase_pg;?>"  onchange="myFunction(this.value)"></td>
+                  </tr>
+									<tr> 
+                    <td>Persentase isian </td>
+                    <td><input type="text" id="persentase_isian" name="persentase_isian" value="<?php echo $ujian->persentase_isian;?>" readonly="readonly"> *tidak perlu diisi</td>
+                  </tr>
                   <tr> 
                     <td>Status </td>
                     <td>
@@ -190,7 +203,7 @@
                   </tr>
                   <tr> 
                     <td>Tipe </td>
-                    <td><input type="text" name="tipe" value="<?php echo $ujian->tipe;?>" readonly="readonly"></td>
+                    <td><input type="text" name="tipe" value="<?php echo $ujian->tipe;?>" readonly="readonly"> *tidak perlu diisi</td>
                   </tr>
                   <tr>
                     <td colspan="2"><input class="btn btn-primary pull-right" type="submit" value="submit" name="btnSubmit"></td>

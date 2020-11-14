@@ -235,7 +235,7 @@
 													<?php if (isset($s->gambarSoal)) { ?>
 														<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
 													<?php } ?>
-													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa2" method="post">
+													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaGabungan" method="post">
 														<div class="input-group">
 															<?php
 															$tempJawaban = -1;
@@ -572,7 +572,15 @@
 									} else {
 										for ($j = 0; $j < $max2; $j++) {
 											foreach ($soal2 as $s) {
-												if ($s->id == $this->session->soal_gabungan[3] && $tempIndex == $j + $max) {
+												if ($s->id == $this->session->soal_gabungan[$j + $max] && $tempIndex == $j + $max) {
+												$tempJawaban = -1;
+												if ($jawaban_isian != null) {
+													for ($k = 0; $k < count($jawaban_isian); $k++) {
+														if ($jawaban_isian[$k]->id_soal == $s->id) {
+															$tempJawaban = $k;
+														}
+													}
+												}
 												?>
 													<h2 align="center"><?php echo $s->materi; ?></h2>
 													<br>
@@ -584,9 +592,9 @@
 													}
 													?>
 													<br>
-													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian3" method="post">
+													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaGabungan" method="post">
 														<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini .."><?php if ($jawaban_isian != null and $tempJawaban != -1) {
-																																					echo "value=" . $jawaban_isian[$tempJawaban]->jawaban . "";
+																																					echo $jawaban_isian[$tempJawaban]->jawaban . "";
 																																				} ?></textarea>
 														<div id="visible" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 														</div>
@@ -609,7 +617,7 @@
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/newNext/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Next</i></a> &nbsp;
 						</div>
-						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/terminate3/' . $tmpId); ?>" onclick="return confirm('Yakin akan mengumpulkan ujian ini?');">
+						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/terminateGabungan/' . $tmpId); ?>" onclick="return confirm('Yakin akan mengumpulkan ujian ini?');">
 							<i class="fa fa-pencil">Kumpulkan</i></a>
 					</div>
 				</div>

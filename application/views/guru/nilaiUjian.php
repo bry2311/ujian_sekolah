@@ -37,8 +37,7 @@
 			var number = document.getElementById('nilaiAkhir').value;
 			var nik = <?= $nik; ?>;
 			var idUjian = <?= $idUjian; ?>;
-			var url = "<?= base_url('guru/submitLastScore/:slug/:slug2/:slug3'); ?>";
-			url = url.replace(':slug', number);
+			var url = "<?= base_url('guru/calculateLastScore/:slug2/:slug3'); ?>";
 			url = url.replace(':slug2', idUjian);
 			url = url.replace(':slug3', nik);
 			window.location.href = url;
@@ -170,8 +169,11 @@
 								<p>Jumlah soal pg = <?= $jmlSoalPg; ?></p>
 								<p>Jumlah soal isian = <?= $jmlSoalIsian; ?></p>
 								<p>Jumlah pg benar = <?= $jmlBetul; ?></p>
+								<p>Jumlah maximum isian = <?= $nilaiMaxIsian; ?></p>
+								<p>Persentase pg:isian = <?php echo $ujian->persentase_pg . " : " . $ujian->persentase_isian ; ?></p>
+								<p>Nilai Akhir = <?= $nilai[0]->hasil; ?></p>
 							</div>
-							<input type="number" id="nilaiAkhir" min="0" max="100" name="nilaiSoal" value="<?= $nilai[0]->hasil; ?>" style="margin:10px 20px 0px 20px">
+							<!-- <input type="number" id="nilaiAkhir" min="0" max="100" name="nilaiSoal" value="<?= $nilai[0]->hasil; ?>" style="margin:10px 20px 0px 20px"> -->
 							<button class="btn btn-primary pull-right" style="margin:10px 20px 0px 20px" onclick="calculateFinal()">
 								<i class="fa fa-plus"></i> Nilai Akhir</a>
 							</button>
@@ -188,6 +190,7 @@
 												<th>Jawaban</th>
 												<th>Status</th>
 												<th>Nilai Per soal</th>
+												<th>Maximum</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -203,13 +206,14 @@
 														<tr>
 															<td><?php echo $no; ?></td>
 															<td>
-																<input type="number" id="<?= $idNumber; ?>" min="0" max="100" name="nilaiSoal" value="0">
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax; ?>" name="nilaiSoal" value="0">
 																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
 															</td>
 															<td><?php echo $s->soal; ?></td>
 															<td><?php echo $j->jawaban; ?></td>
 															<td><?php echo $j->status; ?></td>
 															<td><?php echo $j->nilai_point; ?></td>
+															<td><?php echo $s->bobot; ?></td>
 														</tr>
 													<?php
 													}
@@ -223,6 +227,7 @@
 														<td>-</td>
 														<td>Tidak di jawab</td>
 														<td>0</td>
+														<td><?php echo $s->bobot; ?></td>
 													</tr>
 												<?php
 												}
@@ -243,13 +248,14 @@
 														<tr>
 															<td><?php echo $no; ?></td>
 															<td>
-																<input type="number" id="<?= $idNumber; ?>" min="0" max="100" name="nilaiSoal" value="0">
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax + 1; ?>" name="nilaiSoal" value="0">
 																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
 															</td>
 															<td><?php echo $s->soal; ?></td>
 															<td><?php echo $j->jawaban; ?></td>
 															<td><?php echo $j->status; ?></td>
 															<td><?php echo $j->nilai_point; ?></td>
+															<td><?php echo $s->bobot; ?></td>
 														</tr>
 													<?php
 													}
@@ -263,6 +269,7 @@
 														<td>-</td>
 														<td>Tidak di jawab</td>
 														<td>0</td>
+														<td><?php echo $s->bobot; ?></td>
 													</tr>
 												<?php
 												}

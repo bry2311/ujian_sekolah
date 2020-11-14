@@ -139,7 +139,7 @@ class Siswa extends CI_Controller
 			$data['ujian'] = $a;
 			$nik = $this->session->nik;
 			$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 			$tpz = [];
 			$jml = count($isi);
 			for ($i = 0; $i < $jml; $i++) {
@@ -200,7 +200,7 @@ class Siswa extends CI_Controller
 			$data['ujian'] = $a;
 			$nik = $this->session->nik;
 			$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 			$tpz = [];
 			$jml = count($isi);
 			for ($i = 0; $i < $jml; $i++) {
@@ -250,7 +250,7 @@ class Siswa extends CI_Controller
 			$data['ujian'] = $a;
 			$nik = $this->session->nik;
 			$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+			$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 			$tpz = [];
 			$jml = count($isi);
 			for ($i = 0; $i < $jml; $i++) {
@@ -333,7 +333,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoal2', $data);
 	}
 	public function back2($id, $tempIndex)
@@ -359,7 +359,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoal2', $data);
 	}
 	public function next($id, $tempIndex)
@@ -384,7 +384,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoal', $data);
@@ -414,7 +414,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoal2', $data);
@@ -526,6 +526,91 @@ class Siswa extends CI_Controller
 			$this->next2($id_ujian, $tempIndex);
 		} else {
 			$this->next2($id_ujian, $tempIndex);
+		}
+	}
+	public function addJawabanSiswaGabungan()
+	{
+		$this->isAnyLogin();
+		$id_soal = $this->input->post('id_soal', TRUE);
+		$id_ujian = $this->input->post('id_ujian', TRUE);
+		$waktu = $this->input->post('tanggal', TRUE);
+		$tempIndex = $this->input->post('tempIndex', TRUE);
+		$jawaban = $this->input->post('answer', TRUE);
+		$ja = $this->input->post('ja', TRUE);
+		if($ja != null){
+			$jb = $this->input->post('jb', TRUE);
+			$jc = $this->input->post('jc', TRUE);
+			$jd = $this->input->post('jd', TRUE);
+			$pilihanJawaban = substr($jawaban, 0, 1);
+			$jawabanAsli = substr($jawaban, 2, 1);
+			$hasilJawaban = substr($jawaban, 4);
+			if ($jawaban != NULL) {
+				$nik = $this->session->nik;
+				$check = $this->M_jawaban_siswa->checkJawabanSiswa($id_soal, $id_ujian, $nik);
+				if ($check == null) {
+					$data = array(
+						'id_soal' => $id_soal,
+						'id_ujian' => $id_ujian,
+						'nik' => $nik,
+						'jawaban' => $hasilJawaban,
+						'nomor_soal' => $tempIndex + 1,
+						'pilihan_jawaban' => $pilihanJawaban,
+						'jawaban_asli' => $jawabanAsli,
+						'ja' => $ja,
+						'jb' => $jb,
+						'jc' => $jc,
+						'jd' => $jd,
+					);
+					$this->M_jawaban_siswa->add($data);
+				} else {
+					$data = array(
+						'id_soal' => $id_soal,
+						'id_ujian' => $id_ujian,
+						'nik' => $nik,
+						'jawaban' => $hasilJawaban,
+						'nomor_soal' => $tempIndex + 1,
+						'pilihan_jawaban' => $pilihanJawaban,
+						'jawaban_asli' => $jawabanAsli,
+						'ja' => $ja,
+						'jb' => $jb,
+						'jc' => $jc,
+						'jd' => $jd,
+					);
+					$this->M_jawaban_siswa->editJawabanSiswa($check->id, $data);
+				}
+				$this->newNext($id_ujian, $tempIndex);
+			} else {
+				$this->newNext($id_ujian, $tempIndex);
+			}
+		}else{
+			$jawaban = $this->input->post('jawabanSiswa', TRUE);
+			$pilihanJawaban = substr($jawaban, 0, 1);
+			$hasilJawaban = substr($jawaban, 2);
+			if ($jawaban != NULL) {
+				$nik = $this->session->nik;
+				$check = $this->M_jawaban_siswa_isian->checkJawabanSiswaIsian($id_soal, $id_ujian, $nik);
+				if ($check == null) {
+					$data = array(
+						'id_soal' => $id_soal,
+						'id_ujian' => $id_ujian,
+						'nik' => $nik,
+						'jawaban' => $jawaban,
+						'nomor_soal' => $tempIndex + 1,
+					);
+					$this->M_jawaban_siswa_isian->add($data);
+				} else {
+					$data = array(
+						'id_soal' => $id_soal,
+						'id_ujian' => $id_ujian,
+						'nik' => $nik,
+						'jawaban' => $this->input->post('jawabanSiswa', TRUE),
+					);
+					$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($check->id, $data);
+				}
+				$this->newNext($id_ujian, $tempIndex);
+			} else {
+				$this->newNext($id_ujian, $tempIndex);
+			}
 		}
 	}
 	public function addJawabanSiswa3()
@@ -740,7 +825,7 @@ class Siswa extends CI_Controller
 			$data['soal'] = $this->M_soalisian->getSoalIsian();
 			$count = 0;
 			$soalUjian = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
-			$jawabanSiswa = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+			$jawabanSiswa = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 			$jmlSoal = 0;
 			foreach ($soalUjian as $su) {
 				$jmlSoal += 1;
@@ -909,6 +994,68 @@ class Siswa extends CI_Controller
 		}
 		</script>";
 	}
+	public function terminateGabungan($id)
+	{
+		$this->isAnyLogin();
+		$nik = $this->session->nik;
+		$a = $this->M_ujian->getUjianByID($id);
+		$allSoal = $this->M_ujian_gabungan_has_soal->getSoalPgByIdUjian($id);
+		$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);
+		$data['soal'] = $this->M_soalpg->getSoalpg();
+		$allSoal2 = $this->M_ujian_gabungan_has_soal->getSoalIsianByIdUjian($id);
+		$jawabanSiswa2 = $this->M_jawaban_siswa->getJawabanSiswaIsianByNik2($nik, $id);
+		$data['soal2'] = $this->M_soalisian->getSoalIsian();
+		$jmlSoal = count($allSoal);
+		$count = 0;
+		for ($i = 0; $i < $jmlSoal; $i++) {
+			foreach ($jawabanSiswa as $js) {
+				if ($js->id_soal == $allSoal[$i]->id_soal) {
+					if (trim(strtolower(strip_tags($js->jawaban_asli))) == trim(strtolower(strip_tags($allSoal[$i]->kunci_pg)))) {
+						$count += 1;
+						break;
+					}
+				}
+			}
+		}
+		$jmlSoal2 = count($allSoal2);
+		$totalSoal = $jmlSoal + $jmlSoal2;
+		$n = $this->M_nilai->getNilaiByNikAndIdUjian($nik, $id);
+		if ($n == null) {
+			$nilaiAkhir = ($count * 100 / $totalSoal);
+			$data = array(
+				'id_ujian' => $id,
+				'nik' => $nik,
+				'hasil' => $nilaiAkhir,
+				'tampil' => "non-aktif",
+				'tipe' => "Gabungan",
+				'ujian_ulang' => '0',
+			);
+			$this->M_nilai->add($data);
+		} else {
+			$nilaiAkhir = ($count * 100 / $totalSoal);
+			$data = array(
+				'id_ujian' => $id,
+				'nik' => $nik,
+				'hasil' => $nilaiAkhir,
+				'tampil' => "non-aktif",
+				'tipe' => "Gabungan",
+				'ujian_ulang' => '0',
+			);
+			$this->M_nilai->editnilai($n[0]->id, $data);
+		}
+		$data['nilai'] = $this->M_nilai->getNilaiByNik($nik);
+		$this->session->soal_ujian_random = "";
+		$this->session->soal_ujian_random2 = "";
+		$this->session->waktu = "";
+		echo "<script type='text/javascript'>
+		var cek = confirm('Terimakasih sudah mengerjakan ujian ini!');
+		if(cek){
+			window.location.href = '" . base_url() . "/Siswa/logout';
+		}else{
+			window.location.href = '" . base_url() . "/Siswa/logout';
+		}
+		</script>";
+	}
 	public function terminate3($id)
 	{
 		$this->isAnyLogin();
@@ -1010,7 +1157,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function ujianSoalIsianGabungan($id, $tempIndex)
@@ -1030,7 +1177,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoalIsianGabungan', $data);
 	}
 	public function next3($id, $tempIndex)
@@ -1055,7 +1202,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalGabungan', $data);
@@ -1085,7 +1232,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		if ($tempIndex2 >= $max2 - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalIsianGabungan', $data);
@@ -1115,7 +1262,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		if ($tempIndex >= $max + $max2 - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalGabungan', $data);
@@ -1145,7 +1292,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function back3($id, $tempIndex)
@@ -1173,7 +1320,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function back4($id, $tempIndex2)
@@ -1198,7 +1345,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
-		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$this->load->view('siswa/ujianSoalIsianGabungan', $data);
 	}
 	//End Join Ujian

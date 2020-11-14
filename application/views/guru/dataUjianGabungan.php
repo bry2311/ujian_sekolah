@@ -175,6 +175,7 @@
                       <th>BAB</th>
                       <th>Waktu</th>
                       <th>KKM</th>           
+                      <th>Persentase</th>           
                       <th>Status</th>
                       <th>Thn Ajaran</th> 
                     </tr> 
@@ -204,6 +205,7 @@
                       <td><?php echo $u->bab;?></td>
                       <td><?php echo $u->waktu;?></td>
                       <td><?php echo $u->kkm;?></td>
+                      <td><?php echo $u->persentase_pg . " : " . $u->persentase_isian;?></td>
                       <td><?php echo $u->status;?></td>
                       <td><?php echo $u->tahun_ajaran;?></td>
                     </tr>

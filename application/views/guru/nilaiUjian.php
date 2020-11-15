@@ -34,7 +34,6 @@
 		}
 
 		function calculateFinal() {
-			var number = document.getElementById('nilaiAkhir').value;
 			var nik = <?= $nik; ?>;
 			var idUjian = <?= $idUjian; ?>;
 			var url = "<?= base_url('guru/calculateLastScore/:slug2/:slug3'); ?>";

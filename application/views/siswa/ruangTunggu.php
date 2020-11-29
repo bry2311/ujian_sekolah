@@ -81,23 +81,11 @@
 								<h6 class="m-0 font-weight-bold text-primary">Silahkan pilih ujian yang akan kamu ikuti Daftar Ujian</h6>
 							</div>
 							<div class="card-body">
-								<form class="user" action="<?php echo base_url(); ?>siswa/startLobby" method="post">
+								<form class="user" action="<?php echo base_url(); ?>siswa/informasiUjian" method="post">
 									<table style="width:100%;">
 										<tr>
-											<td>Ujian </td>
+											<td>Hemm </td>
 											<td>
-												<select name="ujian">
-													<option value="-">-- Pilih Ujian --</option>
-													<?php
-													if (isset($daftarUjian)) {
-														for ($i = 0; $i < count($daftarUjian); $i++) {
-													?>
-															<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
-													<?php
-														}
-													}
-													?>
-												</select>
 											</td>
 										</tr>
 										<tr>

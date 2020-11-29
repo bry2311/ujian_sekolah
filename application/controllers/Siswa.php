@@ -91,9 +91,19 @@ class Siswa extends CI_Controller
 				$this->load->view('siswa/informasiUjian2.php', $data);
 			} else {
 				echo "<script type='text/javascript'>alert('Maaf, " . $this->session->nama . " kamu tidak dapat mengikuti " . $ujian->nama . " karena sudah pernah mengikuti sebelumnya.');</script>";
-				$this->index();
 			}
+			redirect('login');
 		}
+	}
+
+	public function startLobby()
+	{
+		$this->isAnyLogin();
+		$idUjian = $this->input->post('ujian', TRUE);
+		$ujian = $this->M_ujian->getUjianById($idUjian);
+		$data['ujian'] = $ujian;
+		// echo "a";exit;
+		$this->load->view('siswa/ruangTunggu.php', $data);
 	}
 
 	//Start Join Ujian

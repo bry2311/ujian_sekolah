@@ -967,7 +967,7 @@ class Admin extends CI_Controller
 		header('Cache-Control: max-age=0');
 		$writer->save('php://output');
 	}
-	public function createPdf($id, $nis, $kelas)
+	public function createPdf($id, $nis)
 	{
 		$this->isAnyLogin();
 		$ujian = $this->M_ujian->getUjianById($id);
@@ -1172,8 +1172,10 @@ class Admin extends CI_Controller
 		$sheet1->setCellValue('A' . $i, 'SOAL');
 		$sheet1->getStyle('A' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('A' . $i)->applyFromArray($styleArrayOut);
-		$sheet1->getStyle('A' . $i . ':H' . $i)->getAlignment()->setHorizontal('center');
-		$sheet1->getStyle('A' . $i . ':H' . $i)->applyFromArray($styleArray);
+		$sheet1->getStyle('A' . $i . ':I' . $i)->getAlignment()->setHorizontal('center');
+		$sheet1->getStyle('A' . $i . ':I' . $i)->applyFromArray($styleArray);
+		$sheet1->setCellValue('I' . $i, 'Nilai Per Soal');
+
 		$i += 1;
 		$j = $i;
 		$tempI = $i;
@@ -1187,25 +1189,25 @@ class Admin extends CI_Controller
 						$isJawab = true;
 						$beginI = $tempI;
 						$sheet1->setCellValue('A' . $tempI, $soalPg[$i - $j]->no_soal . '.');
-						$sheet1->setCellValue('B' . $tempI, $soalPg[$i - $j]->soal);
+						$sheet1->setCellValue('B' . $tempI, strip_tags($soalPg[$i - $j]->soal));
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'A. ' . $js->ja);
-						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($js->ja))) {
+						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($js->ja));
+						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->ja)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'B. ' . $js->jb);
-						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jb))) {
+						$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($js->jb));
+						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jb)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'C. ' . $js->jc);
-						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jc))) {
+						$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($js->jc));
+						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jc)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'D. ' . $js->jd);
-						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jd))) {
+						$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($js->jd));
+						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jd)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
@@ -1214,7 +1216,7 @@ class Admin extends CI_Controller
 						$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 						$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 						$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) != trim(strtolower($js->jawaban))) {
+						if ($soalPg[$i - $j]->kunci_pg != $js->jawaban_asli) {
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 						}
 					}
@@ -1222,31 +1224,31 @@ class Admin extends CI_Controller
 				if (!$isJawab) {
 					$beginI = $tempI;
 					$sheet1->setCellValue('A' . $tempI, $soalPg[$i - $j]->no_soal . '.');
-					$sheet1->setCellValue('B' . $tempI, $soalPg[$i - $j]->soal);
+					$sheet1->setCellValue('B' . $tempI, strip_tags($soalPg[$i - $j]->soal));
 					$tempI += 1;
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->e))) {
-						$sheet1->setCellValue('B' . $tempI, 'A. ' . $soalPg[$i - $j]->e);
+						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($soalPg[$i - $j]->e));
 						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->e))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 					} else {
-						$sheet1->setCellValue('B' . $tempI, 'A. ' . $soalPg[$i - $j]->a);
+						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($soalPg[$i - $j]->a));
 						if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->a))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 					}
 					$tempI += 1;
-					$sheet1->setCellValue('B' . $tempI, 'B. ' . $soalPg[$i - $j]->b);
+					$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($soalPg[$i - $j]->b));
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->b))) {
 						$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 					}
 					$tempI += 1;
-					$sheet1->setCellValue('B' . $tempI, 'C. ' . $soalPg[$i - $j]->c);
+					$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($soalPg[$i - $j]->c));
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->c))) {
 						$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 					}
 					$tempI += 1;
-					$sheet1->setCellValue('B' . $tempI, 'D. ' . $soalPg[$i - $j]->d);
+					$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($soalPg[$i - $j]->d));
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->d))) {
 						$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 					}
@@ -1270,10 +1272,11 @@ class Admin extends CI_Controller
 						$isJawab = true;
 						$beginI = $tempI;
 						$sheet1->setCellValue('A' . $tempI, $soalIsian[$i - $j]->no_soal . '.');
-						$sheet1->setCellValue('B' . $tempI, $soalIsian[$i - $j]->soal);
+						$sheet1->setCellValue('B' . $tempI, strip_tags($soalIsian[$i - $j]->soal));
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, $js->jawaban);
-						$sheet1->getStyle('A' . $beginI . ':H' . $tempI)->applyFromArray($styleArrayOut);
+						$sheet1->setCellValue('B' . $tempI, strip_tags($js->jawaban));
+						$sheet1->getStyle('A' . $beginI . ':I' . $tempI)->applyFromArray($styleArrayOut);
+						$sheet1->setCellValue('I' . $tempI, $js->nilai_point);
 						$tempI += 1;
 					}
 				}
@@ -1290,22 +1293,22 @@ class Admin extends CI_Controller
 							$sheet1->setCellValue('B' . $tempI, ') ' . strip_tags($allSoal[$i - $j]->soal) . '');
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($js->ja));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->ja))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->ja)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($js->jb));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jb))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jb)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($js->jc));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jc))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jc)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
 							$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($js->jd));
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($js->jd))) {
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->jd)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 							$tempI += 1;
@@ -1314,7 +1317,7 @@ class Admin extends CI_Controller
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setHorizontal('center');
 							$sheet1->getStyle('I' . $beginI)->getAlignment()->setVertical('center');
 							$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->applyFromArray($styleArray);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) != trim(strtolower($js->jawaban))) {
+							if ($allSoal[$i - $j]->kunci_pg != $js->jawaban_asli) {
 								$sheet1->getStyle('I' . $beginI . ':I' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('FF0000');
 							}
 						}
@@ -1322,32 +1325,32 @@ class Admin extends CI_Controller
 					if (!$isJawab) {
 						$beginI = $tempI;
 						$sheet1->setCellValue('A' . $tempI, $allSoal[$i - $j]->no_soal . '.');
-						//$sheet1->setCellValue('B'.$tempI, $allSoal[$i-$j]->soal);
+						$sheet1->setCellValue('B'.$tempI,strip_tags( $allSoal[$i-$j]->soal));
 						$tempI += 1;
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->e))) {
-							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->e);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->e))) {
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
+							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($allSoal[$i - $j]->e));
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						} else {
-							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->a);
-							if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->a))) {
+							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($allSoal[$i - $j]->a));
+							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->a)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'B. ' . $allSoal[$i - $j]->b);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->b))) {
+						$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($allSoal[$i - $j]->b));
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->b)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'C. ' . $allSoal[$i - $j]->c);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->c))) {
+						$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($allSoal[$i - $j]->c));
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->c)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'D. ' . $allSoal[$i - $j]->d);
-						if (trim(strtolower($allSoal[$i - $j]->kunci_jawaban)) == trim(strtolower($allSoal[$i - $j]->d))) {
+						$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($allSoal[$i - $j]->d));
+						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->d)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
@@ -1369,10 +1372,11 @@ class Admin extends CI_Controller
 							$isJawab = true;
 							$beginI = $tempI;
 							$sheet1->setCellValue('A' . $tempI, $allSoal[$i - $j]->no_soal . '.');
-							$sheet1->setCellValue('B' . $tempI, $allSoal[$i - $j]->soal);
+							$sheet1->setCellValue('B' . $tempI, strip_tags($allSoal[$i - $j]->soal));
 							$tempI += 1;
-							$sheet1->setCellValue('B' . $tempI, $js->jawaban);
-							$sheet1->getStyle('A' . $beginI . ':H' . $tempI)->applyFromArray($styleArrayOut);
+							$sheet1->setCellValue('B' . $tempI, strip_tags($js->jawaban));
+							$sheet1->getStyle('A' . $beginI . ':I' . $tempI)->applyFromArray($styleArrayOut);
+							$sheet1->setCellValue('I' . $tempI, $js->nilai_point);
 							$tempI += 1;
 						}
 					}

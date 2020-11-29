@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Style\Alignment as alignment;
 
 class Guru extends CI_Controller
 {
@@ -717,6 +718,13 @@ class Guru extends CI_Controller
 	public function tambahUjianDb()
 	{
 		$this->isAnyLogin();
+		$persentasePg= 0;
+		$persentaseIsian =0;
+		if($this->input->post('jenis', TRUE) == "Pilihan Ganda"){
+			$persentasePg = 100;
+		}else{
+			$persentaseIsian = 100;
+		}
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
 			'waktu' => $this->input->post('waktu', TRUE),
@@ -730,8 +738,8 @@ class Guru extends CI_Controller
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
 			'kelas' =>  $this->input->post('kelas', TRUE),
 			'bab' =>  $this->input->post('bab', TRUE),
-			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
-			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
+			'persentase_pg' => $persentasePg,
+			'persentase_isian' => $persentaseIsian,
 		);
 		$this->M_ujian->add($data);
 		redirect('guru/dataUjian', 'refresh');
@@ -807,6 +815,11 @@ class Guru extends CI_Controller
 	{
 		$this->isAnyLogin();
 		$id = $this->input->post('id');
+		if($this->input->post('jenis', TRUE) == "Pilihan Ganda"){
+			$persentasePg = 100;
+		}else{
+			$persentaseIsian = 100;
+		}
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
 			'waktu' => $this->input->post('waktu', TRUE),
@@ -819,8 +832,8 @@ class Guru extends CI_Controller
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
 			'kelas' =>  $this->input->post('kelas', TRUE),
 			'bab' =>  $this->input->post('bab', TRUE),
-			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
-			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
+			'persentase_pg' =>  $persentasePg,
+			'persentase_isian' =>  $persentaseIsian,
 		);
 		if ($this->M_ujian->editUjian($id, $data)) {
 			$this->session->set_flashdata('msg', "<div class='alert alert-success'> Berhasil Mengubah Data.</div>");
@@ -1039,7 +1052,6 @@ class Guru extends CI_Controller
 	{
 		$this->isAnyLogin();
 		$id = $this->input->post('id');
-		echo ($this->input->post('persentase_pg', TRUE));exit;
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
 			'waktu' => $this->input->post('waktu', TRUE),
@@ -2565,7 +2577,7 @@ class Guru extends CI_Controller
 		$sheet1->mergeCells('C' . $i . ':F' . $i);
 		$sheet1->setCellValue('C' . $i, 'BAB ' . $ujian->bab);
 		$sheet1->getStyle('C' . $i)->applyFromArray($leadArray);
-		$sheet1->setCellValue('G' . $i, $nilai[0]->hasil);
+		$sheet1->setCellValue('G' . $i, '-');
 		$sheet1->setCellValue('H' . $i, '-');
 		$sheet1->setCellValue('I' . $i, '-');
 		$sheet1->getStyle('G' . $i)->applyFromArray($leadArray);
@@ -2585,6 +2597,8 @@ class Guru extends CI_Controller
 		$sheet1->getStyle('H' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('I' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('G' . $i . ':I' . $i)->applyFromArray($styleArrayOut);
+		$sheet1->setCellValue('G' . $i, $nilai[0]->hasil);
+
 
 		$i += 2;
 		$sheet1->mergeCells('A' . $i . ':H' . $i);
@@ -2643,7 +2657,29 @@ class Guru extends CI_Controller
 				if (!$isJawab) {
 					$beginI = $tempI;
 					$sheet1->setCellValue('A' . $tempI, $soalPg[$i - $j]->no_soal . '.');
+					$sheet1->getDefaultRowDimension(1)->setRowHeight(-1);
+					$sheet1->getRowDimension(1)->setRowHeight(-1);
+					$sheet1->getStyle('B'. $tempI)->getAlignment()->setWrapText(true);
+					$sheet1->getStyle('B'. $tempI)->getAlignment()->setVertical('top');
 					$sheet1->setCellValue('B' . $tempI, strip_tags($soalPg[$i - $j]->soal));
+					$sheet1->mergeCells('B'.$tempI.':H'.$tempI);
+					if(isset($soalPg[$i - $j]->gambarSoal)){
+						$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+						$drawing->setName('logo');
+						$drawing->setDescription('logo');
+						$drawing->setPath('assets/img/'.$soalPg[$i - $j]->gambarSoal); // put your path and image here
+						$drawing->setCoordinates('J'. $tempI);
+						$drawing->setOffsetX(10);
+						$drawing->setOffsetY(10);
+						$drawing->setHeight(110);
+						$drawing->setWidth(110);
+						$drawing->getShadow()->setVisible(true);
+						$drawing->setWorksheet($sheet1);
+					}
+					// $width=84;
+					// $height=20;		
+					// $text = strip_tags($soalPg[$i - $j]->soal);
+					// $sheet1->getRowDimension(1)->setRowHeight(ceil(strlen($text)/$width)*$height);
 					$tempI += 1;
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->e))) {
 						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($soalPg[$i - $j]->e));
@@ -2744,31 +2780,31 @@ class Guru extends CI_Controller
 					if (!$isJawab) {
 						$beginI = $tempI;
 						$sheet1->setCellValue('A' . $tempI, $allSoal[$i - $j]->no_soal . '.');
-						//$sheet1->setCellValue('B'.$tempI, $allSoal[$i-$j]->soal);
+						$sheet1->setCellValue('B'.$tempI,strip_tags( $allSoal[$i-$j]->soal));
 						$tempI += 1;
 						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
-							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->e);
+							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($allSoal[$i - $j]->e));
 							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->e)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						} else {
-							$sheet1->setCellValue('B' . $tempI, 'A. ' . $allSoal[$i - $j]->a);
+							$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($allSoal[$i - $j]->a));
 							if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->a)))) {
 								$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 							}
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'B. ' . $allSoal[$i - $j]->b);
+						$sheet1->setCellValue('B' . $tempI, 'B. ' . strip_tags($allSoal[$i - $j]->b));
 						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->b)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'C. ' . $allSoal[$i - $j]->c);
+						$sheet1->setCellValue('B' . $tempI, 'C. ' . strip_tags($allSoal[$i - $j]->c));
 						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->c)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}
 						$tempI += 1;
-						$sheet1->setCellValue('B' . $tempI, 'D. ' . $allSoal[$i - $j]->d);
+						$sheet1->setCellValue('B' . $tempI, 'D. ' . strip_tags($allSoal[$i - $j]->d));
 						if (trim(strtolower(strip_tags($allSoal[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($allSoal[$i - $j]->d)))) {
 							$sheet1->getStyle('B' . $tempI)->getFill()->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)->getStartColor()->setARGB('ADFF2F');
 						}

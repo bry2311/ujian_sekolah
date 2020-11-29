@@ -26,6 +26,10 @@
 			width: 350px;
 			padding: 7px 10px;
 		}
+		div.scrollmenu {
+			overflow: auto;
+			white-space: nowrap;
+		}
   </style>
 	<script src="<?= base_url()?>/vendor/ckeditorF/ckeditor.js"></script>
   <script src="<?= base_url()?>/selectator/jquery-1.11.0.min.js"></script>
@@ -154,6 +158,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Tambah Soal Pg</h6>
                 </div>
                 <div class="card-body">
+								<div class="scrollmenu">
                 <form class="user" action="<?php echo base_url();?>guru/tambahSoalDb" method="post">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <tr> 
@@ -462,6 +467,7 @@
                   </tr>
                 </table>
                 </form>
+								</div>
                 </div>
               </div>
           </div>

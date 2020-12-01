@@ -145,23 +145,23 @@
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<tr>
 											<td>Nama </td>
-											<td><input type="text" name="nama"></td>
+											<td><input type="text" name="nama" style="width:90%"></td>
 										</tr>
 										<tr>
 											<td>Mata pelajaran </td>
-											<td><input type="text" name="mata_pelajaran"></td>
+											<td><input type="text" name="mata_pelajaran" style="width:90%"></td>
 										</tr>
 										<tr>
 											<td>Materi Pokok</td>
-											<td><input type="text" name="materi_pokok"></td>
+											<td><input type="text" name="materi_pokok" style="width:90%"></td>
 										</tr>
 										<tr>
 											<td>Kelas</td>
-											<td><input type="text" name="kelas"></td>
+											<td><input type="text" name="kelas" style="width:50%"></td>
 										</tr>
 										<tr>
 											<td>BAB</td>
-											<td><input type="text" name="bab"></td>
+											<td><input type="text" name="bab" style="width:50%"></td>
 										</tr>
 										<tr>
 											<td>Jenis </td>

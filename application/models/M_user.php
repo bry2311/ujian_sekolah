@@ -7,6 +7,11 @@ class M_user extends CI_Model
 		$query = $this->db->query("SELECT * FROM user");
 		return $query->result();
 	}
+	public function getSiswa()
+	{
+		$query = $this->db->query("SELECT * FROM user WHERE role = 'Siswa'");
+		return $query->result();
+	}
 	public function getAllUserOnline()
 	{
 		$query = $this->db->query("SELECT * FROM user WHERE last_status != 0");

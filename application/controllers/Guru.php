@@ -148,7 +148,7 @@ class Guru extends CI_Controller
 	public function dataUser()
 	{
 		$this->isAnyLogin();
-		$data['user'] = $this->M_user->getUser();
+		$data['user'] = $this->M_user->getSiswa();
 		$this->load->view('guru/dataUser', $data);
 	}
 	public function tambahUser()
@@ -402,7 +402,7 @@ class Guru extends CI_Controller
 			'gambarC' => $gc,
 			'gambarD' => $gd,
 			'gambarE' => $ge,
-			'kunci_pg' => $this->input->post('kunci_pg', TRUE),
+			'kunci_pg' => $kunci_pg,
 			'kunci_jawaban' => $kunci_jawaban,
 			'nik' => $this->session->nik,
 		);
@@ -2622,7 +2622,25 @@ class Guru extends CI_Controller
 						$isJawab = true;
 						$beginI = $tempI;
 						$sheet1->setCellValue('A' . $tempI, $soalPg[$i - $j]->no_soal . '.');
+						$sheet1->getDefaultRowDimension(1)->setRowHeight(-1);
+						$sheet1->getRowDimension(1)->setRowHeight(-1);
+						$sheet1->getStyle('B'. $tempI)->getAlignment()->setWrapText(true);
+						$sheet1->getStyle('B'. $tempI)->getAlignment()->setVertical('top');
 						$sheet1->setCellValue('B' . $tempI, strip_tags($soalPg[$i - $j]->soal));
+						$sheet1->mergeCells('B'.$tempI.':H'.$tempI);
+						if(isset($soalPg[$i - $j]->gambarSoal)){
+							$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+							$drawing->setName('logo');
+							$drawing->setDescription('logo');
+							$drawing->setPath('assets/img/'.$soalPg[$i - $j]->gambarSoal); // put your path and image here
+							$drawing->setCoordinates('J'. $tempI);
+							$drawing->setOffsetX(10);
+							$drawing->setOffsetY(10);
+							$drawing->setHeight(110);
+							$drawing->setWidth(110);
+							$drawing->getShadow()->setVisible(true);
+							$drawing->setWorksheet($sheet1);
+						}
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($js->ja));
 						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->ja)))) {
@@ -2676,10 +2694,6 @@ class Guru extends CI_Controller
 						$drawing->getShadow()->setVisible(true);
 						$drawing->setWorksheet($sheet1);
 					}
-					// $width=84;
-					// $height=20;		
-					// $text = strip_tags($soalPg[$i - $j]->soal);
-					// $sheet1->getRowDimension(1)->setRowHeight(ceil(strlen($text)/$width)*$height);
 					$tempI += 1;
 					if (trim(strtolower($soalPg[$i - $j]->kunci_jawaban)) == trim(strtolower($soalPg[$i - $j]->e))) {
 						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($soalPg[$i - $j]->e));

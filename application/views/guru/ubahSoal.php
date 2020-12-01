@@ -489,10 +489,11 @@
 										</script>
 										<tr>
 											<td>Kunci </td>
-											<td><input type="text" readonly value="<?php echo $soal->kunci_jawaban; ?>"> *untuk pengecekan saja</td>
+											<td><input type="text" readonly value="<?php echo $soal->kunci_jawaban; ?>" style="width:50%"> *untuk pengecekan saja</td>
+											<td></td>
 										</tr>
 										<tr>
-											<td colspan="2"><input class="btn btn-primary pull-right" type="submit" value="submit" name="btnSubmit"></td>
+											<td colspan="3"><input class="btn btn-primary pull-right" type="submit" value="Submit" name="btnSubmit"></td>
 										</tr>
 									</table>
 									<input type="hidden" name="id" value="<?php echo $soal->id; ?>">

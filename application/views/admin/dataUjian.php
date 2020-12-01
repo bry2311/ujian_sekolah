@@ -126,6 +126,7 @@
 												<th>KKM</th>
 												<th>Status</th>
 												<th>Thn Ajaran</th>
+												<th>NIK</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -150,6 +151,7 @@
 													<td><?php echo $u->kkm; ?></td>
 													<td><?php echo $u->status; ?></td>
 													<td><?php echo $u->tahun_ajaran; ?></td>
+													<td><?php echo $u->nik; ?></td>
 												</tr>
 											<?php
 												$no++;

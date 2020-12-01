@@ -145,23 +145,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <tr> 
                     <td>Nama </td>
-                    <td><input type="text" name="nama" value="<?php echo $ujian->nama;?>"></td>
+                    <td><input type="text" name="nama" value="<?php echo $ujian->nama;?>" style="width:90%"></td>
                   </tr>
                   <tr> 
                     <td>Mata Pelajaran </td>
-                    <td><input type="text" name="mata_pelajaran" value="<?php echo $ujian->mata_pelajaran;?>"></td>
+                    <td><input type="text" name="mata_pelajaran" value="<?php echo $ujian->mata_pelajaran;?>" style="width:90%"></td>
                   </tr>
                   <tr> 
                     <td>Materi Pokok</td>
-                    <td><input type="text" name="materi_pokok" value="<?php echo $ujian->materi_pokok;?>"></td>
+                    <td><input type="text" name="materi_pokok" value="<?php echo $ujian->materi_pokok;?>" style="width:90%"></td>
 									</tr>
 									<tr> 
                     <td>Kelas</td>
-                    <td><input type="text" name="kelas" value="<?php echo $ujian->kelas;?>"></td>
+                    <td><input type="text" name="kelas" value="<?php echo $ujian->kelas;?>" style="width:50%"></td>
                   </tr>
                   <tr> 
                     <td>BAB</td>
-                    <td><input type="text" name="bab" value="<?php echo $ujian->bab;?>"></td>
+                    <td><input type="text" name="bab" value="<?php echo $ujian->bab;?>" style="width:50%"></td>
                   </tr>
                   <tr> 
                     <td>Jenis </td>

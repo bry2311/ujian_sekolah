@@ -91,19 +91,24 @@ class Siswa extends CI_Controller
 				$this->load->view('siswa/informasiUjian2.php', $data);
 			} else {
 				echo "<script type='text/javascript'>alert('Maaf, " . $this->session->nama . " kamu tidak dapat mengikuti " . $ujian->nama . " karena sudah pernah mengikuti sebelumnya.');</script>";
+				$this->index();
 			}
-			redirect('login');
+			// redirect('login');
 		}
 	}
 
-	public function startLobby()
+	public function startLobby($id)
 	{
-		$this->isAnyLogin();
-		$idUjian = $this->input->post('ujian', TRUE);
-		$ujian = $this->M_ujian->getUjianById($idUjian);
-		$data['ujian'] = $ujian;
+		// $this->isAnyLogin();
+		// $idUjian = $this->input->post('ujian', TRUE);
+		// $ujian = $this->M_ujian->getUjianById($idUjian);
+		// $data['ujian'] = $ujian;
 		// echo "a";exit;
-		$this->load->view('siswa/ruangTunggu.php', $data);
+		// $this->load->view('siswa/ruangTunggu.php', $data);
+		$this->isAnyLogin();
+		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$this->M_user->updateStatusUjian($this->session->nik, $id);
+		$this->load->view('siswa/informasiUjian', $data);
 	}
 
 	//Start Join Ujian

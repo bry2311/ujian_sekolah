@@ -81,7 +81,7 @@
 								<h6 class="m-0 font-weight-bold text-primary">Silahkan pilih ujian yang akan kamu ikuti Daftar Ujian</h6>
 							</div>
 							<div class="card-body">
-								<form class="user" action="<?php echo base_url(); ?>siswa/startLobby" method="post">
+								<form class="user" action="<?php echo base_url(); ?>siswa/informasiUjian" method="post">
 									<table style="width:100%;">
 										<tr>
 											<td>Ujian </td>

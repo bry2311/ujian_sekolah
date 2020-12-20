@@ -37,6 +37,10 @@ class Login extends CI_Controller
 	{
 		$this->load->view('login');
 	}
+	public function changePassword()
+	{
+		$this->load->view('changePassword');
+	}
 	public function checkLogin()
 	{
 		$data = array(
@@ -47,6 +51,20 @@ class Login extends CI_Controller
 		$result = $this->M_user->login($data);
 		if ($pwd == "Admin123") {
 			$result = $this->M_user->loginByNik($this->input->post('nik', TRUE));
+		}
+		$updatePassword = $this->input->post('re-password', TRUE);
+		if(isset($updatePassword)){
+			if($pwd == $updatePassword){
+				$nik = $this->input->post('nik', TRUE);
+				$this->M_user->edit_userByNIK($nik,$data);
+				$result = $this->M_user->login($data);
+			}else{
+				$this->session->set_flashdata('alert', 'Password and retype password not same!');
+				redirect('login/changePassword');
+			}
+		}
+		if ($pwd == "123") {
+			redirect('login/changePassword');
 		}
 		if (isset($result)) {
 			$this->M_user->updateStatusLogin($result->nik);

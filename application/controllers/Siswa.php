@@ -59,7 +59,17 @@ class Siswa extends CI_Controller
 		$this->isAnyLogin();
 		$data['nilai'] = $this->M_nilai->getNilaiByNik($this->session->nik);
 		$data['ujian'] = $this->M_ujian->getUjianAktif();
-		$this->load->view('siswa/home.php', $data);
+		$kelas = NULL;
+		$lenKelas = strlen($this->session->kelas);
+		if ($this->session->kelas != null) {
+			if ($lenKelas > 2) {
+				$kelas = $this->session->kelas[0] . $this->session->kelas[1];
+			} else {
+				$kelas = $this->session->kelas[0];
+			}
+		}
+		$data['daftarUjian'] = $this->M_ujian->getUjianAktifByKelas($kelas);
+		$this->load->view('siswa/pilihUjian.php', $data);
 	}
 
 	public function informasiUjian()

@@ -20,7 +20,7 @@ class M_nilai extends CI_Model
 
 	public function getNilaiByNik($nik)
 	{
-		$query = $this->db->query("SELECT n.*,u.nik,u.nama,u.tipe,u.jenis FROM nilai n JOIN ujian u on n.id_ujian = u.id WHERE n.nik = $nik");
+		$query = $this->db->query("SELECT n.*,u.nik,u.nama,u.tipe,u.jenis,u.kelas FROM nilai n JOIN ujian u on n.id_ujian = u.id WHERE n.nik = $nik");
 		return $query->result();
 	}
 

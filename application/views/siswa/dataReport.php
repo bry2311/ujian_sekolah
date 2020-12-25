@@ -43,11 +43,11 @@
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 			<!-- Nav Item - Dashboard -->
-			<!-- <li class="nav-item">
+			<li class="nav-item">
         <a class="nav-link" href="<?= base_url(); ?>siswa">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Home</span></a>
-      </li> -->
+      </li>
 			<li class="nav-item active">
 				<a class="nav-link" href="<?= base_url(); ?>siswa/dataReport">
 					<i class="fas fa-fw fa-chart-area"></i>
@@ -127,8 +127,8 @@
 										<tr>
 											<th>No</th>
 											<th>Ujian</th>
-											<th>NIS</th>
 											<th>Nilai</th>
+											<th>Report</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -139,12 +139,21 @@
 											<tr>
 												<td><?php echo $no; ?></td>
 												<td><?php echo $dataUjian[$n->id_ujian]; ?></td>
-												<td><?php echo $n->nik; ?></td>
 												<td><?php if ($n->tampil == 'aktif') {
 															echo $n->hasil;
 														} else {
 															echo "Belum di periksa guru.";
 														} ?></td>
+												<td>
+												<?php if ($n->tampil == 'aktif') {
+															?>
+																<a class="btn btn-primary btn-xs" href="<?= base_url('guru/createPdf/' . $n->id_ujian . '/' . $n->nik . '/' . $n->kelas); ?>">
+															<i class="fa fa-pencil">Download</i></a>
+															<?php
+														} else {
+															echo "Belum dapat di download";
+														} ?></td>	
+											</td>
 											</tr>
 										<?php
 											$no++;

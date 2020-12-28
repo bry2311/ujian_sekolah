@@ -145,53 +145,75 @@
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<tr>
 											<td>Nama </td>
-											<td><input type="text" name="nama" style="width:90%"></td>
+											<td><input type="text" name="nama" style="width:90%" placeholder="-- Nama --"></td>
 										</tr>
 										<tr>
 											<td>Mata pelajaran </td>
-											<td><input type="text" name="mata_pelajaran" style="width:90%"></td>
+											<td><input type="text" name="mata_pelajaran" style="width:90%" placeholder="-- Mata Pelajaran --"></td>
 										</tr>
 										<tr>
 											<td>Materi Pokok</td>
-											<td><input type="text" name="materi_pokok" style="width:90%"></td>
+											<td><input type="text" name="materi_pokok" style="width:90%" placeholder="-- Materi Pokok --"></td>
 										</tr>
 										<tr>
 											<td>Kelas</td>
-											<td><input type="text" name="kelas" style="width:50%"></td>
+											<td><input type="text" name="kelas" style="width:50%" placeholder="-- Kelas --"></td>
 										</tr>
 										<tr>
 											<td>BAB</td>
-											<td><input type="text" name="bab" style="width:50%"></td>
+											<td><input type="text" name="bab" style="width:50%" placeholder="-- Bab --"></td>
 										</tr>
 										<tr>
 											<td>Jenis </td>
 											<td>
-												<select name="jenis">
+												<select name="jenis" style="width:50%">
 													<option>Pilihan Ganda</option>
 													<option>Isian</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
+											<td>Tipe Ujian </td>
+											<td>
+												<select id="tipe_ujian" name="tipe_ujian" style="width:50%" onchange="change()">
+													<option>Ulangan Harian</option>
+													<option>PTS</option>
+													<option>PAS</option>
+												</select>
+											</td>
+										</tr>
+										<tr id="waktu_mulai" style="display:none">
+											<td>Waktu Mulai</td>
+											<td><input type="datetime-local" name="waktu_mulai" style="width:30%"> *24 jam **WIB</td> 
+										</tr>
+										<tr>
 											<td>Waktu</td>
-											<td><input type="text" name="waktu"> *dalam satuan menit</td>
+											<td><input type="number" name="waktu" min="0" style="width:30%"> *dalam satuan menit</td>
 										</tr>
 										<tr>
 											<td>KKM</td>
-											<td><input type="text" name="kkm"> *masukan int</td>
+											<td><input type="number" name="kkm" min="0" max="100" style="width:30%"> *masukan bilangan bulat</td>
 										</tr>
 										<tr>
 											<td>Status </td>
 											<td>
-												<select name="status">
+												<select name="status" style="width:50%">
 													<option>aktif</option>
 													<option>non-aktif</option>
 												</select>
 											</td>
 										</tr>
 										<tr>
-											<td>Tahun Ajaran </td>
-											<td><input type="text" name="tahun_ajaran"></td>
+											<td>Tahun Ajaran</td>
+											<td>
+												<select name="tahun_ajaran" style="width:50%">
+													<option>2020/2021</option>
+													<option>2021/2022</option>
+													<option>2022/2023</option>
+													<option>2023/2024</option>
+													<option>2024/2025</option>
+												</select>
+											</td>
 										</tr>
 										<tr>
 											<td>Tipe </td>
@@ -255,6 +277,16 @@
 
 </html>
 
+<script type="text/javascript">
+	function change(){
+		var opsi = document.getElementById('tipe_ujian').value;
+		if(opsi == "PTS" || opsi == "PAS"){
+			var jam = document.getElementById('waktu_mulai').style.display= '';
+		}else{
+			var jam = document.getElementById('waktu_mulai').style.display= 'none';
+		}
+	}
+</script>
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url() ?>/vendor/jquery/jquery.min.js"></script>

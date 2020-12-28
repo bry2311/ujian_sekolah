@@ -172,6 +172,20 @@
                       </select>                     
                     </td>
                   </tr>
+                  <tr>
+											<td>Tipe Ujian </td>
+											<td>
+												<select id="tipe_ujian" name="tipe_ujian" style="width:50%" onchange="change()">
+													<option <?php if($ujian->tipe_ujian == "Ulangan Harian"){ echo "selected";}?>>Ulangan Harian</option>
+													<option <?php if($ujian->tipe_ujian == "PTS"){ echo "selected";}?>>PTS</option>
+													<option <?php if($ujian->tipe_ujian == "PAS"){ echo "selected";}?>>PAS</option>
+												</select>
+                    </td>
+                  </tr>
+                  <tr id="waktu_mulai" style="display:<?php if($ujian->tipe_ujian == 'Ulangan Harian'){ echo 'none';}?>">
+											<td>Waktu Mulai</td>
+											<td><input type="datetime-local" name="waktu_mulai" style="width:30%"> *24 jam **WIB</td> 
+                  </tr>
                   <tr> 
                     <td>Waktu </td>
                     <td><input type="text" name="waktu" value="<?php echo $ujian->waktu;?>"></td>
@@ -255,7 +269,16 @@
 </body>
 
 </html>
-
+<script type="text/javascript">
+	function change(){
+		var opsi = document.getElementById('tipe_ujian').value;
+		if(opsi == "PTS" || opsi == "PAS"){
+			var jam = document.getElementById('waktu_mulai').style.display= '';
+		}else{
+			var jam = document.getElementById('waktu_mulai').style.display= 'none';
+		}
+	}
+</script>
 
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url()?>/vendor/jquery/jquery.min.js"></script>

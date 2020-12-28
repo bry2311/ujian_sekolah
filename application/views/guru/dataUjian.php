@@ -187,6 +187,8 @@
 												<th>Kelas</th>
 												<th>BAB</th>
 												<th>Jenis</th>
+												<th>Tipe Ujjian</th>
+												<th>Jam Mulai</th>
 												<th>Waktu</th>
 												<th>KKM</th>
 												<th>Status</th>
@@ -221,6 +223,8 @@
 													<td><?php echo $u->kelas; ?></td>
 													<td><?php echo $u->bab; ?></td>
 													<td><?php echo $u->jenis; ?></td>
+													<td><?php echo $u->tipe_ujian; ?></td>
+													<td><?php echo $u->waktu_mulai; ?></td>
 													<td><?php echo $u->waktu; ?></td>
 													<td><?php echo $u->kkm; ?></td>
 													<td><?php echo $u->status; ?></td>

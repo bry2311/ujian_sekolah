@@ -147,12 +147,12 @@
 												<td>
 												<?php if ($n->tampil == 'aktif') {
 															?>
-																<a class="btn btn-primary btn-xs" href="<?= base_url('guru/createPdf/' . $n->id_ujian . '/' . $n->nik . '/' . $n->kelas); ?>">
-															<i class="fa fa-pencil">Download</i></a>
-															<?php
-														} else {
-															echo "Belum dapat di download";
-														} ?></td>	
+															<a class="btn btn-primary btn-xs" href="<?= base_url('guru/createPdf/' . $n->id_ujian . '/' . $n->nik . '/' . $n->kelas); ?>">
+														<i class="fa fa-pencil">Download</i></a>
+														<?php
+													} else {
+														echo "Belum dapat di download";
+													} ?></td>	
 											</td>
 											</tr>
 										<?php

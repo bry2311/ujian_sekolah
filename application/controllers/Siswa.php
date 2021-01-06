@@ -417,6 +417,7 @@ class Siswa extends CI_Controller
 			$this->load->view('siswa/ujianSoal', $data);
 		}
 	}
+
 	public function next2($id, $tempIndex)
 	{
 		$this->isAnyLogin();
@@ -505,6 +506,62 @@ class Siswa extends CI_Controller
 		$id_soal = $this->input->post('id_soal', TRUE);
 		$id_ujian = $this->input->post('id_ujian', TRUE);
 		$waktu = $this->input->post('tanggal', TRUE);
+		$tempIndex = $this->input->post('tempIndex', TRUE);
+		$jawaban = $this->input->post('answer', TRUE);
+		$ja = $this->input->post('ja', TRUE);
+		$jb = $this->input->post('jb', TRUE);
+		$jc = $this->input->post('jc', TRUE);
+		$jd = $this->input->post('jd', TRUE);
+		$pilihanJawaban = substr($jawaban, 0, 1);
+		$jawabanAsli = substr($jawaban, 2, 1);
+		$hasilJawaban = substr($jawaban, 4);
+		if ($jawaban != NULL) {
+			$nik = $this->session->nik;
+			$check = $this->M_jawaban_siswa->checkJawabanSiswa($id_soal, $id_ujian, $nik);
+			if ($check == null) {
+				$data = array(
+					'id_soal' => $id_soal,
+					'id_ujian' => $id_ujian,
+					'nik' => $nik,
+					'jawaban' => $hasilJawaban,
+					'nomor_soal' => $tempIndex + 1,
+					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
+					'ja' => $ja,
+					'jb' => $jb,
+					'jc' => $jc,
+					'jd' => $jd,
+				);
+				$this->M_jawaban_siswa->add($data);
+			} else {
+				$data = array(
+					'id_soal' => $id_soal,
+					'id_ujian' => $id_ujian,
+					'nik' => $nik,
+					'jawaban' => $hasilJawaban,
+					'nomor_soal' => $tempIndex + 1,
+					'pilihan_jawaban' => $pilihanJawaban,
+					'jawaban_asli' => $jawabanAsli,
+					'ja' => $ja,
+					'jb' => $jb,
+					'jc' => $jc,
+					'jd' => $jd,
+				);
+				$this->M_jawaban_siswa->editJawabanSiswa($check->id, $data);
+			}
+			$this->next2($id_ujian, $tempIndex);
+		} else {
+			$this->next2($id_ujian, $tempIndex);
+		}
+	}
+
+	public function addJawabanSiswaNext()
+	{
+		// var_dump($this->input->post());exit;
+		$this->isAnyLogin();
+		$id_soal = $this->input->post('id_soal', TRUE);
+		$id_ujian = $this->input->post('id_ujian', TRUE);
+		// $waktu = $this->input->post('tanggal', TRUE);
 		$tempIndex = $this->input->post('tempIndex', TRUE);
 		$jawaban = $this->input->post('answer', TRUE);
 		$ja = $this->input->post('ja', TRUE);

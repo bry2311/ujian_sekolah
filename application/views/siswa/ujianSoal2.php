@@ -265,7 +265,7 @@
 																				?>
 																					<tr>
 																						<?php $ja = $s->e; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
+																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
 																																																																								echo "checked";
 																																																																							} ?>></td>
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
@@ -280,7 +280,7 @@
 																				?>
 																					<tr>
 																						<?php $ja = $s->a; ?>
-																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
+																						<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
 																																																																								echo "checked";
 																																																																							} ?>></td>
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
@@ -294,7 +294,7 @@
 																				} ?>
 																				<tr>
 																					<?php $jb = $s->b; ?>
-																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->b)))) {
+																					<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->b)))) {
 																																																																							echo "checked";
 																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
@@ -307,7 +307,7 @@
 																				</tr>
 																				<tr>
 																					<?php $jc = $s->c; ?>
-																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->c)))) {
+																					<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->c)))) {
 																																																																							echo "checked";
 																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
@@ -319,7 +319,7 @@
 																				</tr>
 																				<tr>
 																					<?php $jd = $s->d; ?>
-																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
+																					<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
 																																																																							echo "checked";
 																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
@@ -346,7 +346,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->e; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->e)))) {
 																																																																							echo "checked";
 																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
@@ -361,7 +361,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->d; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->d)))) {
 																																																																							echo "checked";
 																																																																						} ?>></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
@@ -375,7 +375,7 @@
 																			} ?>
 																			<tr>
 																				<?php $jb = $s->a; ?>
-																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>' <?php if (trim(strtolower(strip_tags($jawaban[$tempJawaban]->jawaban))) == trim(strtolower(strip_tags($s->a)))) {
 																																																																						echo "checked";
 																																																																					} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
@@ -387,7 +387,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jc = $s->b; ?>
-																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->b)) {
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->b)) {
 																																																																						echo "checked";
 																																																																					} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
@@ -399,7 +399,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jd = $s->c; ?>
-																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->c)) {
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>' <?php if (trim($jawaban[$tempJawaban]->jawaban) == trim($s->c)) {
 																																																																						echo "checked";
 																																																																					} ?>></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
@@ -427,7 +427,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->e; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
@@ -440,7 +440,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->a; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='A.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarA)) { ?>
@@ -451,7 +451,7 @@
 																			<?php } ?>
 																			<tr>
 																				<?php $jb = $s->b; ?>
-																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='B.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
@@ -461,7 +461,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jc = $s->c; ?>
-																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='C.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarC)) { ?>
@@ -471,7 +471,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jd = $s->d; ?>
-																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" onclick="selected(this.value)" name="answer" value='D.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarD)) { ?>
@@ -495,7 +495,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->e; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='A.<?php echo "E."; ?> <?php echo strval($s->e); ?>'></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->e; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
@@ -508,7 +508,7 @@
 																			?>
 																				<tr>
 																					<?php $ja = $s->d; ?>
-																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
+																					<td><label label style="font-size:12pt;"><b>A.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='A.<?php echo "D."; ?> <?php echo strval($s->d); ?>'></td>
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->d; ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
@@ -520,7 +520,7 @@
 																			} ?>
 																			<tr>
 																				<?php $jb = $s->a; ?>
-																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>B.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='B.<?php echo "A."; ?> <?php echo strval($s->a); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->a; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarA)) { ?>
@@ -530,7 +530,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jc = $s->b; ?>
-																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>C.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='C.<?php echo "B."; ?> <?php echo strval($s->b); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->b; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
@@ -540,7 +540,7 @@
 																			</tr>
 																			<tr>
 																				<?php $jd = $s->c; ?>
-																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
+																				<td><label label style="font-size:12pt;"><b>D.</b></label> &nbsp; <input type="radio" style="width: 1.5em; height: 1.5em;" name="answer" onclick="selected(this.value)" value='D.<?php echo "C."; ?> <?php echo strval($s->c); ?>'></td>
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo $s->c; ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarC)) { ?>
@@ -561,13 +561,13 @@
 																}
 																?>
 															</div>
-															<input type="hidden" name="ja" value='<?php echo $ja; ?>'>
-															<input type="hidden" name="jb" value='<?php echo $jb; ?>'>
-															<input type="hidden" name="jc" value='<?php echo $jc; ?>'>
-															<input type="hidden" name="jd" value='<?php echo $jd; ?>'>
-															<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
-															<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
-															<input type="hidden" name="tempIndex" value="<?php echo $tempIndex; ?>">
+															<input type="hidden" name="ja" id="ja" value='<?php echo $ja; ?>'>
+															<input type="hidden" name="jb" id="jb" value='<?php echo $jb; ?>'>
+															<input type="hidden" name="jc" id="jc" value='<?php echo $jc; ?>'>
+															<input type="hidden" name="jd" id="jd" value='<?php echo $jd; ?>'>
+															<input type="hidden" name="id_soal" id="id_soal" value="<?php echo $s->id; ?>">
+															<input type="hidden" name="id_ujian" id="id_ujian" value="<?php echo $tmpId; ?>">
+															<input type="hidden" name="tempIndex" id="tempIndex" value="<?php echo $tempIndex; ?>">
 														</form>
 													</div>
 												<?php
@@ -600,12 +600,12 @@
 														<br>
 														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post">
 															<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini ..">
-                                <?php
-													if ($jawaban_isian != null and $tempJawaban != -1) {
-														echo $jawaban_isian[$tempJawaban]->jawaban;
-													}
-								?>
-                              </textarea>
+															<?php
+																				if ($jawaban_isian != null and $tempJawaban != -1) {
+																					echo $jawaban_isian[$tempJawaban]->jawaban;
+																				}
+															?>
+                          									</textarea>
 															<div id="aaaa" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 															</div>
 															<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
@@ -626,8 +626,17 @@
 						<div id="visible">
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/back2/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Back</i></a> &nbsp;
-							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/next2/' . $tmpId . "/" . $tempIndex); ?>">
-								<i class="fa fa-pencil">Next</i></a> &nbsp;
+							<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaNext" method="post">
+								<input type="hidden" name="answer" id="answer" value=''>
+								<input type="hidden" name="ja" id="ja2" value=''>
+								<input type="hidden" name="jb" id="jb2" value=''>
+								<input type="hidden" name="jc" id="jc2" value=''>
+								<input type="hidden" name="jd" id="jd2" value=''>
+								<input type="hidden" name="id_soal" id="id_soal2" value="">
+								<input type="hidden" name="id_ujian" id="id_ujian2" value="">
+								<input type="hidden" name="tempIndex" id="tempIndex2" value="">
+								<input class="btn btn-primary pull-right" type="Submit" value="Next" name="btnSubmit">
+							</form>
 						</div>
 						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/checkData/' . $tmpId); ?>">
 							<i class="fa fa-pencil">Kumpulkan</i></a>
@@ -687,9 +696,27 @@
 </html>
 
 <script>
+	function selected(val){
+		document.getElementById("answer").value=val;
+	}
 	// Get the modal
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var ja = document.getElementById('ja').value;
+	var ja2 = document.getElementById('ja2').value = ja;
+	var jb = document.getElementById('jb').value;
+	var jb2 = document.getElementById('jb2').value = jb;
+	var jc = document.getElementById('jc').value;
+	var jc2 = document.getElementById('jc2').value = jc;
+	var jd = document.getElementById('jd').value;
+	var jd2 = document.getElementById('jd2').value = jd;
+	var idsoal = document.getElementById('id_soal').value;
+	var idsoal2 = document.getElementById('id_soal2').value = idsoal;
+	var idujian = document.getElementById('id_ujian').value;
+	var idujian2 = document.getElementById('id_ujian2').value = idujian;
+	var tempIndex = document.getElementById('tempIndex').value;
+	var tempIndex2 = document.getElementById('tempIndex2').value = tempIndex;
+
 	var img1 = document.getElementById("myImg1");
 	var img2 = document.getElementById("myImg2");
 	var img3 = document.getElementById("myImg3");

@@ -188,6 +188,24 @@
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
+	
+	<!--Modal-->
+	<!-- <div class="modal fade"id="myModal2" role="dialog">
+		<div class="modal-dialog"> -->
+		<!-- Modal content-->
+		<!-- <div class="modal-content">
+			<div class="modal-header">
+			<h4 class="modal-title">Declare New Property?</h4>
+			</div>
+			<div class="modal-body Content">
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div> -->
 
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
@@ -209,6 +227,14 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<!-- Page Heading -->
+					<?php
+					//if($data['openModal']=="true"){
+					?>
+						<!-- <script>
+							var modal = document.getElementById("myModal");
+							modal.style.display = block;
+						</script> -->
+					<?php //}?>
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
 						<h1 class="h3 mb-0 text-gray-800" style="font-size:12pt;">Data Ujian</h1>
 					</div>
@@ -640,6 +666,35 @@
 						</div>
 						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/checkData/' . $tmpId); ?>">
 							<i class="fa fa-pencil">Kumpulkan</i></a>
+						
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+							Open modal
+						</button>
+						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/preview/' . $tmpId); ?>">
+							<i class="fa fa-pencil">Preview</i></a>
+					</div>
+					<!-- Modal -->
+					<div class="modal" id="myModal">
+						<div class="modal-dialog">
+						<div class="modal-content">
+						
+							<!-- Modal Header -->
+							<div class="modal-header">
+							<h4 class="modal-title">Modal Heading</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							
+							<!-- Modal body -->
+							<div class="modal-body">
+							Modal body..
+							</div>
+							
+							<!-- Modal footer -->
+							<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+						</div>
 					</div>
 				</div>
 				<!-- /.container-fluid -->
@@ -699,6 +754,12 @@
 	function selected(val){
 		document.getElementById("answer").value=val;
 	}
+	// $(function(){
+	// 	$(document).on(".click","#testModal",function(e){
+	// 		e.preventDefault();
+	// 		$("#myModal2").modal('toggle');
+	// 	});
+	// })
 	// Get the modal
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
@@ -771,6 +832,11 @@
 <!-- Bootstrap core JavaScript-->
 <script src="<?= base_url() ?>/vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url() ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="<?= base_url() ?>/vendor/jquery-easing/jquery.easing.min.js"></script>

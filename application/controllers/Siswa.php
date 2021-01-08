@@ -185,6 +185,7 @@ class Siswa extends CI_Controller
 					}
 				}
 			}
+			$data['openModal'] = "false";
 			$this->session->soal_ujian_random = $tpz;
 			$this->load->view('siswa/ujianSoal', $data);
 		} else {
@@ -332,6 +333,7 @@ class Siswa extends CI_Controller
 			// exit;
 			// $this->session->soal_ujian_random = $tpz;
 			// $this->session->soal_ujian_random2 = $tpz2;
+			$data['openModal'] = "false";
 			$this->session->soal_gabungan = $tpz3;
 			$this->load->view('siswa/ujianSoalGabungan', $data);
 		}
@@ -359,6 +361,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoal2', $data);
 	}
 	public function back2($id, $tempIndex)
@@ -385,8 +388,10 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openmodal'] = "false";
 		$this->load->view('siswa/ujianSoal2', $data);
 	}
+
 	public function next($id, $tempIndex)
 	{
 		$this->isAnyLogin();
@@ -410,6 +415,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoal', $data);
@@ -441,6 +447,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoal2', $data);
@@ -962,6 +969,7 @@ class Siswa extends CI_Controller
 		$this->session->waktu = "";
 		$this->dataReport();
 	}
+
 	public function checkData($id)
 	{
 		$this->isAnyLogin();
@@ -1240,6 +1248,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function ujianSoalIsianGabungan($id, $tempIndex)
@@ -1260,6 +1269,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoalIsianGabungan', $data);
 	}
 	public function next3($id, $tempIndex)
@@ -1285,6 +1295,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		if ($tempIndex >= $max - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalGabungan', $data);
@@ -1315,6 +1326,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		if ($tempIndex2 >= $max2 - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalIsianGabungan', $data);
@@ -1345,6 +1357,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		if ($tempIndex >= $max + $max2 - 1) {
 			echo "<script type='text/javascript'>alert('Sudah soal terakhir');</script>";
 			$this->load->view('siswa/ujianSoalGabungan', $data);
@@ -1375,6 +1388,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function back3($id, $tempIndex)
@@ -1403,6 +1417,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoalGabungan', $data);
 	}
 	public function back4($id, $tempIndex2)
@@ -1428,6 +1443,7 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "false";
 		$this->load->view('siswa/ujianSoalIsianGabungan', $data);
 	}
 	//End Join Ujian
@@ -1439,7 +1455,76 @@ class Siswa extends CI_Controller
 		$nik = $this->session->nik;
 		$data['nilai'] = $this->M_nilai->getNilaiByNik($nik);
 		$data['ujian'] = $this->M_ujian->getUjian();
+		$data['openModal'] = "false";
 		$this->load->view('siswa/dataReport', $data);
 	}
 	//End Report
+
+
+	// preview start
+	public function preview($id)
+	{
+		$this->isAnyLogin();
+		$nik = $this->session->nik;
+		$a = $this->M_ujian->getUjianByID($id);
+		if ($a->jenis == "Pilihan Ganda") {
+			$allSoal = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian3($id);
+			$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);
+			$data['soal'] = $this->M_soalpg->getSoalpg();
+		} else {
+			$allSoal = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian3($id);
+			$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaIsianByNik2($nik, $id);
+			$data['soal'] = $this->M_soalisian->getSoalIsian();
+		}
+		
+		var_dump($allSoal,$jawabanSiswa);exit;
+		foreach ($allSoal as $soal) {
+			$cek = false;
+			$no = 0;
+			foreach ($jawabanSiswa as $jawaban) {
+				if($jawaban->id_soal == $soal->id_soal){
+					$cek = true;
+					$no = $jawaban['nomor_soal'];
+					break;
+				}
+			}
+			if($cek == true){
+				$soal->status = 1;
+			}else{
+				$soal->status = 0;
+			}
+		}
+		var_dump($allSoal);exit;
+		$this->back3FromPreview($id, 1,$allSoal);
+	}
+
+	public function back3FromPreview($id, $tempIndex,$dataJawaban)
+	{
+		$this->isAnyLogin();
+		date_default_timezone_set('Asia/Jakarta');
+		$this->session->soal_ujian_random;
+		$temp = $this->M_ujian_has_soal->getCountSoalByIdUjian($id);
+		$max = $temp;
+		if ($tempIndex <= 0) {
+			$data['index'] = 0;
+		} else {
+			$data['index'] = $tempIndex - 1;
+		}
+		$a = $this->M_ujian->getUjianByID($id);
+		if ($a->jenis == "Pilihan Ganda") {
+			$data['soal'] = $this->M_soalpg->getSoalpg();
+		} else {
+			$data['soal'] = $this->M_soalisian->getSoalIsian();
+		}
+		$data['max'] = $max;
+		$data['soal_ujian'] = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian($id);
+		$data['ujian'] = $this->M_ujian->getUjianByID($id);
+		$nik = $this->session->nik;
+		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
+		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
+		$data['openModal'] = "true";
+		$data['jawaban'] = $dataJawaban;
+		$this->load->view('siswa/ujianSoal2', $data);
+	}
+	// preview end
 }

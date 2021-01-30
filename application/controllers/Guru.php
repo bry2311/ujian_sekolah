@@ -579,7 +579,7 @@ class Guru extends CI_Controller
 	public function tambahSoalIsian()
 	{
 		$this->isAnyLogin();
-		$data['gambar'] = $this->M_gambar->getGambar();
+		$data['gambar'] = $this->M_gambar->getGambarByNik($this->session->nik);
 		$data['kelas'] = $this->M_kelas->getKelas();
 		$this->load->view('guru/tambahSoalIsian', $data);
 	}
@@ -1012,18 +1012,23 @@ class Guru extends CI_Controller
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
 			'waktu' => $this->input->post('waktu', TRUE),
+			'tipe' => "Gabungan",
+			// 'tipe_ujian' => $this->input->post('tipe_ujian', TRUE),
+			// 'waktu_mulai' => NULL,
 			'jenis' => $this->input->post('jenis', TRUE),
-			'tipe' => $this->input->post('tipe', TRUE),
 			'status' => $this->input->post('status', TRUE),
-			'nik' => $this->session->nik,
-			'tahun_ajaran' =>  $this->input->post('tahun_ajaran', TRUE),
 			'kkm' => $this->input->post('kkm', TRUE),
+			'mata_pelajaran' =>  $this->input->post('mata_pelajaran', TRUE),
+			'bab' =>  $this->input->post('bab', TRUE),
 			'tahun_ajaran' =>  $this->input->post('tahun_ajaran', TRUE),
 			'materi_pokok' =>  $this->input->post('materi_pokok', TRUE),
+			'nik' => $this->session->nik,
+			'kelas' =>  $this->input->post('kelas', TRUE),
 			'persentase_pg' =>  $this->input->post('persentase_pg', TRUE),
 			'persentase_isian' =>  $this->input->post('persentase_isian', TRUE),
 		);
-		$this->M_ujian->add($data);
+		// var_dump($data);exit;
+		$test = $this->M_ujian->add($data);
 		redirect('guru/dataUjianGabungan', 'refresh');
 	}
 	public function hapusUjianGabungan($id)

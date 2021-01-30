@@ -177,13 +177,13 @@
                       </td>
                       <td><?php echo $su->materi;?></td>
                       <td><?php echo $su->kd;?></td>
-                      <td><?php echo $su->soal;?></td>
-                      <td><?php echo $su->a;?></td>
-                      <td><?php echo $su->b;?></td>
-                      <td><?php echo $su->c;?></td>
-                      <td><?php echo $su->d;?></td>
-                      <td><?php echo $su->e;?></td>
-                      <td><?php echo $su->kunci_jawaban;?></td>
+                      <td><?php echo htmlspecialchars($su->soal);?></td>
+                      <td><?php echo htmlspecialchars($su->a);?></td>
+                      <td><?php echo htmlspecialchars($su->b);?></td>
+                      <td><?php echo htmlspecialchars($su->c);?></td>
+                      <td><?php echo htmlspecialchars($su->d);?></td>
+                      <td><?php echo htmlspecialchars($su->e);?></td>
+                      <td><?php echo htmlspecialchars($su->kunci_jawaban);?></td>
                     </tr>
                     <?php
                         $no++;

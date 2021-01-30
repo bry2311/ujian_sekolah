@@ -184,13 +184,13 @@
                       <td><?php echo $su->no_soal;?></td>
                       <td><?php echo $s->materi;?></td>
                       <td><?php echo $s->kd;?></td>
-                      <td><?php echo $s->soal;?></td>
-                      <td><?php echo $s->a;?></td>
-                      <td><?php echo $s->b;?></td>
-                      <td><?php echo $s->c;?></td>
-                      <td><?php echo $s->d;?></td>
-                      <td><?php echo $s->e;?></td>
-                      <td><?php echo $s->kunci_jawaban;?></td>
+                      <td><?php echo htmlspecialchars($s->soal);?></td>
+                      <td><?php echo htmlspecialchars($s->a);?></td>
+                      <td><?php echo htmlspecialchars($s->b);?></td>
+                      <td><?php echo htmlspecialchars($s->c);?></td>
+                      <td><?php echo htmlspecialchars($s->d);?></td>
+                      <td><?php echo htmlspecialchars($s->e);?></td>
+                      <td><?php echo htmlspecialchars($s->kunci_jawaban);?></td>
                       <td> 
                           <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoalGabungan/'.$su->id.'/'.$ujian->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">
                           <i class="fa fa-trash-o">Hapus</i></a>

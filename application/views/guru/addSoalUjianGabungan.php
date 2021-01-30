@@ -183,31 +183,31 @@
 													<td><input type="checkbox" name="id_soal[]" class="" id="id_soal<?php echo $s->id ?>" value="<?php echo $s->id ?>"></td>
 													<td><?php echo $s->materi; ?></td>
 													<td><?php echo $s->kd; ?></td>
-													<td><?php echo $s->soal;
+													<td><?php echo htmlspecialchars($s->soal);
 															if ($s->gambarSoal != null) {
 																echo ' (' . $s->gambarSoal . ')';
 															}; ?></td>
-													<td><?php echo $s->a;
+													<td><?php echo htmlspecialchars($s->a);
 															if ($s->gambarA != null) {
 																echo ' (' . $s->gambarA . ')';
 															} ?></td>
-													<td><?php echo $s->b;
+													<td><?php echo htmlspecialchars($s->b);
 															if ($s->gambarB != null) {
 																echo ' (' . $s->gambarB . ')';
 															} ?></td>
-													<td><?php echo $s->c;
+													<td><?php echo htmlspecialchars($s->c);
 															if ($s->gambarC != null) {
 																echo ' (' . $s->gambarC . ')';
 															} ?></td>
-													<td><?php echo $s->d;
+													<td><?php echo htmlspecialchars($s->d);
 															if ($s->gambarD != null) {
 																echo ' (' . $s->gambarD . ')';
 															} ?></td>
-													<td><?php echo $s->e;
+													<td><?php echo htmlspecialchars($s->e);
 															if ($s->gambarE != null) {
 																echo ' (' . $s->gambarE . ')';
 															} ?></td>
-													<td><?php echo $s->kunci_pg; ?></td>
+													<td><?php echo htmlspecialchars($s->kunci_pg); ?></td>
 												</tr>
 											<?php
 												$no++;

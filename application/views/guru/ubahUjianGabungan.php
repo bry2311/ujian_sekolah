@@ -150,19 +150,23 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <tr> 
                     <td>Nama </td>
-                    <td><input type="text" name="nama" value="<?php echo $ujian->nama;?>"></td>
+                    <td><input type="text" name="nama" value="<?php echo $ujian->nama;?>" style="width:90%"></td>
                   </tr>
                   <tr> 
                     <td>Mata Pelajaran </td>
-                    <td><input type="text" name="mata_pelajaran" value="<?php echo $ujian->mata_pelajaran;?>"></td>
+                    <td><input type="text" name="mata_pelajaran" value="<?php echo $ujian->mata_pelajaran;?>" style="width:90%"></td>
                   </tr>
                   <tr> 
                     <td>Materi Pokok</td>
-                    <td><input type="text" name="materi_pokok" value="<?php echo $ujian->materi_pokok;?>"></td>
+                    <td><input type="text" name="materi_pokok" value="<?php echo $ujian->materi_pokok;?>" style="width:90%"></td>
+                  </tr>
+									<tr> 
+                    <td>Kelas</td>
+                    <td><input type="text" name="kelas" value="<?php echo $ujian->kelas;?>" style="width:50%"></td>
                   </tr>
                   <tr> 
                     <td>BAB</td>
-                    <td><input type="text" name="bab" value="<?php echo $ujian->bab;?>"></td>
+                    <td><input type="text" name="bab" value="<?php echo $ujian->bab;?>" style="width:50%"></td>
                   </tr>
                   <tr> 
                     <td>Jenis </td>
@@ -199,7 +203,13 @@
                   </tr>
                   <tr> 
                     <td>Tahun Ajaran </td>
-                    <td><input type="text" name="tahun_ajaran" value="<?php echo $ujian->tahun_ajaran;?>"></td>
+                    <td><select name="tahun_ajaran" style="width:50%">
+												<option <?php echo $ujian->tahun_ajaran == '2020/2021' ? 'selected' : ''; ?>>2020/2021</option>
+												<option <?php echo $ujian->tahun_ajaran == '2021/2022' ? 'selected' : ''; ?>>2021/2022</option>
+												<option <?php echo $ujian->tahun_ajaran == '2022/2023' ? 'selected' : ''; ?>>2022/2023</option>
+												<option <?php echo $ujian->tahun_ajaran == '2023/2024' ? 'selected' : ''; ?>>2023/2024</option>
+												<option <?php echo $ujian->tahun_ajaran == '2024/2025' ? 'selected' : ''; ?>>2024/2025</option>
+											</select></td>
                   </tr>
                   <tr> 
                     <td>Tipe </td>

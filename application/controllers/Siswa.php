@@ -1477,7 +1477,7 @@ class Siswa extends CI_Controller
 			$data['soal'] = $this->M_soalisian->getSoalIsian();
 		}
 		
-		var_dump($allSoal,$jawabanSiswa);exit;
+		// var_dump($allSoal,$jawabanSiswa);exit;
 		foreach ($allSoal as $soal) {
 			$cek = false;
 			$no = 0;
@@ -1494,7 +1494,7 @@ class Siswa extends CI_Controller
 				$soal->status = 0;
 			}
 		}
-		var_dump($allSoal);exit;
+		// var_dump($allSoal);exit;
 		$this->back3FromPreview($id, 1,$allSoal);
 	}
 

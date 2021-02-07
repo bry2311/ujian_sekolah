@@ -385,7 +385,30 @@ class Guru extends CI_Controller
 		} else if ($kunci_pg == "E") {
 			$kunci_jawaban = $this->input->post('e', TRUE);
 		}
-		//var_dump($a);exit;
+		$cekSoal=0;
+		$cekA=0;
+		$cekB=0;
+		$cekC=0;
+		$cekD=0;
+		$cekE=0;
+		if($this->input->post('checkSoal', TRUE) != null){
+			$checkSoal = 1;
+		}
+		if($this->input->post('checkA', TRUE) != null){
+			$cekA = 1;
+		}
+		if($this->input->post('checkB', TRUE) != null){
+			$cekB = 1;
+		}
+		if($this->input->post('checkC', TRUE) != null){
+			$cekC = 1;
+		}
+		if($this->input->post('checkD', TRUE) != null){
+			$cekD = 1;
+		}
+		if($this->input->post('checkE', TRUE) != null){
+			$cekE = 1;
+		}
 		$data = array(
 			'materi' => $this->input->post('materi', TRUE),
 			'kd' => $this->input->post('kd', TRUE),
@@ -395,6 +418,12 @@ class Guru extends CI_Controller
 			'c' => $this->input->post('c', TRUE),
 			'd' => $this->input->post('d', TRUE),
 			'e' => $this->input->post('e', TRUE),
+			'checkSoal' => $cekSoal,
+			'checkA' => $cekA,
+			'checkB' => $cekB,
+			'checkC' => $cekC,
+			'checkD' => $cekD,
+			'checkE' => $cekE,
 			'kelas' => $this->input->post('kelas', TRUE),
 			'gambarSoal' => $gs,
 			'gambarA' => $ga,
@@ -478,6 +507,30 @@ class Guru extends CI_Controller
 		} else if ($kunci_pg == "E") {
 			$kunci_jawaban = $this->input->post('e', TRUE);
 		}
+		$cekSoal=0;
+		$cekA=0;
+		$cekB=0;
+		$cekC=0;
+		$cekD=0;
+		$cekE=0;
+		if($this->input->post('checkSoal', TRUE) != null){
+			$checkSoal = 1;
+		}
+		if($this->input->post('checkA', TRUE) != null){
+			$cekA = 1;
+		}
+		if($this->input->post('checkB', TRUE) != null){
+			$cekB = 1;
+		}
+		if($this->input->post('checkC', TRUE) != null){
+			$cekC = 1;
+		}
+		if($this->input->post('checkD', TRUE) != null){
+			$cekD = 1;
+		}
+		if($this->input->post('checkE', TRUE) != null){
+			$cekE = 1;
+		}
 		$data = array(
 			'materi' => $this->input->post('materi', TRUE),
 			'kd' => $this->input->post('kd', TRUE),
@@ -487,6 +540,12 @@ class Guru extends CI_Controller
 			'c' => $this->input->post('c', TRUE),
 			'd' => $this->input->post('d', TRUE),
 			'e' => $this->input->post('e', TRUE),
+			'checkSoal' => $cekSoal,
+			'checkA' => $cekA,
+			'checkB' => $cekB,
+			'checkC' => $cekC,
+			'checkD' => $cekD,
+			'checkE' => $cekE,
 			'kelas' => $this->input->post('kelas', TRUE),
 			'gambarSoal' => $gs,
 			'gambarA' => $ga,

@@ -168,6 +168,7 @@
 		@media only screen and (max-width: 700px) {
 			.modal-content {
 				width: 100%;
+				
 			}
 		}
 
@@ -185,28 +186,12 @@
 </head>
 
 <body id="page-top">
-
+	<div id="myModal" class="modal">
+		<button onclick="testSkill()" style="margin:10px;">Close</button>
+		<img class="modal-content" id="img01" style="max-height:750px;">
+	</div>
 	<!-- Page Wrapper -->
 	<div id="wrapper">
-	
-	<!--Modal-->
-	<!-- <div class="modal fade"id="myModal2" role="dialog">
-		<div class="modal-dialog"> -->
-		<!-- Modal content-->
-		<!-- <div class="modal-content">
-			<div class="modal-header">
-			<h4 class="modal-title">Declare New Property?</h4>
-			</div>
-			<div class="modal-body Content">
-			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Yes</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	</div> -->
-
 		<!-- Content Wrapper -->
 		<div id="content-wrapper" class="d-flex flex-column">
 			<!-- Main Content -->
@@ -263,7 +248,7 @@
 															<h2 style="font-size:12pt;"><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
 														</div>
 														<?php if (isset($s->gambarSoal)) { ?>
-															<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
+															<img id="myImg" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
 														<?php } ?>
 														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswa2" method="post">
 															<div class="input-group">
@@ -297,7 +282,7 @@
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->e); ?></label></td>
 																						<td>
 																							<?php if (isset($s->gambarE)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																								<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
 																							<?php } ?>
 																						</td>
 																					</tr>
@@ -312,7 +297,7 @@
 																						<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->a); ?></label></td>
 																						<td>
 																							<?php if (isset($s->gambarA)) { ?>
-																								<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																								<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
 																							<?php } ?>
 																						</td>
 																					</tr>
@@ -326,7 +311,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->b); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarB)) { ?>
-																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
 																						<?php
 																						} ?>
 																					</td>
@@ -339,7 +324,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->c); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarC)) { ?>
-																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																							<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -351,7 +336,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->d); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
-																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -378,7 +363,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->e); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -393,7 +378,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->d); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -407,7 +392,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->a); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarA)) { ?>
-																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																						<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -419,7 +404,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->b); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
-																						<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																						<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -431,7 +416,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->c); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarC)) { ?>
-																						<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -457,7 +442,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->e); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -470,7 +455,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->a); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarA)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																							<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -481,7 +466,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->b); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
-																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																						<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -525,7 +510,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->e); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarE)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
+																							<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarE; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -538,7 +523,7 @@
 																					<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->d); ?></label></td>
 																					<td>
 																						<?php if (isset($s->gambarD)) { ?>
-																							<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
+																							<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarD; ?>" class="pic">
 																						<?php } ?>
 																					</td>
 																				</tr>
@@ -550,7 +535,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->a); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarA)) { ?>
-																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
+																						<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarA; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -560,7 +545,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->b); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarB)) { ?>
-																						<img id="myImg4" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
+																						<img id="myImg2" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarB; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -570,7 +555,7 @@
 																				<td>&nbsp;<label style="font-size:12pt;"><?php echo htmlspecialchars($s->c); ?></label></td>
 																				<td>
 																					<?php if (isset($s->gambarC)) { ?>
-																						<img id="myImg5" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
+																						<img id="myImg3" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarC; ?>" class="pic">
 																					<?php } ?>
 																				</td>
 																			</tr>
@@ -619,7 +604,7 @@
 														<h2><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
 														<?php if (isset($s->gambarSoal)) {
 														?>
-															<img id="myImg1" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
+															<img id="myImg" alt="test" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">
 														<?php
 														}
 														?>
@@ -649,7 +634,7 @@
 								<!-- </div> -->
 							</div>
 						</div>
-						<div id="visible">
+						<div id="visible" style="display:flex;">
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/back2/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Back</i></a> &nbsp;
 							<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaNext" method="post">
@@ -663,50 +648,16 @@
 								<input type="hidden" name="tempIndex" id="tempIndex2" value="">
 								<input class="btn btn-primary pull-right" type="Submit" value="Next" name="btnSubmit">
 							</form>
+							&nbsp;
+							<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/checkData/' . $tmpId); ?>">
+								<i class="fa fa-pencil">Kumpulkan</i></a>
 						</div>
-						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/checkData/' . $tmpId); ?>">
-							<i class="fa fa-pencil">Kumpulkan</i></a>
-						
-						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-							Open modal
-						</button>
-						<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/preview/' . $tmpId); ?>">
-							<i class="fa fa-pencil">Preview</i></a>
-					</div>
-					<!-- Modal -->
-					<div class="modal" id="myModal">
-						<div class="modal-dialog">
-						<div class="modal-content">
-						
-							<!-- Modal Header -->
-							<div class="modal-header">
-							<h4 class="modal-title">Modal Heading</h4>
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							</div>
-							
-							<!-- Modal body -->
-							<div class="modal-body">
-							Modal body..
-							</div>
-							
-							<!-- Modal footer -->
-							<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-							</div>
-						</div>
-						</div>
+						<!-- <a class="btn btn-danger btn-xs" href="<?= base_url('siswa/preview/' . $tmpId); ?>">
+							<i class="fa fa-pencil">Preview</i></a> -->
 					</div>
 				</div>
 				<!-- /.container-fluid -->
-
 			</div>
-			<!-- End of Main Content -->
-			<div id="myModal" class="modal">
-				<span class="close">&times;</span>
-				<img class="modal-content" id="img01">
-				<div id="caption"></div>
-			</div>
-			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
@@ -726,26 +677,6 @@
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fas fa-angle-up"></i>
 	</a>
-
-	<!-- Logout Modal-->
-	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-					<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">×</span>
-					</button>
-				</div>
-				<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-				<div class="modal-footer">
-					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-					<a class="btn btn-primary" href="login.html">Logout</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
 </body>
 
 </html>
@@ -754,13 +685,6 @@
 	function selected(val){
 		document.getElementById("answer").value=val;
 	}
-	// $(function(){
-	// 	$(document).on(".click","#testModal",function(e){
-	// 		e.preventDefault();
-	// 		$("#myModal2").modal('toggle');
-	// 	});
-	// })
-	// Get the modal
 
 	// Get the image and insert it inside the modal - use its "alt" text as a caption
 	var ja = document.getElementById('ja').value;
@@ -777,7 +701,8 @@
 	var idujian2 = document.getElementById('id_ujian2').value = idujian;
 	var tempIndex = document.getElementById('tempIndex').value;
 	var tempIndex2 = document.getElementById('tempIndex2').value = tempIndex;
-
+	var modal = document.getElementById("myModal");
+	var img = document.getElementById("myImg");
 	var img1 = document.getElementById("myImg1");
 	var img2 = document.getElementById("myImg2");
 	var img3 = document.getElementById("myImg3");
@@ -785,43 +710,37 @@
 	var img5 = document.getElementById("myImg5");
 	var modalImg = document.getElementById("img01");
 	var captionText = document.getElementById("caption");
-	// Get the <span> element that closes the modal
-	var modal = document.getElementById("myModal");
-	var span = document.getElementsByClassName("close")[0];
 
+	img.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+	img1.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+	img2.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+	img3.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+	img4.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+	img5.onclick = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+	}
+
+	var span = document.getElementsByClassName("close")[0];
 	// When the user clicks on <span> (x), close the modal
-	span.onclick = function() {
+	function testSkill(){
+		var modal = document.getElementById("myModal");
 		modal.style.display = "none";
-	}
-	if (img1 != null) {
-		img1.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-		}
-	}
-	if (img2 != null) {
-		img2.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-		}
-	}
-	if (img3 != null) {
-		img3.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-		}
-	}
-	if (img4 != null) {
-		img4.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-		}
-	}
-	if (img5 != null) {
-		img5.onclick = function() {
-			modal.style.display = "block";
-			modalImg.src = this.src;
-		}
 	}
 </script>
 <script>

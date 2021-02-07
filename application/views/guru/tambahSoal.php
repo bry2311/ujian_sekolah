@@ -174,32 +174,38 @@
                   <tr> 
                     <td>Soal </td>
                     <td><textarea id="soal" name="soal" style="width:500px"></textarea></td>
-                    <td></td>
+                    <td><input type="checkbox" name="checkSoal" value="1">
+												<label>Tunjukan Kode HTML</label><br></td>
                   </tr>
                   <tr> 
                     <td>A </td>
                     <td><textarea name="a" style="width:500px"></textarea></td>
-                    <td><input type="radio" id="kunci" name="kunci_pg" value="A" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+                    <td><input type="radio" id="kunci" name="kunci_pg" value="A" required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkA" value="1"> <label>Tunjukan Kode HTML</label></td></td>
                   </tr> 
                   <tr> 
                     <td>B </td>
                     <td><textarea name="b" style="width:500px"></textarea></td>
-										<td><input type="radio" id="kunci" name="kunci_pg" value="B" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="B" required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkB" value="1"> <label>Tunjukan Kode HTML</label></td>
                   </tr>
                   <tr> 
                     <td>C </td>
                     <td><textarea name="c" style="width:500px"></textarea></td>
-										<td><input type="radio" id="kunci" name="kunci_pg" value="C" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="C" required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkC" value="1"> <label>Tunjukan Kode HTML</label></td>
                   </tr>
                   <tr> 
                     <td>D </td>
                     <td><textarea name="d" style="width:500px"></textarea></td>
-										<td><input type="radio" id="kunci" name="kunci_pg" value="D" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="D" required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkD" value="1"> <label>Tunjukan Kode HTML</label></td>
                   </tr>
                   <tr> 
                     <td>E </td>
                     <td><textarea name="e" style="width:500px"></textarea></td>
-										<td><input type="radio" id="kunci" name="kunci_pg" value="E" required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+										<td><input type="radio" id="kunci" name="kunci_pg" value="E" required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkE" value="1"> <label>Tunjukan Kode HTML</label></td>
                   </tr>
                   <tr>
                     <td>Kelas </td>

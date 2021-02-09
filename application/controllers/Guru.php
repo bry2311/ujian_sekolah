@@ -392,7 +392,7 @@ class Guru extends CI_Controller
 		$cekD=0;
 		$cekE=0;
 		if($this->input->post('checkSoal', TRUE) != null){
-			$checkSoal = 1;
+			$cekSoal = 1;
 		}
 		if($this->input->post('checkA', TRUE) != null){
 			$cekA = 1;
@@ -514,7 +514,7 @@ class Guru extends CI_Controller
 		$cekD=0;
 		$cekE=0;
 		if($this->input->post('checkSoal', TRUE) != null){
-			$checkSoal = 1;
+			$cekSoal = 1;
 		}
 		if($this->input->post('checkA', TRUE) != null){
 			$cekA = 1;

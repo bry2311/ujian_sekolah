@@ -178,33 +178,38 @@
 										<tr>
 											<td>Soal </td>
 											<td><textarea name="soal" style="width:500px"><?php echo $soal->soal; ?></textarea></td>
-											<td></td>
+											<td><input type="checkbox" name="checkSoal" value="1"> <label>Tunjukan Kode HTML</label></td>
 										</tr>
 										<tr>
 											<td>A </td>
 											<td><textarea name="a" style="width:500px"><?php echo $soal->a; ?></textarea></td>
-											<td><input type="radio" id="kunci" name="kunci_pg" value="A" <?php echo $soal->kunci_pg == "A" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+											<td><input type="radio" id="kunci" name="kunci_pg" value="A" <?php echo $soal->kunci_pg == "A" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkA" value="1"> <label>Tunjukan Kode HTML</label></td>
 										</tr>
 										<tr>
 											<td>B </td>
 											<td><textarea name="b" style="width:500px"><?php echo $soal->b; ?></textarea></td>
-											<td><input type="radio" id="kunci" name="kunci_pg" value="B" <?php echo $soal->kunci_pg == "B" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+											<td><input type="radio" id="kunci" name="kunci_pg" value="B" <?php echo $soal->kunci_pg == "B" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkB" value="1"> <label>Tunjukan Kode HTML</label></td>
 										</tr>
 										<tr>
 											<td>C </td>
 											<td><textarea name="c" style="width:500px"><?php echo $soal->c; ?></textarea></td>
-											<td><input type="radio" id="kunci" name="kunci_pg" value="C" <?php echo $soal->kunci_pg == "C" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+											<td><input type="radio" id="kunci" name="kunci_pg" value="C" <?php echo $soal->kunci_pg == "C" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkC" value="1"> <label>Tunjukan Kode HTML</label></td>
 										</tr>
 										<tr>
 											<td>D </td>
 											<td><textarea name="d" style="width:500px"><?php echo $soal->d; ?></textarea></td>
-											<td><input type="radio" id="kunci" name="kunci_pg" value="D" <?php echo $soal->kunci_pg == "D" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+											<td><input type="radio" id="kunci" name="kunci_pg" value="D" <?php echo $soal->kunci_pg == "D" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkD" value="1"> <label>Tunjukan Kode HTML</label></td>
 
 										</tr>
 										<tr>
 											<td>E </td>
 											<td><textarea name="e" style="width:500px"><?php echo $soal->e; ?></textarea></td>
-											<td><input type="radio" id="kunci" name="kunci_pg" value="E" <?php echo $soal->kunci_pg == "E" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label></td>
+											<td><input type="radio" id="kunci" name="kunci_pg" value="E" <?php echo $soal->kunci_pg == "E" ? "checked" : ""; ?> required> &nbsp;<label for="kunci">Kunci Jawaban</label><br>
+										<input type="checkbox" name="checkE" value="1"> <label>Tunjukan Kode HTML</label></td>
 
 										</tr>
 										<tr>

@@ -12,12 +12,33 @@
 	<title>CBT Talenta School</title>
 
 	<!-- Custom fonts for this template-->
-	<link href="<?= base_url() ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<link href="<?= base_url() ?>/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+	<link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
 	<!-- Custom styles for this template-->
 	<link href="<?= base_url() ?>/css/sb-admin-2.min.css" rel="stylesheet">
-
+	<link href="<?= base_url() ?>/selectator/fm.selectator.jquery.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:700,400,300" rel="stylesheet" type="text/css">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css" rel="stylesheet">
+	<style>
+		#select1,
+		#select1_ajax,
+		#select2,
+		#select3,
+		#select7,
+		#select5,
+		#select6 {
+			width: 350px;
+			padding: 7px 10px;
+		}
+		div.scrollmenu {
+			overflow: auto;
+			white-space: nowrap;
+		}
+	</style>
+	<script src="<?= base_url() ?>/vendor/ckeditorF/ckeditor.js"></script>
+	<script src="<?= base_url() ?>/selectator/jquery-1.11.0.min.js"></script>
+	<script src="<?= base_url() ?>/selectator/fm.selectator.jquery.js"></script>
 </head>
 
 <body id="page-top">
@@ -54,13 +75,13 @@
 					<span>Daftar Gambar</span>
 				</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item active">
 				<a class="nav-link" href="<?= base_url(); ?>guru/dataSoal">
 					<i class="fas fa-fw fa-cog"></i>
 					<span>Daftar Soal</span>
 				</a>
 			</li>
-			<li class="nav-item active">
+			<li class="nav-item">
 				<a class="nav-link" href="<?= base_url(); ?>guru/dataUjian">
 					<i class="fas fa-fw fa-database"></i>
 					<span>Daftar Ujian</span>
@@ -131,51 +152,32 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Detail Ujian</h1>
+						<h1 class="h3 mb-0 text-gray-800">Ubah Nomer Soal</h1>
 					</div>
 					<!-- Content Row -->
 					<div class="row">
 						<!-- Approach -->
 						<div class="card shadow mb-4" style="width:100%">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Detail Ujian <?php echo $ujian->jenis . " ( " . count($soal_ujian) . " )"; ?></h6>
+								<h6 class="m-0 font-weight-bold text-primary">Ubah Nomer Soal</h6>
 							</div>
 							<div class="card-body">
-								<form class="user" action="<?php echo base_url(); ?>guru/simpanUbahUjian" method="post">
+								<div class="scrollmenu">	
+								<form class="user" action="<?php echo base_url(); ?>guru/simpanUbahNomer" method="post">
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-										<thead>
-											<tr>
-												<th>No Soal</th>
-												<th>Action</th>
-												<th>Materi</th>
-												<th>K.d.</th>
-												<th>Soal</th>
-											</tr>
-										</thead>
-										<tbody>
-											<?php
-											$no = 1;
-											foreach ($soal_ujian as $su) {
-											?>
-												<tr>
-													<td><?php echo $su->no_soal; ?></td>
-													<td>
-														<a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoal/' . $su->id . '/' . $ujian->id); ?>" onclick="return confirm('Yakin akan menghapus data ini?');">
-															<i class="fa fa-trash-o">Hapus</i></a>
-														<a class="btn btn-warning btn-xs" href="<?= base_url('guru/editNomer/'.$su->id.'/'.$ujian->id);?>" >
-														<i class="fa fa-trash-o">Edit No</i></a>
-													</td>
-													<td><?php echo $su->materi; ?></td>
-													<td><?php echo $su->kd; ?></td>
-													<td><?php echo $su->soal; ?></td>
-												</tr>
-											<?php
-												$no++;
-											}
-											?>
-										</tbody>
+										<tr>
+											<td>Nomer </td>
+											<td><input type="number" value="<?php echo $soal_ujian->no_soal; ?>" name="no_soal" min="1"></td>
+											<td></td>
+										</tr>
+										<tr>
+											<td colspan="3"><input class="btn btn-primary pull-right" type="submit" value="Submit" name="btnSubmit"></td>
+										</tr>
 									</table>
+									<input type="hidden" name="id" value="<?php echo $soal_ujian->id; ?>">
+									<input type="hidden" name="id_ujian" value="<?php echo $id_ujian; ?>">
 								</form>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -228,10 +230,19 @@
 </body>
 
 </html>
-
+<script>
+	CKEDITOR.replace('soal');
+	CKEDITOR.replace('a');
+	CKEDITOR.replace('b');
+	CKEDITOR.replace('c');
+	CKEDITOR.replace('d');
+	CKEDITOR.replace('e');
+	CKEDITOR.replace('kunci_jawaban');
+	CKEDITOR.config.height = 600;
+	CKEDITOR.config.width = 1000;
+</script>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<?= base_url() ?>/vendor/jquery/jquery.min.js"></script>
 <script src="<?= base_url() ?>/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
@@ -239,10 +250,3 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<?= base_url() ?>/js/sb-admin-2.min.js"></script>
-
-<!-- Page level plugins -->
-<script src="<?= base_url() ?>/vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url() ?>/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="<?= base_url() ?>/js/demo/datatables-demo.js"></script>

@@ -161,6 +161,7 @@
                   <thead>
                     <tr>
                       <th>No Soal</th>
+                      <th>Action</th>
                       <th>Materi</th>
                       <th>K.d.</th>
                       <th>Soal</th>
@@ -170,7 +171,6 @@
                       <th>D</th>
                       <th>E</th>
                       <th>Kunci</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -182,6 +182,12 @@
                     ?>
                     <tr>
                       <td><?php echo $su->no_soal;?></td>
+                      <td> 
+                          <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoalGabungan/'.$su->id.'/'.$ujian->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">
+                          <i class="fa fa-trash-o">Hapus</i></a>
+													<a class="btn btn-warning btn-xs" href="<?= base_url('guru/editNomerGabungan/'.$su->id.'/'.$ujian->id);?>" >
+                          <i class="fa fa-trash-o">Edit No</i></a>
+                      </td>
                       <td><?php echo $s->materi;?></td>
                       <td><?php echo $s->kd;?></td>
                       <td><?php echo htmlspecialchars($s->soal);?></td>
@@ -191,10 +197,6 @@
                       <td><?php echo htmlspecialchars($s->d);?></td>
                       <td><?php echo htmlspecialchars($s->e);?></td>
                       <td><?php echo htmlspecialchars($s->kunci_jawaban);?></td>
-                      <td> 
-                          <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoalGabungan/'.$su->id.'/'.$ujian->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">
-                          <i class="fa fa-trash-o">Hapus</i></a>
-                      </td>
                     </tr>
                     <?php
                             $no++;

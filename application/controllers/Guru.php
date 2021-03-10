@@ -1011,6 +1011,52 @@ class Guru extends CI_Controller
 			$this->load->view('guru/detailUjianIsian', $data);
 		}
 	}
+	public function editNomer($id, $idUjian)
+	{
+		$this->isAnyLogin();
+		$data['ujian'] = $this->M_ujian->getUjianByID($idUjian);
+		$data['id_ujian'] = $idUjian;
+		$a = $this->M_ujian->getUjianByID($idUjian);
+		if ($a->jenis == "Pilihan Ganda") {
+			$data['soal_ujian'] = $this->M_ujian_has_soal->getUjianHasSoalById($id);
+			$this->load->view('guru/ubahNomer', $data);
+		} else {
+			$data['soal_ujian'] = $this->M_ujian_has_soal->getUjianHasSoalById($id);
+			$this->load->view('guru/ubahNomer', $data);
+		}
+	}
+	public function editNomerGabungan($id, $idUjian)
+	{
+		$this->isAnyLogin();
+		$data['ujian'] = $this->M_ujian->getUjianByID($idUjian);
+		$data['id_ujian'] = $idUjian;
+		$data['soal_ujian'] = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalById($id);
+		$this->load->view('guru/ubahNomerGabungan', $data);
+	}
+	public function simpanUbahNomer()
+	{
+		$this->isAnyLogin();
+		$id = $this->input->post('id', TRUE);
+		$idUjian = $this->input->post('id_ujian', TRUE);
+		$data = array(
+			'id' => $id,
+			'no_soal' => $this->input->post('no_soal', TRUE)
+		);
+		$this->M_ujian_has_soal->editUjianHasSoal($id,$data);
+		redirect('guru/detailUjian/' . $idUjian, 'refresh');
+	}
+	public function simpanUbahNomerGabungan()
+	{
+		$this->isAnyLogin();
+		$id = $this->input->post('id', TRUE);
+		$idUjian = $this->input->post('id_ujian', TRUE);
+		$data = array(
+			'id' => $id,
+			'no_soal' => $this->input->post('no_soal', TRUE)
+		);
+		$this->M_ujian_gabungan_has_soal->editUjianGabunganHasSoal($id,$data);
+		redirect('guru/detailUjianGabungan/' . $idUjian, 'refresh');
+	}
 	public function hapusUjianHasSoal($id, $id2)
 	{
 		$this->isAnyLogin();

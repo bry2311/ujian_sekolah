@@ -174,6 +174,8 @@
                       <td> 
                           <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoal/'.$su->id.'/'.$ujian->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">
                           <i class="fa fa-trash-o">Hapus</i></a>
+													<a class="btn btn-warning btn-xs" href="<?= base_url('guru/editNomer/'.$su->id.'/'.$ujian->id);?>" >
+                          <i class="fa fa-trash-o">Edit No</i></a>
                       </td>
                       <td><?php echo $su->materi;?></td>
                       <td><?php echo $su->kd;?></td>

@@ -161,15 +161,10 @@
                   <thead>
                     <tr>
                       <th>No Soal</th>
+                      <th>Action</th>
                       <th>Materi</th>
                       <th>K.d.</th>
                       <th>Soal</th>
-                      <th>Kunci 1</th>
-                      <th>Kunci 2</th>
-                      <th>Kunci 3</th>
-                      <th>Kunci 4</th>
-                      <th>Kunci 5</th>
-                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -181,18 +176,15 @@
                     ?>
                     <tr>
                       <td><?php echo $su->no_soal;?></td>
-                      <td><?php echo $s->materi;?></td>
-                      <td><?php echo $s->kd;?></td>
-                      <td><?php echo $s->soal;?></td>
-                      <td><?php echo $s->kunci_jawaban1;?></td>
-                      <td><?php echo $s->kunci_jawaban2;?></td>
-                      <td><?php echo $s->kunci_jawaban3;?></td>
-                      <td><?php echo $s->kunci_jawaban4;?></td>
-                      <td><?php echo $s->kunci_jawaban5;?></td>
                       <td> 
                           <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianHasSoalGabungan/'.$su->id.'/'.$ujian->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">
                           <i class="fa fa-trash-o">Hapus</i></a>
+													<a class="btn btn-warning btn-xs" href="<?= base_url('guru/editNomerGabungan/'.$su->id.'/'.$ujian->id);?>" >
+                          <i class="fa fa-trash-o">Edit No</i></a>
                       </td>
+                      <td><?php echo $s->materi;?></td>
+                      <td><?php echo $s->kd;?></td>
+                      <td><?php echo $s->soal;?></td>
                     </tr>
                     <?php
                             $no++;

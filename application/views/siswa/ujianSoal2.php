@@ -599,9 +599,9 @@
 													}
 												?>
 													<div class="card-body">
-														<h2 align="center"><?php echo $s->materi; ?></h2>
+														<h3 align="center"><?php echo $s->materi; ?></h3>
 														<br>
-														<h2><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h2>
+														<h3><?php echo $tempIndex + 1 . ". &nbsp;" . $s->soal; ?></h3>
 														<?php if (isset($s->gambarSoal)) {
 														?>
 															<img id="myImg" alt="test" src="<?php echo base_url(); ?>/assets/img/<?php echo $s->gambarSoal; ?>" class="pic">

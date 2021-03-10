@@ -26,10 +26,11 @@
 	<script type="text/javascript">
 		function calculate(id, idSoal, idUjian) {
 			var number = document.getElementById(id).value;
-			var url = "<?= base_url('guru/submitScore/:slug/:slug2/:slug3'); ?>";
+			var url = "<?= base_url('guru/submitScore/:slug/:slug2/:slug3/:slug4'); ?>";
 			url = url.replace(':slug', number);
 			url = url.replace(':slug2', idSoal);
 			url = url.replace(':slug3', idUjian);
+			url = url.replace(':slug4', <?php echo $nik;?>);
 			window.location.href = url;
 		}
 

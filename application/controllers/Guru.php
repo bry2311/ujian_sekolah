@@ -1041,7 +1041,7 @@ class Guru extends CI_Controller
 
 	public function shareUjian($id)
 	{
-		echo "<script>alert('Copy link ini = http://talentaschool.sch.id:8060/ujian_sekolah/guru/shareUjian/" . $id . "')</script>";
+		// echo "<script>alert('Copy link ini = http://talentaschool.sch.id:8060/ujian_sekolah/guru/shareUjian/" . $id . "')</script>";
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
 		$a = $this->M_ujian->getUjianByID($id);
 		if ($a->jenis == "Pilihan Ganda") {
@@ -1050,6 +1050,18 @@ class Guru extends CI_Controller
 			$data['soal_ujian'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
 		}
 		$this->load->view('share/ujian', $data);
+	}
+	public function shareUjianGabungan($id)
+	{
+		// echo "<script>alert('Copy link ini = http://talentaschool.sch.id:8060/ujian_sekolah/guru/shareUjian/" . $id . "')</script>";
+		$data['ujian'] = $this->M_ujian->getUjianByID($id);
+		$data['soal_ujian'] = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
+		$test = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
+		$data['soal_ujian_isian'] = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+		$a = $this->M_ujian->getUjianByID($id);
+		$data['soal'] = $this->M_soalpg->getSoalpg();
+		$data['soalisian'] = $this->M_soalisian->getSoalIsian();
+		$this->load->view('share/ujianGabungan', $data);
 	}
 	//End Ujian
 
@@ -2696,19 +2708,19 @@ class Guru extends CI_Controller
 						$sheet1->getStyle('B'. $tempI)->getAlignment()->setVertical('top');
 						$sheet1->setCellValue('B' . $tempI, strip_tags($soalPg[$i - $j]->soal));
 						$sheet1->mergeCells('B'.$tempI.':H'.$tempI);
-						if(isset($soalPg[$i - $j]->gambarSoal)){
-							$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-							$drawing->setName('logo');
-							$drawing->setDescription('logo');
-							$drawing->setPath('assets/img/'.$soalPg[$i - $j]->gambarSoal); // put your path and image here
-							$drawing->setCoordinates('J'. $tempI);
-							$drawing->setOffsetX(10);
-							$drawing->setOffsetY(10);
-							$drawing->setHeight(110);
-							$drawing->setWidth(110);
-							$drawing->getShadow()->setVisible(true);
-							$drawing->setWorksheet($sheet1);
-						}
+						// if(isset($soalPg[$i - $j]->gambarSoal)){
+						// 	$drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
+						// 	$drawing->setName('logo');
+						// 	$drawing->setDescription('logo');
+						// 	$drawing->setPath('assets/img/'.$soalPg[$i - $j]->gambarSoal); // put your path and image here
+						// 	$drawing->setCoordinates('J'. $tempI);
+						// 	$drawing->setOffsetX(10);
+						// 	$drawing->setOffsetY(10);
+						// 	$drawing->setHeight(110);
+						// 	$drawing->setWidth(110);
+						// 	$drawing->getShadow()->setVisible(true);
+						// 	$drawing->setWorksheet($sheet1);
+						// }
 						$tempI += 1;
 						$sheet1->setCellValue('B' . $tempI, 'A. ' . strip_tags($js->ja));
 						if (trim(strtolower(strip_tags($soalPg[$i - $j]->kunci_jawaban))) == trim(strtolower(strip_tags($js->ja)))) {
@@ -5113,7 +5125,7 @@ class Guru extends CI_Controller
 		$this->load->view('guru/nilaiUjian', $data);
 	}
 
-	public function submitScore($score, $idSoal, $idUjian)
+	public function submitScore($score, $idSoal, $idUjian, $nik)
 	{
 		$this->isAnyLogin();
 		$data = [
@@ -5121,7 +5133,6 @@ class Guru extends CI_Controller
 			'status' => 'Sudah dinilai',
 		];
 		$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($idSoal, $data);
-		$nik = $this->session->nik;
 		redirect('guru/nilaiUjian/' . $idUjian . '/' . $nik, 'refresh');
 	}
 

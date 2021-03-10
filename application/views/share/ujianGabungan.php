@@ -73,9 +73,6 @@
 									<dt>Soal</dt>
 								</dl>
 								<div style="width: 100%; overflow-x:auto;">
-									<?php
-									if ($ujian->jenis == "Pilihan Ganda") {
-									?>
 										<table style="width:100%;">
 											<thead>
 												<th>No</th>
@@ -95,15 +92,15 @@
 												foreach ($soal_ujian as $su) {
 												?>
 													<tr>
-														<td><?php echo $su->no_soal; ?></td>
+														<td><?php echo $no; ?></td>
 														<td><?php echo $su->materi; ?></td>
 														<td><?php echo $su->kd; ?></td>
-														<td><?php echo $s->checkSoal ? htmlspecialchars($s->soal) : $s->soal; ?></td>
-														<td><?php echo $s->checkA ? htmlspecialchars($s->a) : $s->a; ?></td>
-														<td><?php echo $s->checkB ? htmlspecialchars($s->b) : $s->b; ?></td>
-														<td><?php echo $s->checkC ? htmlspecialchars($s->c) : $s->c; ?></td>
-														<td><?php echo $s->checkD ? htmlspecialchars($s->d) : $s->d; ?></td>
-														<td><?php echo $s->checkE ? htmlspecialchars($s->e) : $s->e; ?></td>
+														<td><?php echo $su->checkSoal ? htmlspecialchars($su->soal) : $su->soal; ?></td>
+														<td><?php echo $su->checkA ? htmlspecialchars($su->a) : $su->a; ?></td>
+														<td><?php echo $su->checkB ? htmlspecialchars($su->b) : $su->b; ?></td>
+														<td><?php echo $su->checkC ? htmlspecialchars($su->c) : $su->c; ?></td>
+														<td><?php echo $su->checkD ? htmlspecialchars($su->d) : $su->d; ?></td>
+														<td><?php echo $su->checkE ? htmlspecialchars($su->e) : $su->e; ?></td>
 														<td><?php echo $su->kunci_jawaban; ?></td>
 													</tr>
 												<?php
@@ -113,30 +110,25 @@
 											</tbody>
 										</table>
 								</div>
-							<?php
-									} else if ($ujian->jenis == "Isian") {
-							?>
-								<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+								<table class="table table-bordered"  width="100%" cellspacing="0">
 									<thead>
 										<tr>
 											<th>No Soal</th>
 											<th>Materi</th>
 											<th>K.d.</th>
 											<th>Soal</th>
-											<th>Kunci </th>
 										</tr>
 									</thead>
 									<tbody>
 										<?php
 										$no = 1;
-										foreach ($soal_ujian as $su) {
+										foreach ($soal_ujian_isian as $su) {
 										?>
 											<tr>
-												<td><?php echo $su->no_soal; ?></td>
+												<td><?php echo $no; ?></td>
 												<td><?php echo $su->materi; ?></td>
 												<td><?php echo $su->kd; ?></td>
 												<td><?php echo $su->soal; ?></td>
-												<td><?php echo $su->kunci_jawaban1; ?></td>
 											</tr>
 										<?php
 											$no++;
@@ -144,9 +136,6 @@
 										?>
 									</tbody>
 								</table>
-							<?php
-									}
-							?>
 							</div>
 						</div>
 					</div>

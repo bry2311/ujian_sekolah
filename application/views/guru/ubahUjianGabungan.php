@@ -146,7 +146,7 @@
                   <h6 class="m-0 font-weight-bold text-primary">Ubah Soal</h6>
                 </div>
                 <div class="card-body">
-                <form class="user" action="<?php echo base_url();?>guru/simpanUbahUjian" method="post">
+                <form class="user" action="<?php echo base_url();?>guru/simpanUbahUjianGabungan" method="post">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <tr> 
                     <td>Nama </td>

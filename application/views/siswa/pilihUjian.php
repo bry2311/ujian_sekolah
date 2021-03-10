@@ -113,6 +113,11 @@
 								<h6 class="m-0 font-weight-bold text-primary">Silahkan pilih ujian yang akan kamu ikuti Daftar Ujian</h6>
 							</div>
 							<div class="card-body">
+								<?php 
+									date_default_timezone_set('Asia/Jakarta');
+									$jamSkrg = date('y-m-d h:i:s');
+
+								?>
 								<form class="user" action="<?php echo base_url(); ?>siswa/informasiUjian" method="post">
 									<table style="width:100%;">
 										<tr>
@@ -123,9 +128,19 @@
 													<?php
 													if (isset($daftarUjian)) {
 														for ($i = 0; $i < count($daftarUjian); $i++) {
-													?>
-															<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
-													<?php
+															if($daftarUjian[$i]->tipe_ujian != "Ulangan Harian"){
+																$waktuUjian =  date('y-m-d h:i:s', strtotime($daftarUjian[$i]->waktu_mulai));
+
+																if(strtotime($waktuUjian) <= strtotime($jamSkrg)){
+															?>
+																<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
+															<?php
+																}
+															}else{
+															?>
+																<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
+															<?php
+															}
 														}
 													}
 													?>

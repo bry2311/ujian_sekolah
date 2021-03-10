@@ -21,6 +21,8 @@
 	date_default_timezone_set('Asia/Jakarta');
 	$tmpId = $ujian->id;
 	?>
+	<script src="<?= base_url() ?>/vendor/ckeditorF/ckeditor.js"></script>
+
 	<script type="text/javascript">
 		// Set the date we're counting down to 
 		var wktu = new Date("<?php echo $this->session->waktu; ?>").getTime();
@@ -592,11 +594,20 @@
 													}
 													?>
 													<br>
-													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaGabungan" method="post">
+													<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaGabungan" method="post" enctype="multipart/form-data">
 														<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini .."><?php if ($jawaban_isian != null and $tempJawaban != -1) {
 																																					echo $jawaban_isian[$tempJawaban]->jawaban . "";
 																																				} ?></textarea>
-														<div id="visible" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+														<div id="visible" style="margin-top:20px">
+														<h3>Upload Gambar (jika perlu): </h3><input type="file" class="btn btn-warning pull-right" name="gambar" value="Upload"></br></br>
+															<?php
+																if($jawaban_isian != null and $jawaban_isian[$tempJawaban]->gambar != null){
+															?>
+															<image  src='../../..//assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar;?>' style="width:100px;heigh:100px"></br></br>					
+															<?php
+																}
+															?>
+														<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 														</div>
 														<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
 														<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
@@ -723,6 +734,9 @@
 			modalImg.src = this.src;
 		}
 	}
+	CKEDITOR.replace('jawabanSiswa');
+	CKEDITOR.config.height = 600;
+	CKEDITOR.config.width = 1000;
 </script>
 
 <!-- Bootstrap core JavaScript-->

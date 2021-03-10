@@ -23,6 +23,15 @@
       white-space: nowrap;
     }
     </style> 
+			<script>
+		function copyLink(element, $id) {
+			var $temp = $("<input>");
+			$("body").append($temp);
+			$temp.val($(element).text() + $id).select();
+			document.execCommand("copy");
+			$temp.remove();
+		}
+	</script>
 </head>
  
 <body id="page-top">
@@ -164,6 +173,9 @@
                   <i class="fa fa-plus"></i> Tambah Ujian</a>                 
                 <div class="card-body">
                 <div class="scrollmenu">
+								<div style="display:none">
+										<p id="testSkill">http://talentaschool.sch.id:8060/ujian_sekolah/guru/shareUjianGabungan/</p>
+									</div>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
@@ -194,6 +206,7 @@
                           <i class="fa fa-pencil">Detail</i></a> 
 													<a class="btn btn-warning btn-xs" href="<?= base_url('guru/testUjian/'.$u->id);?>">
                           <i class="fa fa-pencil">Test Ujian</i></a> 
+													<button class="btn btn-danger btn-xs" onclick="copyLink('#testSkill',<?= $u->id; ?>)">Bagikan</button>
                           <a class="btn btn-primary btn-xs" href="<?= base_url('guru/ubahUjianGabungan/'.$u->id);?>">
                           <i class="fa fa-pencil">Edit</i></a> 
                           <a class="btn btn-danger btn-xs" href="<?= base_url('guru/hapusUjianGabungan/'.$u->id);?>" onclick="return confirm('Yakin akan menghapus data ini?');">

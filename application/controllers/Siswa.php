@@ -446,6 +446,7 @@ class Siswa extends CI_Controller
 		$data['ujian'] = $this->M_ujian->getUjianByID($id);
 		$nik = $this->session->nik;
 		$data['jawaban'] = $this->M_jawaban_siswa->getJawabanSiswaByNik($nik, $id);
+		// var_dump($this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik));exit;
 		$data['jawaban_isian'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
 		$data['openModal'] = "false";
 		if ($tempIndex >= $max - 1) {
@@ -678,6 +679,26 @@ class Siswa extends CI_Controller
 			if ($jawaban != NULL) {
 				$nik = $this->session->nik;
 				$check = $this->M_jawaban_siswa_isian->checkJawabanSiswaIsian($id_soal, $id_ujian, $nik);
+				$config['upload_path'] = './assets/img';
+				$config['allowed_types'] = 'gif|jpg|png|jpeg';
+				$config['quality'] = '80%';
+				$config['max_size'] = 4196;
+				$config['width'] = 150;
+				$config['heigth'] = 150;
+		
+				$this->load->library('upload', $config);
+				$namaGambar = null;
+				if (!$this->upload->do_upload('gambar')) {
+					$error = array('error' => $this->upload->display_errors());
+				} else {
+					$temp = $this->upload->data();
+					$data = array(
+						'nama' => $this->input->post('nama', TRUE),
+						'link' => $temp['file_name'],
+						'nik' => $this->session->nik,
+					);
+					$namaGambar = $temp['file_name'];
+				}
 				if ($check == null) {
 					$data = array(
 						'id_soal' => $id_soal,
@@ -685,6 +706,7 @@ class Siswa extends CI_Controller
 						'nik' => $nik,
 						'jawaban' => $jawaban,
 						'nomor_soal' => $tempIndex + 1,
+						'gambar' => $namaGambar
 					);
 					$this->M_jawaban_siswa_isian->add($data);
 				} else {
@@ -693,6 +715,7 @@ class Siswa extends CI_Controller
 						'id_ujian' => $id_ujian,
 						'nik' => $nik,
 						'jawaban' => $this->input->post('jawabanSiswa', TRUE),
+						'gambar' => $namaGambar
 					);
 					$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($check->id, $data);
 				}
@@ -805,6 +828,27 @@ class Siswa extends CI_Controller
 		if ($jawaban != NULL) {
 			$nik = $this->session->nik;
 			$check = $this->M_jawaban_siswa_isian->checkJawabanSiswaIsian($id_soal, $id_ujian, $nik);
+
+			$config['upload_path'] = './assets/img';
+			$config['allowed_types'] = 'gif|jpg|png|jpeg';
+			$config['quality'] = '80%';
+			$config['max_size'] = 4196;
+			$config['width'] = 150;
+			$config['heigth'] = 150;
+	
+			$this->load->library('upload', $config);
+			$namaGambar = null;
+			if (!$this->upload->do_upload('gambar')) {
+				$error = array('error' => $this->upload->display_errors());
+			} else {
+				$temp = $this->upload->data();
+				$data = array(
+					'nama' => $this->input->post('nama', TRUE),
+					'link' => $temp['file_name'],
+					'nik' => $this->session->nik,
+				);
+				$namaGambar = $temp['file_name'];
+			}
 			if ($check == null) {
 				$data = array(
 					'id_soal' => $id_soal,
@@ -812,6 +856,7 @@ class Siswa extends CI_Controller
 					'nik' => $nik,
 					'jawaban' => $jawaban,
 					'nomor_soal' => $tempIndex + 1,
+					'gambar' => $namaGambar
 				);
 				$this->M_jawaban_siswa_isian->add($data);
 			} else {
@@ -820,12 +865,36 @@ class Siswa extends CI_Controller
 					'id_ujian' => $id_ujian,
 					'nik' => $nik,
 					'jawaban' => $this->input->post('jawabanSiswa', TRUE),
+					'gambar' => $namaGambar
 				);
 				$this->M_jawaban_siswa_isian->editJawabanSiswaIsian($check->id, $data);
 			}
 			$this->next2($id_ujian, $tempIndex);
 		} else {
 			$this->next2($id_ujian, $tempIndex);
+		}
+	}
+	public function uploadGambar()
+	{
+		$this->isAnyLogin();
+		$config['upload_path'] = './assets/img';
+		$config['allowed_types'] = 'gif|jpg|png|jpeg';
+		$config['quality'] = '80%';
+		$config['max_size'] = 4196;
+		$config['width'] = 150;
+		$config['heigth'] = 150;
+
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('gambar')) {
+			$error = array('error' => $this->upload->display_errors());
+		} else {
+			$temp = $this->upload->data();
+			$data = array(
+				'nama' => $this->input->post('nama', TRUE),
+				'link' => $temp['file_name'],
+				'nik' => $this->session->nik,
+			);
 		}
 	}
 	public function addJawabanSiswaIsian3()

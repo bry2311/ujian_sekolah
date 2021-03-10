@@ -609,15 +609,25 @@
 														}
 														?>
 														<br>
-														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post">
+														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post" enctype="multipart/form-data">
 															<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini ..">
 															<?php
-																				if ($jawaban_isian != null and $tempJawaban != -1) {
-																					echo $jawaban_isian[$tempJawaban]->jawaban;
-																				}
+																if ($jawaban_isian != null and $tempJawaban != -1) {
+																	echo $jawaban_isian[$tempJawaban]->jawaban;
+																}
 															?>
                           									</textarea>
-															<div id="aaaa" style="margin-top:20px"><input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
+															
+															<div id="aaaa" style="margin-top:20px">
+															<h3>Upload Gambar (jika perlu): </h3><input type="file" class="btn btn-warning pull-right" name="gambar" value="Upload"></br></br>
+															<?php
+																if($jawaban_isian != null and $jawaban_isian[$tempJawaban]->gambar != null){
+															?>
+															<image  src='../assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar;?>' style="width:100px;heigh:100px"></br></br>					
+															<?php
+																}
+															?>
+															<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 															</div>
 															<input type="hidden" name="id_soal" value="<?php echo $s->id; ?>">
 															<input type="hidden" name="id_ujian" value="<?php echo $tmpId; ?>">
@@ -637,6 +647,9 @@
 						<div id="visible" style="display:flex;">
 							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/back2/' . $tmpId . "/" . $tempIndex); ?>">
 								<i class="fa fa-pencil">Back</i></a> &nbsp;
+							<?php
+								if ($ujian->jenis == "Pilihan Ganda") {
+							?>
 							<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaNext" method="post">
 								<input type="hidden" name="answer" id="answer" value=''>
 								<input type="hidden" name="ja" id="ja2" value=''>
@@ -648,6 +661,14 @@
 								<input type="hidden" name="tempIndex" id="tempIndex2" value="">
 								<input class="btn btn-primary pull-right" type="Submit" value="Next" name="btnSubmit">
 							</form>
+							<?php
+								}else{
+							?>
+							<a class="btn btn-primary btn-xs" href="<?= base_url('siswa/next2/' . $tmpId . "/" . $tempIndex); ?>">
+								<i class="fa fa-pencil">Next</i></a>
+							<?php
+								}
+							?>
 							&nbsp;
 							<a class="btn btn-danger btn-xs" href="<?= base_url('siswa/checkData/' . $tmpId); ?>">
 								<i class="fa fa-pencil">Kumpulkan</i></a>

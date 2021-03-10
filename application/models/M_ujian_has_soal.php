@@ -18,14 +18,14 @@ class M_ujian_has_soal extends CI_Model {
         return $query->result();
     }
     public function getUjianHasSoalByIdUjian($id){  
-        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban, s.kunci_pg, s.checkSoal FROM ujian_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id ORDER BY us.no_soal");
+        $query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban, s.kunci_pg, s.checkSoal, s.checkA, s.checkB, s.checkC, s.checkD, s.checkE FROM ujian_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id ORDER BY us.no_soal");
         return $query->result();
     }
     public function getUjianHasSoalByIdUjian3($id){  
         $query = $this->db->query("SELECT DISTINCT id_soal FROM ujian_has_soal WHERE id_ujian = $id");
         return $query->result();
     }
-    public function getCountSoalByIdUjian($id){ 
+    public function getCountSoalByIdUjian($id){
         $query = $this->db->query("SELECT id FROM ujian_has_soal WHERE id_ujian = $id");
         return $query->num_rows();
     }

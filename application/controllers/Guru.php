@@ -5138,9 +5138,15 @@ class Guru extends CI_Controller
 		$data['nik'] = $nik;
 		$data['nilai'] = $this->M_nilai->getNilaiByIdUjian($id);
 		$data['ujian'] = $this->M_ujian->getUjianById($id);
+		$ujian = $this->M_ujian->getUjianById($id);
+		if($ujian->tipe == "Gabungan"){
+			$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+		}else{
+			$soalIsian = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
+		}
 		$data['soal'] = $this->M_ujian_has_soal->getUjianHasSoalIsianByIdUjian($id);
 		$data['jawaban'] = $this->M_jawaban_siswa_isian->getJawabanSiswaIsianByNik($id, $nik);
-		$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+		// $soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
 		$data['soalGabungan'] = $soalIsian;
 		$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
 		$jawabanPg = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nik, $id);

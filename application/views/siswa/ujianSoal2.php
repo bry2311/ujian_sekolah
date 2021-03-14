@@ -612,7 +612,7 @@
 														<form class="user" action="<?php echo base_url(); ?>siswa/addJawabanSiswaIsian2" method="post" enctype="multipart/form-data">
 															<textarea name="jawabanSiswa" style="width:80%" placeholder="Tulis jawaban disini ..">
 															<?php
-																if ($jawaban_isian != null and $tempJawaban != -1) {
+																if ($jawaban_isian != null && $tempJawaban != -1) {
 																	echo $jawaban_isian[$tempJawaban]->jawaban;
 																}
 															?>
@@ -621,11 +621,13 @@
 															<div id="aaaa" style="margin-top:20px">
 															<h3>Upload Gambar (jika perlu): </h3><input type="file" class="btn btn-warning pull-right" name="gambar" value="Upload"></br></br>
 															<?php
-																if($jawaban_isian != null and $jawaban_isian[$tempJawaban]->gambar != null){
+																if($jawaban_isian != null ){
+																	if($tempJawaban !== -1 && $jawaban_isian[$tempJawaban]->gambar != null){
 															?>
 															<image  src='../assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar;?>' style="width:100px;heigh:100px"></br></br>					
 															<?php
 																}
+															}
 															?>
 															<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 															</div>

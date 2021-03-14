@@ -189,6 +189,7 @@
 												<th>Soal</th>
 												<th>Jawaban</th>
 												<th>Status</th>
+												<th>File</th>
 												<th>Nilai Per soal</th>
 												<th>Maximum</th>
 											</tr>
@@ -206,12 +207,19 @@
 														<tr>
 															<td><?php echo $no; ?></td>
 															<td>
-																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax; ?>" name="nilaiSoal" value="0">
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax; ?>" name="nilaiSoal" value="<?php echo $j->nilai_point; ?>">
 																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
 															</td>
 															<td><?php echo $s->soal; ?></td>
 															<td><?php echo $j->jawaban; ?></td>
 															<td><?php echo $j->status; ?></td>
+															<td>
+															<?php if($j->gambar != null){?> 
+															<a href="../../../assets/img/<?php echo $j->gambar; ?>">Buka</a>
+															<?php }else{ ?>
+															-
+															<?php }; ?>
+															</td>
 															<td><?php echo $j->nilai_point; ?></td>
 															<td><?php echo $s->bobot; ?></td>
 														</tr>
@@ -225,6 +233,7 @@
 														<td>-</td>
 														<td><?php echo $s->soal; ?></td>
 														<td>-</td>
+														<td>Tidak di jawab</td>
 														<td>Tidak di jawab</td>
 														<td>0</td>
 														<td><?php echo $s->bobot; ?></td>
@@ -248,12 +257,18 @@
 														<tr>
 															<td><?php echo $no; ?></td>
 															<td>
-																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax + 1; ?>" name="nilaiSoal" value="0">
+																<input type="number" id="<?= $idNumber; ?>" min="0" max="<?= $nilaiMax + 1; ?>" name="nilaiSoal" value="<?php echo $j->nilai_point; ?>">
 																<button onclick="calculate('<?= $idNumber; ?>','<?= $j->id; ?>','<?= $idUjian; ?>')">Nilai</button>
 															</td>
 															<td><?php echo $s->soal; ?></td>
 															<td><?php echo $j->jawaban; ?></td>
 															<td><?php echo $j->status; ?></td>
+															<td>
+															<?php if($j->gambar != null){?> 
+															<a href="../../../assets/img/<?php echo $j->gambar; ?>" target="_blank">Buka</a>
+															<?php }else{ ?>
+															-
+															<?php }; ?>
 															<td><?php echo $j->nilai_point; ?></td>
 															<td><?php echo $s->bobot; ?></td>
 														</tr>
@@ -267,6 +282,7 @@
 														<td>-</td>
 														<td><?php echo $s->soal; ?></td>
 														<td>-</td>
+														<td>Tidak di jawab</td>
 														<td>Tidak di jawab</td>
 														<td>0</td>
 														<td><?php echo $s->bobot; ?></td>

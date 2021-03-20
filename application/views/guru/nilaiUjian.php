@@ -172,6 +172,7 @@
 								<p>Jumlah maximum isian = <?= $nilaiMaxIsian; ?></p>
 								<p>Persentase pg:isian = <?php echo $ujian->persentase_pg . " : " . $ujian->persentase_isian ; ?></p>
 								<p>Nilai Akhir = <?= $nilai[0]->hasil; ?></p>
+								<p>Nilai PG = <?= $nilaiPg; ?> ( <?= round($nilaiPg * $ujian->persentase_pg / 100); ?>  )</p>
 							</div>
 							<!-- <input type="number" id="nilaiAkhir" min="0" max="100" name="nilaiSoal" value="<?= $nilai[0]->hasil; ?>" style="margin:10px 20px 0px 20px"> -->
 							<button class="btn btn-primary pull-right" style="margin:10px 20px 0px 20px" onclick="calculateFinal()">

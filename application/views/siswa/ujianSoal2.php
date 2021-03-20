@@ -624,7 +624,9 @@
 																if($jawaban_isian != null ){
 																	if($tempJawaban !== -1 && $jawaban_isian[$tempJawaban]->gambar != null){
 															?>
-															<image  src='../assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar;?>' style="width:100px;heigh:100px"></br></br>					
+															<a href="../../../assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar; ?>" target="_blank">File</a>
+														
+															</br></br>					
 															<?php
 																}
 															}

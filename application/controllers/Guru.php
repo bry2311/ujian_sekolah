@@ -5168,12 +5168,14 @@ class Guru extends CI_Controller
 			$maximumIsian += $soalIsian[$i]->bobot;
 		}
 		$nilaiMax = round((1 / ($jmlSoalPg + $jmlSoalIsian))*100,2);
+		$nilaiPg = round(($betul / $jmlSoalPg) *100,1);
 		$data['jmlSoalPg'] = $jmlSoalPg;
 		$data['jmlSoalIsian'] = $jmlSoalIsian;
 		$data['jmlJawabPg'] = $jmlJawabPg;
 		$data['jmlBetul'] = $betul;
 		$data['nilaiMax'] = $nilaiMax;
 		$data['nilaiMaxIsian'] = $maximumIsian;
+		$data['nilaiPg'] = $nilaiPg;
 		$this->load->view('guru/nilaiUjian', $data);
 	}
 

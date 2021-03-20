@@ -601,11 +601,14 @@
 														<div id="visible" style="margin-top:20px">
 														<h3>Upload Gambar (jika perlu): </h3><input type="file" class="btn btn-warning pull-right" name="gambar" value="Upload"></br></br>
 															<?php
+															if($tempJawaban !== -1){
 																if($jawaban_isian != null and $jawaban_isian[$tempJawaban]->gambar != null){
 															?>
-															<image  src='../../..//assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar;?>' style="width:100px;heigh:100px"></br></br>					
+															<a href="../../../assets/img/<?php echo $jawaban_isian[$tempJawaban]->gambar; ?>" target="_blank">File</a>
+															</br></br>					
 															<?php
 																}
+															}
 															?>
 														<input class="btn btn-primary pull-right" type="Submit" value="Ok" name="btnSubmit">
 														</div>

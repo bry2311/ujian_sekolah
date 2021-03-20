@@ -1177,10 +1177,11 @@ class Siswa extends CI_Controller
 			}
 		}
 		$jmlSoal2 = count($allSoal2);
-		$totalSoal = $jmlSoal + $jmlSoal2;
+		$totalSoal = $jmlSoal;
 		$n = $this->M_nilai->getNilaiByNikAndIdUjian($nik, $id);
 		if ($n == null) {
-			$nilaiAkhir = ($count * 100 / $totalSoal);
+			// $nilaiAkhir = ($count * 100 / $totalSoal);
+			$nilaiAkhir = ($count * $a->persentase_pg) / ($totalSoal);
 			$data = array(
 				'id_ujian' => $id,
 				'nik' => $nik,
@@ -1191,7 +1192,9 @@ class Siswa extends CI_Controller
 			);
 			$this->M_nilai->add($data);
 		} else {
-			$nilaiAkhir = ($count * 100 / $totalSoal);
+			// $nilaiAkhir = ($count * 100 / $totalSoal);
+			$nilaiAkhir = ($count * $a->persentase_pg) / ($totalSoal);
+
 			$data = array(
 				'id_ujian' => $id,
 				'nik' => $nik,

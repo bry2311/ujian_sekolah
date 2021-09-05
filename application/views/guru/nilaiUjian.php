@@ -180,7 +180,7 @@
 							</button>
 
 							<div class="card-body">
-								<div class="scrollmenu">
+								<!-- <div class="scrollmenu"> -->
 									<!-- <form action="<?= base_url('guru/cobaDownload'); ?>" method="POST"> -->
 									<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 										<thead>
@@ -298,7 +298,7 @@
 										</tbody>
 									</table>
 									<!-- </form> -->
-								</div>
+								<!-- </div> -->
 							</div>
 						</div>
 					</div>

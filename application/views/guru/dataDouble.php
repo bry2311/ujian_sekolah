@@ -24,23 +24,7 @@
 		}
 	</style>
 	<?php
-	$max = count($ujian);
-	$dataUjian = [];
-	for ($i = 0; $i < $max; $i++) {
-		$dataUjian[$ujian[$i]->id] = $ujian[$i]->nama;
-	}
 
-	$dataNilai = [];
-	$ct = 0;
-	for ($i = 0; $i < $max; $i++) {
-		for ($j = 0; $j < count($nilai); $j++) {
-			if ($nilai[$j]->id_ujian == $ujian[$i]->id) {
-				$ct += 1;
-			}
-		}
-		$dataNilai[$ujian[$i]->id] = $ct;
-		$ct = 0;
-	}
 	?>
 </head>
 
@@ -155,14 +139,14 @@
 				<div class="container-fluid">
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
-						<h1 class="h3 mb-0 text-gray-800">Data Report</h1>
+						<h1 class="h3 mb-0 text-gray-800">Data Jawaban Siswa</h1>
 					</div>
 					<!-- Content Row -->
 					<div class="row">
 						<!-- Approach -->
 						<div class="card shadow mb-4" style="width:100%">
 							<div class="card-header py-3">
-								<h6 class="m-0 font-weight-bold text-primary">Lihat Nilai</h6>
+								<h6 class="m-0 font-weight-bold text-primary">Double </h6>
 							</div>
 							<div class="card-body">
 								<div class="scrollmenu">
@@ -170,37 +154,25 @@
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>Ujian</th>
-												<th>Tipe</th>
-												<th>Jenis</th>
-												<th>Jumlah Siswa</th>
+												<th>id</th>
+												<th>NIK</th>
+												<th>id soal</th>
 												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
 											<?php
 											$no = 1;
-											foreach ($ujian as $uj) {
+											foreach ($jawaban_siswa_pg as $n) {
 											?>
 												<tr>
 													<td><?php echo $no; ?></td>
-													<td><?php echo $uj->nama; ?></td>
-													<td><?php echo $uj->tipe; ?></td>
-													<td><?php echo $uj->jenis; ?></td>
-													<td><?php echo $dataNilai[$uj->id]; ?></td>
+													<td><?php echo $n->id; ?></td>
+													<td><?php echo $n->nik; ?></td>
+													<td><?php echo $n->id_soal; ?></td>
 													<td>
-														<a class="btn btn-primary btn-xs" href="<?= base_url('guru/detailReport/' . $uj->id . '/' . $uj->jenis); ?>">
-															<i class="fa fa-pencil">Naskah</i></a>
-														<a class="btn btn-primary btn-xs" href="<?= base_url('guru/downloadNaskahAll/' . $uj->id); ?>">
-															<i class="fa fa-pencil">All Naskah</i></a>
-														<a class="btn btn-primary btn-xs" href="<?= base_url('guru/excelReport/' . $uj->id); ?>">
-															<i class="fa fa-pencil">Rekap</i></a>
-														<a class="btn btn-primary btn-xs" href="<?= base_url('guru/excelReport2/' . $uj->id); ?>">
-															<i class="fa fa-pencil">Analisa</i></a>
-														<a class="btn btn-primary btn-xs" href="<?= base_url('guru/excelReport3/' . $uj->id); ?>">
-															<i class="fa fa-pencil">Daftar Nilai</i></a>
-														<a class="btn btn-warning btn-xs" href="<?= base_url('guru/double/' . $uj->id . '/' . $uj->jenis); ?>">
-															<i class="fa fa-pencil">Double</i></a>
+														<a class="btn btn-danger btn-xs" href="<?= base_url('guru/deleteDouble/' . $n->id . '/' . $id_ujian .'/' . $jenis); ?>">
+														<i class="fa fa-pencil">Delete</i></a>
 													</td>
 												</tr>
 											<?php
@@ -210,8 +182,6 @@
 										</tbody>
 									</table>
 								</div>
-								<a class="btn btn-primary btn-xs" href="<?= base_url('guru/cobaDownload'); ?>">
-									<i class="fa fa-pencil">Test Download</i></a>
 							</div>
 						</div>
 					</div>

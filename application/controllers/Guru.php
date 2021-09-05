@@ -1941,6 +1941,25 @@ class Guru extends CI_Controller
 		$this->load->view('guru/dataReport', $data);
 	}
 
+	public function double($id, $jenis)
+	{
+		$this->isAnyLogin();
+		if($jenis != "Gabungan"){
+			$data['jawaban_siswa_pg'] = $this->M_jawaban_siswa->getJawabanSiswaByIdUjian($id);
+		}else{
+			$data['jawaban_siswa_pg'] = $this->M_jawaban_siswa->getJawabanSiswaByIdUjian($id);
+		}
+		$data['id_ujian'] = $id;
+		$data['jenis'] = $jenis;
+		$this->load->view('guru/dataDouble', $data);
+	}
+
+	public function deleteDouble($id,$id_ujian,$jenis)
+	{
+		$this->M_jawaban_siswa->delete($id);
+		redirect('guru/double/' . $id_ujian . '/' . $jenis, 'refresh');
+	}
+
 	public function detailReport($id, $jenis)
 	{
 		$this->isAnyLogin();
@@ -2723,7 +2742,37 @@ class Guru extends CI_Controller
 		$sheet1->getStyle('H' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('I' . $i)->applyFromArray($leadArray);
 		$sheet1->getStyle('G' . $i . ':I' . $i)->applyFromArray($styleArrayOut);
-		$sheet1->setCellValue('G' . $i, $nilai[0]->hasil);
+		//nilai bagi 2 
+		if($ujian->tipe == "Gabungan"){
+			$soalIsian = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjianIsian($id);
+			$soalPg = $this->M_ujian_gabungan_has_soal->getUjianGabunganHasSoalByIdUjian($id);
+			$jawabanPg = $this->M_jawaban_siswa->getJawabanSiswaByNik2($nis, $id);
+			$jmlSoalPg = count($soalPg);
+			$jmlJawabPg = count($jawabanPg);
+			$jmlSoalIsian = count($soalIsian);
+			$betul = 0;
+			for ($k = 0; $k < $jmlSoalPg; $k++) {
+				for ($l = 0; $l < $jmlJawabPg; $l++) {
+					if ($soalPg[$k]->id_soal == $jawabanPg[$l]->id_soal) {
+						if ($soalPg[$k]->kunci_pg == $jawabanPg[$l]->jawaban_asli) {
+							$betul += 1;
+						}
+					}
+				}
+			}
+			$maximumIsian = 0;
+			for($k = 0;$k< $jmlSoalIsian; $k++){
+				$maximumIsian += $soalIsian[$k]->bobot;
+			}
+			$nilaiPg = round($betul / $jmlSoalPg  * $ujian->persentase_pg,0);
+			$nilaiIsian = $nilai[0]->hasil - $nilaiPg;
+			$sheet1->setCellValue('G' . $i, $nilai[0]->hasil);
+			$sheet1->setCellValue('H' . $i, $nilaiPg);
+			$sheet1->setCellValue('I' . $i, $nilaiIsian);
+		}else{
+			$sheet1->setCellValue('G' . $i, $nilai[0]->hasil);
+
+		}
 
 
 		$i += 2;
@@ -3675,6 +3724,7 @@ class Guru extends CI_Controller
 		$ujian = $this->M_ujian->getUjianById($id);
 		$allKelas = $this->M_kelas->getKelasByClass2($kelas);
 		$allUser = $this->M_user->getAllUserByKelas($kelas);
+		// var_dump(count($allUser));exit;
 		// var_dump($allUser);exit;
 		//$nilai = $this->M_nilai->getNilaiByIdUjianAndKelas($id,$kelas);
 		$tgl = date('d-M');
@@ -3880,7 +3930,7 @@ class Guru extends CI_Controller
 						for ($js = 0; $js < count($jawabanSiswa); $js++) {
 							if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 								$isAnswered = true;
-								if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_PG)) {
+								if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_pg)) {
 									$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
 									$arrJmlBenar[$cellVal - 3] += 1;
 									$bUser += 1;
@@ -3942,20 +3992,28 @@ class Guru extends CI_Controller
 					if ($ujian->jenis == "Pilihan Ganda") {
 						$allSoal = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian($id);
 						$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaByKelas($userKelas[$us]->nik, $id, $allKelas[$ck]->nama);
+						$default = -1;
 						for ($z = 0; $z < count($allSoal); $z++) {
 							$isAnswered = false;
+							$double = false;
 							for ($js = 0; $js < count($jawabanSiswa); $js++) {
 								if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 									$isAnswered = true;
-									if ($jawabanSiswa[$js]->jawaban_asli ==  $allSoal[$z]->kunci_pg) {
-										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
-										$arrJmlBenar[$cellVal - 3] += 1;
-										$bUser += 1;
-									} else {
-										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 0);
+									if($default == $jawabanSiswa[$js]->id_soal){
+										$double = true;
 									}
-									$sheet1->getCellByColumnAndRow($cellVal, $i)->getStyle()->applyFromArray($styleArray);
-									$cellVal += 1;
+									if(!$double){
+										if ($jawabanSiswa[$js]->jawaban_asli ==  $allSoal[$z]->kunci_pg) {
+											$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
+											$arrJmlBenar[$cellVal - 3] += 1;
+											$bUser += 1;
+										} else {
+											$sheet1->setCellValueByColumnAndRow($cellVal, $i, 0);
+										}
+										$sheet1->getCellByColumnAndRow($cellVal, $i)->getStyle()->applyFromArray($styleArray);
+										$cellVal += 1;
+									}
+									$default = $jawabanSiswa[$js]->id_soal;
 								}
 							}
 							if (!$isAnswered) {
@@ -4245,20 +4303,28 @@ class Guru extends CI_Controller
 						$allSoal = $this->M_ujian_has_soal->getUjianHasSoalByIdUjian($id);
 						$jawabanSiswa = $this->M_jawaban_siswa->getJawabanSiswaByKelas($userKelas[$us]->nik, $id, $allKelas[$ck]->nama);
 						// var_dump($userKelas);exit;
+						$default = -1;
 						for ($z = 0; $z < count($allSoal); $z++) {
 							$isAnswered = false;
+							$double = false;
 							for ($js = 0; $js < count($jawabanSiswa); $js++) {
 								if ($allSoal[$z]->id_soal == $jawabanSiswa[$js]->id_soal) {
 									$isAnswered = true;
-									if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_pg)) {
-										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
-										$arrJmlBenar[$cellVal - 3] += 1;
-										$bUser += 1;
-									} else {
-										$sheet1->setCellValueByColumnAndRow($cellVal, $i, 0);
+									if($default == $jawabanSiswa[$js]->id_soal){
+										$double = true;
 									}
-									$sheet1->getCellByColumnAndRow($cellVal, $i)->getStyle()->applyFromArray($styleArray);
-									$cellVal += 1;
+									if(!$double){
+										if (trim($jawabanSiswa[$js]->jawaban_asli) ==  trim($allSoal[$z]->kunci_pg)) {
+											$sheet1->setCellValueByColumnAndRow($cellVal, $i, 1);
+											$arrJmlBenar[$cellVal - 3] += 1;
+											$bUser += 1;
+										} else {
+											$sheet1->setCellValueByColumnAndRow($cellVal, $i, 0);
+										}
+										$sheet1->getCellByColumnAndRow($cellVal, $i)->getStyle()->applyFromArray($styleArray);
+										$cellVal += 1;
+									}
+									$default = $jawabanSiswa[$js]->id_soal;
 								}
 							}
 							if (!$isAnswered) {

@@ -56,7 +56,7 @@ class M_ujian_gabungan_has_soal extends CI_Model
 	}
 	public function getUjianPGByIdUjian($id)
 	{
-		$query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban FROM ujian_gabungan_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id AND us.tipe = 'Pilihan Ganda'");
+		$query = $this->db->query("SELECT us.*, s.materi, s.kd, s.soal, s.a, s.b , s.c, s.d, s.e, s.kunci_jawaban, s.kunci_pg FROM ujian_gabungan_has_soal us JOIN soalpg s ON us.id_soal = s.id WHERE us.id_ujian = $id AND us.tipe = 'Pilihan Ganda'");
 		return $query->result();
 	}
 	public function getUjianIsianByIdUjian($id)

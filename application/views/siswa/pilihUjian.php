@@ -128,19 +128,9 @@
 													<?php
 													if (isset($daftarUjian)) {
 														for ($i = 0; $i < count($daftarUjian); $i++) {
-															if($daftarUjian[$i]->tipe_ujian != "Ulangan Harian"){
-																$waktuUjian =  date('y-m-d h:i:s', strtotime($daftarUjian[$i]->waktu_mulai));
-
-																if(strtotime($waktuUjian) <= strtotime($jamSkrg)){
 															?>
 																<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
 															<?php
-																}
-															}else{
-															?>
-																<option value="<?= $daftarUjian[$i]->id; ?>"><?= $daftarUjian[$i]->nama; ?></option>
-															<?php
-															}
 														}
 													}
 													?>
